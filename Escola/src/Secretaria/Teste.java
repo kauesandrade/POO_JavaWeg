@@ -7,13 +7,13 @@ public class teste {
 		
 		Aluno aluno1 = new Aluno();
 		
-		aluno1.setNome("Carlos");
-		aluno1.setCpf("11855307979");
-		aluno1.setEmail("carlosbolzanell@gmail.com");
+		aluno1.setNome("kaue");
+		aluno1.setCpf("123456789");
+		aluno1.setEmail("kauesandrade@gmail.com");
 		aluno1.setEndereco("Frederico barg 85");
 		aluno1.setMatricula("1234");
-		aluno1.setResponsavel("Roseli de Souza Ortiz");
-		aluno1.setTelefone("47997718238");
+		aluno1.setResponsavel("Carlos Roberto");
+		aluno1.setTelefone("47992907780");
 		
 		Curso programacao = new Curso();
 		
