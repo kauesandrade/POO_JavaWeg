@@ -3,7 +3,9 @@ package Secretaria;
 public class teste {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// Public = todos
+		// Privete = somente o objeto
+		// Protected = todos do mesmo pacote
 		
 		Aluno aluno1 = new Aluno();
 		
