@@ -1,10 +1,19 @@
 package Secretaria;
 
 public class Avaliacao {
+	private String notas;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public String getNotas() {
+		return notas;
+	}
 
+	public void setNotas(String notas) {
+		if (notas.length() > 0) {
+			this.notas = notas;
+		}else {
+			System.out.println("Nota invalida");
+		}
+		
 	}
 
 }
