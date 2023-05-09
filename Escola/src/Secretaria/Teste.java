@@ -10,45 +10,69 @@ public class teste {
 		Aluno aluno1 = new Aluno();
 		
 		aluno1.setNome("kaue");
-		aluno1.setCpf("123456789");
+		System.out.println(aluno1.getNome());
+		aluno1.setCpf("123.456.789-12");
+		System.out.println(aluno1.getCpf());
 		aluno1.setEmail("kauesandrade@gmail.com");
-		aluno1.setEndereco("Frederico barg 85");
-		aluno1.setMatricula("1234");
-		aluno1.setResponsavel("Carlos Roberto");
-		aluno1.setTelefone("47992907780");
+		System.out.println(aluno1.getEmail());
+		aluno1.setEndereco("Frederico barg, 85");
+		System.out.println(aluno1.getEndereco());
+		aluno1.setMatricula("1234555");
+		System.out.println(aluno1.getMatricula());
+		aluno1.setResponsavel("Carlor Roberto de Andrade");
+		System.out.println(aluno1.getResponsavel());
+		aluno1.setTelefone("(47)992907780");
+		System.out.println(aluno1.getTelefone());
 		
-		Curso programacao = new Curso();
-		
-		programacao.setCargaHoraria(2880);
-		programacao.setMateria("Programação java");
-		programacao.setNome("Programação de Sistemas");
-		
-		Matricula matricula1 = new Matricula();
-		
-		matricula1.setCurso("Programação de Sistemas");
-		matricula1.setNumero(1234);
-		matricula1.setTurma("MI 73");
-		
-		UnidadeCurricular java = new UnidadeCurricular();
-		
-		java.setAvaliacao("Prova 1");
-		java.setFrequencia(100);
-		java.setProfessor("Rodrigo Willemann");
-		
-		Avaliacao prova1 = new Avaliacao();
-		
-		prova1.setNotas("10");
-		
-		Professores professor = new Professores();
-		
-		professor.setNome("Rodrigo Willemann");
-		professor.setDataNascimento("19/03/1970");
-		professor.setCpf("07907907979");
-		professor.setEmail("rodrigowillemann@gmail.com");
-		professor.setEndereco("Rua Lago das caldeiras 89");
-		professor.setMatricula("18976543");
-		professor.setTelefone("4789087639");
-		
+//		Curso programacao = new Curso();
+//		
+//		programacao.setCargaHoraria(2880);
+//		System.out.println(programacao.getCargaHoraria());
+//		programacao.setMateria("Programação java");
+//		System.out.println(programacao.getMateria());
+//		programacao.setNome("Programação de Sistemas");
+//		System.out.println(programacao.getNome());
+//		
+//		Matricula matricula1 = new Matricula();
+//	
+//		matricula1.setCurso("Programação de Sistemas");
+//		System.out.println(matricula1.getCurso());
+//		matricula1.setNumero(1234);
+//		System.out.println(matricula1.getNumero());
+//		matricula1.setTurma("MI 73");
+//		System.out.println(matricula1.getTurma());
+//		
+//		UnidadeCurricular java = new UnidadeCurricular();
+//		
+//		java.setAvaliacao("Prova 1");
+//		System.out.println(java.getAvaliacao());
+//		java.setFrequencia(100);
+//		System.out.println(java.getFrequencia());
+//		java.setProfessor("Rodrigo Willemann");
+//		System.out.println(java.getProfessor());
+//		
+//		Avaliacao prova1 = new Avaliacao();
+//		
+//		prova1.setNotas("10");
+//		System.out.println(prova1.getNotas());
+//		
+//		Professores professor = new Professores();
+//		
+//		professor.setNome("Rodrigo Willemann");
+//		System.out.println(professor.getNome());
+//		professor.setDataNascimento("19/03/1970");
+//		System.out.println(professor.getDataNascimento());
+//		professor.setCpf("123456789-12");
+//		System.out.println(professor.getCpf());
+//		professor.setEmail("rodrigowillemann@gmail.com");
+//		System.out.println(professor.getEmail());
+//		professor.setEndereco("Rua Lago das caldeiras 89");
+//		System.out.println(professor.getEndereco());
+//		professor.setMatricula("18976543");
+//		System.out.println(professor.getMatricula());
+//		professor.setTelefone("(47)992907780");
+//		System.out.println(professor.getTelefone());
+//		
 		
 		
 

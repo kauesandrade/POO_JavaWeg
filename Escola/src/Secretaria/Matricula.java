@@ -10,7 +10,7 @@ public class Matricula {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-	public String getNome() {
+	public String getCurso() {
 		return curso;
 	}
 	public void setCurso(String curso) {
