@@ -43,7 +43,7 @@ public class Professores {
 		return cpf;
 	}
 	public void setCpf(String cpf) {
-		if(cpf.length()>11 && cpf.length()<13 && cpf.matches("[0-9]+-[0-9]*")) {
+		if(cpf.matches("[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}")) {
 			this.cpf = cpf;
 		}else {
 			System.out.println("Cpf Invalido!!!");
@@ -55,7 +55,11 @@ public class Professores {
 		return endereco;
 	}
 	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+		if(endereco.matches("")) {
+			System.out.println("Endereco Invalido!!!");
+		}else {
+			this.endereco = endereco;
+		}
 	}
 	
 	

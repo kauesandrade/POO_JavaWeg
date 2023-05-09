@@ -114,7 +114,6 @@ package Secretaria;
 		}else {
 			this.endereco = endereco;
 		}
-		
 	}
 	
 	

@@ -9,11 +9,13 @@ public class teste {
 		
 		Aluno aluno1 = new Aluno();
 		
-		aluno1.setNome("kaue");
+		aluno1.setNome("Kauê Schaefer de Andrade");
 		System.out.println(aluno1.getNome());
 		aluno1.setCpf("123.456.789-12");
 		System.out.println(aluno1.getCpf());
-		aluno1.setEmail("kauesandrade@gmail.com");
+		aluno1.setDataNascimento("24/04/2006");
+		System.out.println(aluno1.getDataNascimento());
+		aluno1.setEmail("kauesandrade206@gmail.com");
 		System.out.println(aluno1.getEmail());
 		aluno1.setEndereco("Frederico barg, 85");
 		System.out.println(aluno1.getEndereco());
