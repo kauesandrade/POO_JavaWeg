@@ -12,8 +12,6 @@ public class Aluno {
 	private String nome;
 	/** Propriedade data de nascimento do aluno */
 	private String dataNascimento;
-	/** Propriedade matrícula do aluno */
-	private String matricula;
 	/** Propriedade CPF do aluno */
 	private String cpf;
 	/** Propriedade endereço do aluno */
@@ -67,26 +65,6 @@ public class Aluno {
 	public void setDataNascimento(String dataNascimento) {
 		if (dataNascimento.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")) {
 			this.dataNascimento = dataNascimento;
-		}
-	}
-
-	/**
-	 * Método para retornar a matrícula do aluno
-	 * 
-	 * @return matricula
-	 */
-	public String getMatricula() {
-		return matricula;
-	}
-
-	/**
-	 * Procedimento para verificar a matrícula do aluno
-	 * 
-	 * @param matricula
-	 */
-	public void setMatricula(String matricula) {
-		if (matricula.matches("[0-9]*")) {
-			this.matricula = matricula;
 		}
 	}
 
@@ -192,5 +170,6 @@ public class Aluno {
 		}
 
 	}
+
 
 }

@@ -7,69 +7,73 @@ public class Teste {
 		// Privete = somente o objeto
 		// Protected = todos do mesmo pacote
 		
-		Aluno aluno1 = new Aluno("Kauê Schaefer de Andrade");
-		if(aluno1.getNome() != null) {
-			System.out.println(aluno1.getNome());
-		}else {
-			System.out.println("Nome Invalido!!!");
-		}
+//		Aluno aluno1 = new Aluno("Kauê Schaefer de Andrade");
+//		if(aluno1.getNome() != null) {
+//			System.out.println(aluno1.getNome());
+//		}else {
+//			System.out.println("Nome Invalido!!!");
+//		}
+//		
+//		
+//		aluno1.setCpf("123.456.789-12");
+//		if(aluno1.getCpf() != null) {
+//			System.out.println(aluno1.getCpf());
+//		}else {
+//			System.out.println("Cpf Invalido!!!");
+//		}
+//		
+//		
+//		aluno1.setDataNascimento("24/04/2006");
+//		if(aluno1.getDataNascimento() != null) {
+//			System.out.println(aluno1.getDataNascimento());
+//		} else {
+//			System.out.println("Data de Nascimento Invalida!!!");
+//		}
+//		
+//		
+//		aluno1.setEmail("kauesandrade206@gmail.com");
+//		if(aluno1.getEmail() != null) {
+//			System.out.println(aluno1.getEmail());
+//		} else {
+//			System.out.println("Email Invalido!!!");
+//		}
+//	
+//		
+//		
+//		aluno1.setEndereco("Frederico barg, 85");
+//		if(aluno1.getEndereco() != null) {
+//			System.out.println(aluno1.getEndereco());
+//		} else {
+//			System.out.println("Endereco Invalido!!!");
+//		}
+//		
+//		
+//		aluno1.setResponsavel("Carlor Roberto de Andrade");
+//		if(aluno1.getResponsavel() != null) {
+//			System.out.println(aluno1.getResponsavel());
+//		}else {
+//			System.out.println("Nome do Responsavel Invalido!!!");
+//		}
+//		
+//		
+//		aluno1.setTelefone("(47)992907780");
+//		if(aluno1.getTelefone() != null) {
+//			System.out.println(aluno1.getTelefone());
+//		} else {
+//			System.out.println("Telefone Invalido!!!");
+//		}
 		
 		
-		aluno1.setCpf("123.456.789-12");
-		if(aluno1.getCpf() != null) {
-			System.out.println(aluno1.getCpf());
-		}else {
-			System.out.println("Cpf Invalido!!!");
-		}
 		
 		
-		aluno1.setDataNascimento("24/04/2006");
-		if(aluno1.getDataNascimento() != null) {
-			System.out.println(aluno1.getDataNascimento());
-		} else {
-			System.out.println("Data de Nascimento Invalida!!!");
-		}
 		
+		Matricula matricula1 = new Matricula();
 		
-		aluno1.setEmail("kauesandrade206@gmail.com");
-		if(aluno1.getEmail() != null) {
-			System.out.println(aluno1.getEmail());
-		} else {
-			System.out.println("Email Invalido!!!");
-		}
-	
-		
-		
-		aluno1.setEndereco("Frederico barg, 85");
-		if(aluno1.getEndereco() != null) {
-			System.out.println(aluno1.getEndereco());
-		} else {
-			System.out.println("Endereco Invalido!!!");
-		}
-		
-		
-		aluno1.setMatricula("1234555");
-		if(aluno1.getMatricula() != null) {
-			System.out.println(aluno1.getMatricula());
+		matricula1.setCodigo("S12345");
+		if(matricula1.getCodigo() != null) {
+			System.out.println(matricula1.getCodigo());
 		}else {
 			System.out.println("Número da matricula Invalida!!!");
-		}
-		
-		
-		
-		aluno1.setResponsavel("Carlor Roberto de Andrade");
-		if(aluno1.getResponsavel() != null) {
-			System.out.println(aluno1.getResponsavel());
-		}else {
-			System.out.println("Nome do Responsavel Invalido!!!");
-		}
-		
-		
-		aluno1.setTelefone("(47)992907780");
-		if(aluno1.getTelefone() != null) {
-			System.out.println(aluno1.getTelefone());
-		} else {
-			System.out.println("Telefone Invalido!!!");
 		}
 		
 		
@@ -81,15 +85,6 @@ public class Teste {
 //		System.out.println(programacao.getMateria());
 //		programacao.setNome("Programação de Sistemas");
 //		System.out.println(programacao.getNome());
-//		
-//		Matricula matricula1 = new Matricula();
-//	
-//		matricula1.setCurso("Programação de Sistemas");
-//		System.out.println(matricula1.getCurso());
-//		matricula1.setNumero(12);
-//		System.out.println(matricula1.getNumero());
-//		matricula1.setTurma("MI 73");
-//		System.out.println(matricula1.getTurma());
 //		
 //		UnidadeCurricular java = new UnidadeCurricular();
 //		

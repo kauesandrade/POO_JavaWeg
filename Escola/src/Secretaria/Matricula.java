@@ -6,34 +6,33 @@ package Secretaria;
  * @author Kauê S. Andrade (anotação)
  */
 public class Matricula {
-	/** Propriedade número do curso */
-	private int numero;
+	/** Propriedade matrícula do aluno */
+	private String matricula;
 	/** Propriedade nome do curso(nome completo) */
 	private String curso;
 	/** Propriedade nome da turma(nome completo) */
 	private String turma;
 	
+	
 	/**
-	 * Método para retornar o número do curso
+	 * Método para retornar a matrícula do aluno
 	 * 
-	 * @return numero
+	 * @return matricula
 	 */
-	public int getNumero() {
-		return numero;
+	public String getMatricula() {
+		return matricula;
 	}
 	/**
-	 * Procedimento para verificar o número do curso
+	 * Procedimento para verificar a matrícula do aluno
 	 * 
-	 * @param numero
+	 * @param matricula
 	 */
-	public void setNumero(int numero) {
-		if (numero > 0 && numero < 2000) {
-			this.numero = numero;
-		} else {
-			System.out.println("Numero do curso Invalido!!!");
+	public void setMatricula(String matricula) {
+		if (matricula.matches("[A-Z]{1}[0-9]{5}")) {
+			this.matricula = matricula;
 		}
-		
 	}
+
 	
 	/**
 	 * Método para retornar o nome do curso
