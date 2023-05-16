@@ -6,7 +6,6 @@ package Secretaria;
  * @author Kauê S. Andrade (anotação)
  *
  */
-
 public class Professores {
 	/** Propriedade nome do professor(nome completo) */
 	private String nome;

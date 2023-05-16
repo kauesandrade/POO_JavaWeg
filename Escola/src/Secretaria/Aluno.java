@@ -1,13 +1,12 @@
 package Secretaria;
 
-//import java.util.Date;
-
 /**
  * Classe para representar o Aluno no Sistema Escolar
  * 
  * @author Kauê S. Andrade (anotação)
  *
  */
+//import java.util.Date;
 public class Aluno {
 	/** Propriedade nome do aluno(nome completo) */
 	private String nome;
