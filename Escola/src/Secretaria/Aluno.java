@@ -154,7 +154,7 @@ public class Aluno {
 		if (telefone.length() > 12 && telefone.length() < 14 && telefone.matches("[0-9()-]*")) {
 			this.telefone = telefone;
 		} else {
-			System.out.println("Telefone Invalido");
+			System.out.println("Telefone Invalido!!!");
 		}
 	}
 

@@ -1,6 +1,6 @@
 package Secretaria;
 
-public class teste {
+public class Teste {
 
 	public static void main(String[] args) {
 		// Public = todos
@@ -26,24 +26,24 @@ public class teste {
 		aluno1.setTelefone("(47)992907780");
 		System.out.println(aluno1.getTelefone());
 		
-//		Curso programacao = new Curso();
-//		
-//		programacao.setCargaHoraria(2880);
-//		System.out.println(programacao.getCargaHoraria());
-//		programacao.setMateria("Programação java");
-//		System.out.println(programacao.getMateria());
-//		programacao.setNome("Programação de Sistemas");
-//		System.out.println(programacao.getNome());
-//		
-//		Matricula matricula1 = new Matricula();
-//	
-//		matricula1.setCurso("Programação de Sistemas");
-//		System.out.println(matricula1.getCurso());
-//		matricula1.setNumero(1234);
-//		System.out.println(matricula1.getNumero());
-//		matricula1.setTurma("MI 73");
-//		System.out.println(matricula1.getTurma());
-//		
+		Curso programacao = new Curso();
+		
+		programacao.setCargaHoraria(2880);
+		System.out.println(programacao.getCargaHoraria());
+		programacao.setMateria("Programação java");
+		System.out.println(programacao.getMateria());
+		programacao.setNome("Programação de Sistemas");
+		System.out.println(programacao.getNome());
+		
+		Matricula matricula1 = new Matricula();
+	
+		matricula1.setCurso("Programação de Sistemas");
+		System.out.println(matricula1.getCurso());
+		matricula1.setNumero(12);
+		System.out.println(matricula1.getNumero());
+		matricula1.setTurma("MI 73");
+		System.out.println(matricula1.getTurma());
+		
 //		UnidadeCurricular java = new UnidadeCurricular();
 //		
 //		java.setAvaliacao("Prova 1");
