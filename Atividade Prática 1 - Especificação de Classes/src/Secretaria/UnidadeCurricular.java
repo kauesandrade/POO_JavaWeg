@@ -8,8 +8,8 @@ public class UnidadeCurricular {
 
 	public UnidadeCurricular(String nome, Curso curso) {
 		super();
-		this.nome = nome;
-		this.curso = curso;
+		setNome(nome);
+		setCurso(curso);
 	}
 	
 	
@@ -18,7 +18,11 @@ public class UnidadeCurricular {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		if(nome.length() > 0 && nome.matches("[A-Za-z áàâãéèêóòôõíìç]*")) {
+			this.nome = nome;
+		}else {
+			System.out.println("Nome da unidade curricular Invalida!!!");
+		}
 	}
 
 	public Curso getCurso() {

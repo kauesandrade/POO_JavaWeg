@@ -69,7 +69,7 @@ public class Teste {
 		
 		Matricula matricula1 = new Matricula();
 		
-		matricula1.setCodigo("S12345");
+		matricula1.setCodigo("S12375");
 		if(matricula1.getCodigo() != null) {
 			System.out.println(matricula1.getCodigo());
 		}else {

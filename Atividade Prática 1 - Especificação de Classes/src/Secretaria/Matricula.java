@@ -14,8 +14,8 @@ public class Matricula {
 	private Curso curso;
 	
 	public Matricula(Aluno aluno, Curso curso) {
-		this.aluno = aluno;
-		this.curso = curso;
+		setAluno(aluno);
+		setCurso(curso);
 	}
 	
 	

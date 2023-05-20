@@ -14,6 +14,15 @@ public class Curso {
 	/** Propriedade nome do curso */
 	private String nome;
 	
+	
+	
+	
+	public Curso(String nome) {
+		this.nome = nome;
+	}
+	
+	
+	
 	/**
 	 * Método para retornar a carga horária do curso
 	 * 
