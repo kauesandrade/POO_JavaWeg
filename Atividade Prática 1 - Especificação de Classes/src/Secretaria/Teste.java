@@ -7,7 +7,7 @@ public class Teste {
 		// Privete = somente o objeto
 		// Protected = todos do mesmo pacote
 		
-		Aluno aluno1 = new Aluno("Kauê Schaefer de Andrade1");
+		Aluno aluno1 = new Aluno("Kauê Schaefer de Andrade");
 		System.out.println(aluno1.getNome());
 		
 		aluno1.setCpf("123.456.789-12");
@@ -28,14 +28,12 @@ public class Teste {
 		aluno1.setTelefone("(47)992907780");
 		System.out.println(aluno1.getTelefone());
 		
-//		Matricula matricula1 = new Matricula();
-//		
-//		matricula1.setCodigo("S12345");
-//		if(matricula1.getCodigo() != null) {
-//			System.out.println(matricula1.getCodigo());
-//		}else {
-//			System.out.println("Número da matricula Invalida!!!");
-//		}
+		Matricula matricula1 = new Matricula(null, null);
+		
+		matricula1.setCodigo("S12345");
+		System.out.println(matricula1.getCodigo());
+		
+		
 		
 		
 //		Curso programacao = new Curso();
