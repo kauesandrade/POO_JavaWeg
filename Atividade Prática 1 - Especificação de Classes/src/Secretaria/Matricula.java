@@ -35,6 +35,8 @@ public class Matricula {
 	public void setCodigo(String codigo) {
 		if (codigo.matches("[A-Z]{1}[0-9]{5}")) {
 			this.codigo = codigo;
+		}else {
+			System.out.println("Número da matricula Invalida!!!");
 		}
 	}
 
