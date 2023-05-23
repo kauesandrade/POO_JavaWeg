@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"Secretaria","l":"Aluno"},{"p":"Secretaria","l":"Avaliacao"},{"p":"Secretaria","l":"Curso"},{"p":"Secretaria","l":"Matricula"},{"p":"Secretaria","l":"Notas"},{"p":"Secretaria","l":"Teste"},{"p":"Secretaria","l":"UnidadeCurricular"}];updateSearchResults();

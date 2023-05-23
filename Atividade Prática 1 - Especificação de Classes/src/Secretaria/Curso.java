@@ -6,17 +6,26 @@ package Secretaria;
  * @author Kauê S. Andrade (anotação)
  *
  */
+
 public class Curso {
+	
 	/** Propriedade nome do curso */
 	private String nome;
 	
+	/**construtor da propriedade nome */
 	public Curso(String nome) {
 		setNome(nome);
 	}
-	 	
+	
+	/**
+	 * Método para retornar o nome do curso
+	 * 
+	 * @return nome
+	 */
 	public String getNome() {
 		return nome;
 	}
+	
 	/**
 	 * Procedimento para verificar o nome do curso
 	 * 

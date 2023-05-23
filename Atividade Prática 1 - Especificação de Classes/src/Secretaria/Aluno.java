@@ -6,7 +6,7 @@ package Secretaria;
  * @author Kauê S. Andrade (anotação)
  *
  */
-//import java.util.Date;
+
 public class Aluno {
 	/** Propriedade nome do aluno(nome completo) */
 	private String nome;
