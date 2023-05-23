@@ -12,13 +12,13 @@ public class Teste {
 		UnidadeCurricular unidadeCurricular1 = new UnidadeCurricular("Programação Orientada a Objeto",curso1);
 		Matricula matricula1 = new Matricula(aluno1, unidadeCurricular1);
 		Avaliacao avaliacao1 = new Avaliacao("JAVA",unidadeCurricular1);
-		Notas notas1 = new Notas(aluno1, avaliacao1, (float) 8.5);
+		Notas notas1 = new Notas(aluno1, avaliacao1, (float) 8.6);
 		
 		//______________TESTE DA CLASSE ALUNOS______________\\
 		
 		System.out.println("Classe Aluno!!:");
 		
-		System.out.println("Nome:"+aluno1.getNome());
+		System.out.println("Nome: "+aluno1.getNome());
 		
 		aluno1.setCpf("123.456.789-12");
 		System.out.println("CPF: "+aluno1.getCpf());
