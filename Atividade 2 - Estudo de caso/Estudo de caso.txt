@@ -1,0 +1,17 @@
+1- Cliente, categoria, produtos, carrinho de compras, pagamento, endereço, venda.
+
+2- Clinte: nome, login, senha, cpf, endereço, e-mail, telefone(s), data de nascimento.
+Categoria: nome, tipo.
+Produto: nome, descrição, preço, imagem, estoque, avaliação, modelo, marca, cor.
+Carrinho de compras: produto(s) -> quantidade, valor total(método), cliente.       
+Pagemento: forma de pagamento(boleto, pix, cartão), parcelamento, desconto, total, frete, venda.
+Endereço: identificação, rua, cep, cidade, uf, número, complemento.
+Venda(NF): cliente, empresa, produto(s)
+
+3-  Clinte: cadastro(), logar(), comprar(), mostraDados().
+Categoria: getter/setters
+Produto: cadastrar(), setEstoque(), atualizarEstoque(), verificarEstoque(), avaliar(), addCategoria(), removerCategoria(), addFoto(), removerFoto().
+Carrinho de compras: adicionar(), removerProduto(), getValorTotal(), finalizarCompra().
+Pagemento: calcularTotal(), calcularFrete(), calcularParcelas(), calcularDesconto().
+Venda(NF): emitirNF().
+Endereço: getter/setters
