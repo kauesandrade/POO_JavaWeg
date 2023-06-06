@@ -32,7 +32,6 @@ public class Cliente {
 	
 	
 	public Cliente() {
-		
 	}
 	
 	public Cliente(String nome, String login, String senha, String cpf, String email, String telefone,
@@ -46,6 +45,42 @@ public class Cliente {
 		this.telefone = telefone;
 		this.dataDeNascimento = dataDeNascimento;
 	}
+	
+	
+	
+	public String cadastrar(String nome, String login, String senha, String cpf, String data, String email) {
+		setNome(nome);	
+		setLogin(login);
+		setSenha(senha);
+		setCpf(cpf);
+		setDataDeNascimento(data);
+		setEmail(email);
+		
+		if (getNome() == null || getLogin() == null || getSenha() == null || 
+			getCpf() == null || getDataDeNascimento() == null || getEmail() == null) {
+			return "N";
+		}
+		return "A";
+		
+	}
+	
+	public String logar(String login, String senha) {
+		if(this.login.equals(login) && this.senha.equals(senha)) {
+			return "A";
+		}
+		return "N";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/**
@@ -66,13 +101,6 @@ public class Cliente {
 		if (nome.length() > 0 && nome.matches("[A-Za-z áàâãéèêóòôõíìç]*")) {
 			this.nome = nome;
 		}
-		
-	}
-	
-	
-	public void cadastrar() {
-		
-		setLogin();
 		
 	}
 	
@@ -113,7 +141,7 @@ public class Cliente {
 	 * @param senha
 	 */
 	public void setSenha(String senha) {
-		if (senha.length() > 5 && senha.length() < 15){
+		if (senha.length() >= 5 && senha.length() < 15){
 			this.senha = senha;
 		}
 	}
@@ -199,6 +227,8 @@ public class Cliente {
 			this.dataDeNascimento = dataDeNascimento;
 		}
 	}
+
+
 	
 	
 }
