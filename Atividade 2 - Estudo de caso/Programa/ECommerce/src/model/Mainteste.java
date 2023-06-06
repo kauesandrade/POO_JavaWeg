@@ -9,7 +9,7 @@ public class Mainteste {
 	Scanner sc = new Scanner(System.in);
 	
 	Cliente cliente = new Cliente();
-	Date data = new Date()
+	Date data = new Date();
 	
 //	cadastro -----------------------------------
 		
