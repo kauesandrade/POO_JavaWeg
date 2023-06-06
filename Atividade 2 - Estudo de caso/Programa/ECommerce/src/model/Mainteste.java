@@ -1,4 +1,6 @@
 package model;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class Mainteste {
@@ -7,13 +9,15 @@ public class Mainteste {
 	Scanner sc = new Scanner(System.in);
 	
 	Cliente cliente = new Cliente();
+	Date data = new Date()
 	
 //	cadastro -----------------------------------
 		
 		String logar;
 	
 		do {
-			
+			SimpleDateFormat formato = new SimpleDateFormat("dataB");
+			 
 			System.out.println("Nome: ");
 			String nome = sc.next();
 			System.out.println("Login: ");
@@ -25,7 +29,8 @@ public class Mainteste {
 			System.out.println("cpf: ");
 			String cpf = sc.next();
 			System.out.println("Data de nascimento: ");
-			String data = sc.next();
+			String dataB = sc.next();
+			Date data = formato.parse(dataB);
 			
 			
 			
