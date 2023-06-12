@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Classe para representar o Cliente no Sistema de E-commerce
@@ -30,14 +30,14 @@ public class Cliente {
 	private String telefone;
 	
 	/** Propriedade data de nascimento do cliente */
-	private Date dataDeNascimento;
+	private String dataDeNascimento;
 	
 	
 	public Cliente() {
 	}
 	
 	public Cliente(String nome, String login, String senha, String cpf, String email, String telefone,
-			Date dataDeNascimento) {
+			String dataDeNascimento) {
 		super();
 		this.nome = nome;
 		this.login = login;
@@ -50,7 +50,7 @@ public class Cliente {
 	
 	
 	
-	public String cadastrar(String nome, String login, String senha, String cpf, Date data, String email) {
+	public String cadastrar(String nome, String login, String senha, String cpf, String data, String email) {
 		setNome(nome);	
 		setLogin(login);
 		setSenha(senha);
@@ -215,17 +215,17 @@ public class Cliente {
 	 * 
 	 * @return dataDeNascimento
 	 */
-	public Date getDataDeNascimento() {
+	public String getDataDeNascimento() {
 		return dataDeNascimento;
 	}
 	
 	/**
 	 * Procedimento para verificar o data de nascimento do cliente
 	 * 
-	 * @param dataDeNascimento
+	 * @param data
 	 */
-	public void setDataDeNascimento(Date dataDeNascimento) {
-			this.dataDeNascimento = dataDeNascimento;
+	public void setDataDeNascimento(String data) {
+			this.dataDeNascimento = data;
 	}
 
 

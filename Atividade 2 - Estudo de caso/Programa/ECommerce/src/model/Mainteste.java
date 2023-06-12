@@ -1,5 +1,5 @@
 package model;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
@@ -9,14 +9,12 @@ public class Mainteste {
 	Scanner sc = new Scanner(System.in);
 	
 	Cliente cliente = new Cliente();
-	Date data = new Date();
 	
 //	cadastro -----------------------------------
 		
 		String logar;
 	
 		do {
-			SimpleDateFormat formato = new SimpleDateFormat("dataB");
 			 
 			System.out.println("Nome: ");
 			String nome = sc.next();
@@ -30,12 +28,11 @@ public class Mainteste {
 			String cpf = sc.next();
 			System.out.println("Data de nascimento: ");
 			String dataB = sc.next();
-			Date data = formato.parse(dataB);
+//			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+//			Date data = formato.parse("23/04/2005");
+//			
 			
-			
-			
-			
-			logar = cliente.cadastrar(nome, login, senha, cpf, data, email);
+			logar = cliente.cadastrar(nome, login, senha, cpf, dataB, email);
 			
 			if(logar == "N") {
 				System.out.println("Digite uma parametor melhor");
