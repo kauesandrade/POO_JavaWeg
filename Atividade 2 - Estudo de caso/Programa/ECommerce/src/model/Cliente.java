@@ -61,8 +61,11 @@ public class Cliente {
 		if (getNome() == null || getLogin() == null || getSenha() == null || 
 			getCpf() == null || getDataDeNascimento() == null || getEmail() == null) {
 			return "N";
+		}else {
+			
+			return "A";
 		}
-		return "A";
+		
 		
 	}
 	

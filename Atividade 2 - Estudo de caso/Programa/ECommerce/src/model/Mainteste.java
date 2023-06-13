@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -8,7 +9,24 @@ public class Mainteste {
 	
 	Scanner sc = new Scanner(System.in);
 	
-	Cliente cliente = new Cliente();
+	 ArrayList<Cliente> clientes = new ArrayList();
+	 
+	 //--------------Tela Inicio------------
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	
 //	cadastro -----------------------------------
 		
@@ -35,7 +53,7 @@ public class Mainteste {
 			logar = cliente.cadastrar(nome, login, senha, cpf, dataB, email);
 			
 			if(logar == "N") {
-				System.out.println("Digite uma parametor melhor");
+				System.out.println("Digite uma parametro melhor");
 			}
 			
 		}while(logar == "N");
@@ -46,7 +64,7 @@ public class Mainteste {
 		
 		do {
 			
-			System.out.println("Login: ");
+			jLabel
 			String login = sc.next();
 			System.out.println("Senha: ");
 			String senha = sc.next();
