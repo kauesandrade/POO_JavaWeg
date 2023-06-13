@@ -79,13 +79,12 @@ public class Cliente {
 	public String mostrarDados() {
 		
 		return "Nome: "+ this.nome
-				+"";
+				+"Login: "+this.login
+				+"Senha: "+this.senha
+				+"Email: "+this.email
+				+"CPF: "+this.cpf
+				+"Data de Nascimento: "+this.dataDeNascimento;
 	}
-	
-	
-	
-	
-	
 	
 	
 	/**

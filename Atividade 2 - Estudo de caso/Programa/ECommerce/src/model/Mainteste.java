@@ -3,79 +3,120 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class Mainteste {
+	
+	private static Scanner sc = new Scanner(System.in);
+	private static ArrayList<Cliente> clientes = new ArrayList();
+	private static  Cliente cliente = new Cliente();
+	
 	public static void main(String[] args) {
+
+		
 	
-	Scanner sc = new Scanner(System.in);
+	 
+	 //--------------Tela Inicio-----------
+		login();
+		System.out.println(clientes.get(0));
 	
-	 ArrayList<Cliente> clientes = new ArrayList();
-	 
-	 //--------------Tela Inicio------------
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	
-//	cadastro -----------------------------------
+	}
+	
+	public static void cadastro() {
+		
+		 JLabel lbNome = new JLabel("Nome:");
+		 JLabel lbLogin = new JLabel("Login:");
+		 JLabel lbSenha = new JLabel("Senha:");
+		 JLabel lbEmail = new JLabel("Email:");
+		 JLabel lbCpf = new JLabel("CPF:");
+		 JLabel lbDataNas = new JLabel("Data de Nascimento:");
+
+		 JTextField nome = new JTextField();
+		 JTextField login = new JTextField();
+		 JPasswordField senha = new JPasswordField();
+		 JTextField email = new JTextField();
+		 JTextField cpf = new JTextField();
+		 JTextField dataNas = new JTextField();
 		
 		String logar;
-	
+		
 		do {
 			 
-			System.out.println("Nome: ");
-			String nome = sc.next();
-			System.out.println("Login: ");
-			String login = sc.next();
-			System.out.println("Senha: ");
-			String senha = sc.next();
-			System.out.println("email: ");
-			String email = sc.next();
-			System.out.println("cpf: ");
-			String cpf = sc.next();
-			System.out.println("Data de nascimento: ");
-			String dataB = sc.next();
+			 Object[] co = {lbNome, nome, lbLogin, login, lbSenha, senha, lbEmail, email, lbCpf, cpf, lbDataNas, dataNas};
+			 JOptionPane.showMessageDialog(null, co, "Login", JOptionPane.OK_CANCEL_OPTION);
+
+			
+			 
 //			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 //			Date data = formato.parse("23/04/2005");
 //			
 			
-			logar = cliente.cadastrar(nome, login, senha, cpf, dataB, email);
+			logar = cliente.cadastrar(nome, login, senha, cpf, dataNas, email);
 			
 			if(logar == "N") {
 				System.out.println("Digite uma parametro melhor");
+			}else {
+				clientes.add(cliente);
 			}
 			
 		}while(logar == "N");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void login(){
 		
-		//Login ------------------------------------
+	 JLabel lblogin = new JLabel("Login");
+	 JLabel lbsenha = new JLabel("Senha");
+	 JTextField login = new JTextField();
+	 JPasswordField senha = new JPasswordField();
+	 
+	 
+	 Object[] co = {lblogin, login, lbsenha, senha};
+	 
+	 JOptionPane.showMessageDialog(null, co, "Login", JOptionPane.OK_CANCEL_OPTION);
 		
-		logar = "";
+		
+		
+		
+		
+		
+		String logar = "";
 		
 		do {
+	
 			
-			jLabel
-			String login = sc.next();
-			System.out.println("Senha: ");
-			String senha = sc.next();
-			
-			logar = cliente.logar(login, senha);
+			for(int i=0; i < clientes.size(); i++) {
+				logar = cliente.logar(login, senha);
+				if(logar == "A"){
+					break;
+				}
+			}
 			
 			if(logar == "N") {
 				System.out.println("Coloque um login valido!!");
 			}
+			
 		}while(logar != "A");
-	
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
 }
+	
