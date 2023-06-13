@@ -1,6 +1,8 @@
 package model;
 import java.util.ArrayList;
 import java.util.Date;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
@@ -26,7 +28,22 @@ public class Mainteste {
 		JButton btLogin = new JButton("Login");
 		JButton btSair = new JButton("Sair");
 		
-		btCadastro.addActionListener();
+		btCadastro.addActionListener( (ActionListener) new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				cadastro();
+			}
+		});
+		
+		btLogin.addActionListener( (ActionListener) new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				login();
+			}
+		});
+		
+		btSair.addActionListener( (ActionListener) new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		
 		
