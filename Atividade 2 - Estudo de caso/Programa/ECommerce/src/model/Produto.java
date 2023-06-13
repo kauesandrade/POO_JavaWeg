@@ -12,6 +12,7 @@ public class Produto {
 	private String descricao;
 	private String fotos;
 	private int limiteDeCompras;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -72,6 +73,5 @@ public class Produto {
 	public void setLimiteDeCompras(int limiteDeCompras) {
 		this.limiteDeCompras = limiteDeCompras;
 	}
-	
 	
 }

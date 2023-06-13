@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -13,13 +15,22 @@ public class Mainteste {
 	private static Scanner sc = new Scanner(System.in);
 	private static ArrayList<Cliente> clientes = new ArrayList();
 	private static  Cliente cliente = new Cliente();
+	private static int clientela;
 	
 	public static void main(String[] args) {
-
-		
 	
 	 
 	 //--------------Tela Inicio-----------
+		
+		JButton btCadastro = new JButton("Cadastrar");
+		JButton btLogin = new JButton("Login");
+		JButton btSair = new JButton("Sair");
+		
+		btCadastro.addActionListener();
+		
+		
+		
+		cadastro();
 		login();
 		System.out.println(clientes.get(0));
 	
@@ -49,17 +60,23 @@ public class Mainteste {
 			 Object[] co = {lbNome, nome, lbLogin, login, lbSenha, senha, lbEmail, email, lbCpf, cpf, lbDataNas, dataNas};
 			 JOptionPane.showMessageDialog(null, co, "Login", JOptionPane.OK_CANCEL_OPTION);
 
+			String nome1 = nome.getText();
+			String login1 = login.getText();
+			String senha1 = String.valueOf(senha.getPassword());
+			String email1 = email.getText();
+			String cpf1 = cpf.getText();
+			String dataNas1 = dataNas.getText();
 			
 			 
 //			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-//			Date data = formato.parse("23/04/2005");
-//			
+//			Date data = formato.parse(dataNas1);
 			
-			logar = cliente.cadastrar(nome, login, senha, cpf, dataNas, email);
+			logar = cliente.cadastrar(nome1, login1, senha1, cpf1, dataNas1, email1);
 			
-			if(logar == "N") {
+			if(logar.equals("N")) {
 				System.out.println("Digite uma parametro melhor");
 			}else {
+				JOptionPane.showMessageDialog(null, "Cliente Cadastrado", "Confirmado", JOptionPane.DEFAULT_OPTION);
 				clientes.add(cliente);
 			}
 			
@@ -82,29 +99,29 @@ public class Mainteste {
 	 JTextField login = new JTextField();
 	 JPasswordField senha = new JPasswordField();
 	 
-	 
 	 Object[] co = {lblogin, login, lbsenha, senha};
-	 
-	 JOptionPane.showMessageDialog(null, co, "Login", JOptionPane.OK_CANCEL_OPTION);
 		
-		
-		
-		
-		
-		
-		String logar = "";
+	 String logar = "";
 		
 		do {
-	
+			
+			 JOptionPane.showMessageDialog(null, co, "Login", JOptionPane.OK_CANCEL_OPTION);
+			 
+			 String login1 = login.getText();
+			 String senha1 = String.valueOf(senha.getPassword());
+			
+			logar = "";
 			
 			for(int i=0; i < clientes.size(); i++) {
-				logar = cliente.logar(login, senha);
-				if(logar == "A"){
+				logar = clientes.get(i).logar(login1, senha1);
+				if(logar.equals("A")){
+					// fazer um seja bem vindo
+					clientela = i;
 					break;
 				}
 			}
 			
-			if(logar == "N") {
+			if(logar.equals("N")) {
 				System.out.println("Coloque um login valido!!");
 			}
 			

@@ -3,7 +3,7 @@ package model;
 public class Carrinho_de_compras {
 
 	private Cliente cliente;
-// private ArrayList<Stign> telefone = new telefone
+// private ArrayList<String> telefone = new telefone
 	
 	private int quantidade;
 	
@@ -14,6 +14,10 @@ public class Carrinho_de_compras {
 
 	public void setCliente(Cliente cliente) {
 //		this.cliente.add(cliente);
+	}
+	
+	public void adicionarProduto() {
+		
 	}
 	
 	
