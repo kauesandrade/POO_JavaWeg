@@ -42,15 +42,13 @@ public class Mainteste {
 		
 		btSair.addActionListener( (ActionListener) new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
 		
+		Object[] layoutTelaP = { btCadastro, btLogin, btSair};
 		
-		
-		cadastro();
-		login();
-		System.out.println(clientes.get(0));
-	
+		JOptionPane.showMessageDialog(null, layoutTelaP, "LOJA IRADA", JOptionPane.DEFAULT_OPTION);
 	
 	}
 	
