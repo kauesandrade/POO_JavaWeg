@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
@@ -24,19 +25,34 @@ public class Mainteste {
 	 
 	 //--------------Tela Inicio-----------
 		
+		telaInicial();
+	
+	}
+	
+	public static void telaInicial() {
 		JButton btCadastro = new JButton("Cadastrar");
 		JButton btLogin = new JButton("Login");
 		JButton btSair = new JButton("Sair");
 		
 		btCadastro.addActionListener( (ActionListener) new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				cadastro();
+				try {
+					cadastro();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
 		btLogin.addActionListener( (ActionListener) new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				login();
+				boolean loginConfirmado = login();
+				if(loginConfirmado == true) {
+					//fazer um break para a tela inicial
+				}else {
+					
+				}
 			}
 		});
 		
@@ -49,10 +65,9 @@ public class Mainteste {
 		Object[] layoutTelaP = { btCadastro, btLogin, btSair};
 		
 		JOptionPane.showMessageDialog(null, layoutTelaP, "LOJA IRADA", JOptionPane.DEFAULT_OPTION);
-	
 	}
 	
-	public static void cadastro() {
+	public static void cadastro() throws ParseException {
 		
 		 JLabel lbNome = new JLabel("Nome:");
 		 JLabel lbLogin = new JLabel("Login:");
@@ -69,8 +84,8 @@ public class Mainteste {
 		 JTextField dataNas = new JTextField();
 		
 		String logar;
-		
-		do {
+	
+//		do {
 			 
 			 Object[] co = {lbNome, nome, lbLogin, login, lbSenha, senha, lbEmail, email, lbCpf, cpf, lbDataNas, dataNas};
 			 JOptionPane.showMessageDialog(null, co, "Login", JOptionPane.OK_CANCEL_OPTION);
@@ -89,13 +104,13 @@ public class Mainteste {
 			logar = cliente.cadastrar(nome1, login1, senha1, cpf1, data, email1);
 			
 			if(logar.equals("N")) {
-				System.out.println("Digite uma parametro melhor");
+				JOptionPane.showMessageDialog(null, "Digite um parametro melhor", "Erro!!", JOptionPane.ERROR_MESSAGE);
 			}else {
 				JOptionPane.showMessageDialog(null, "Cliente Cadastrado", "Confirmado", JOptionPane.DEFAULT_OPTION);
 				clientes.add(cliente);
 			}
 			
-		}while(logar == "N");
+//		}while(logar == "N");
 	}
 	
 	
@@ -107,20 +122,21 @@ public class Mainteste {
 	
 	
 	
-	public static void login(){
+	public static boolean login(){
 		
 	 JLabel lblogin = new JLabel("Login");
 	 JLabel lbsenha = new JLabel("Senha");
 	 JTextField login = new JTextField();
 	 JPasswordField senha = new JPasswordField();
 	 
-	 Object[] co = {lblogin, login, lbsenha, senha};
+	 
+	 Object[] layoutLogin = {lblogin, login, lbsenha, senha};
 		
 	 String logar = "";
 		
-		do {
+//		do {
 			
-			 JOptionPane.showMessageDialog(null, co, "Login", JOptionPane.OK_CANCEL_OPTION);
+			 JOptionPane.showMessageDialog(null, layoutLogin, "Login", JOptionPane.OK_CANCEL_OPTION);
 			 
 			 String login1 = login.getText();
 			 String senha1 = String.valueOf(senha.getPassword());
@@ -130,17 +146,20 @@ public class Mainteste {
 			for(int i=0; i < clientes.size(); i++) {
 				logar = clientes.get(i).logar(login1, senha1);
 				if(logar.equals("A")){
-					// fazer um seja bem vindo
+					JOptionPane.showMessageDialog(null, "Seja Bem-Vindo "+clientes.get(i).getNome(), "Login Efetuado", JOptionPane.DEFAULT_OPTION);
 					clientela = i;
 					break;
 				}
 			}
 			
 			if(logar.equals("N")) {
-				System.out.println("Coloque um login valido!!");
+				JOptionPane.showMessageDialog(null, "Coloque um login valido!!", "Erro!!", JOptionPane.ERROR_MESSAGE);
+				login();
+				return false;
 			}
+			return true;
 			
-		}while(logar != "A");
+//		}while(logar != "A");
 	}
 	
 	
