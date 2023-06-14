@@ -30,14 +30,14 @@ public class Cliente {
 	private String telefone;
 	
 	/** Propriedade data de nascimento do cliente */
-	private String dataDeNascimento;
+	private Date dataDeNascimento;
 	
 	
 	public Cliente() {
 	}
 	
 	public Cliente(String nome, String login, String senha, String cpf, String email, String telefone,
-			String dataDeNascimento) {
+			Date dataDeNascimento) {
 		super();
 		this.nome = nome;
 		this.login = login;
@@ -50,7 +50,7 @@ public class Cliente {
 	
 	
 	
-	public String cadastrar(String nome, String login, String senha, String cpf, String data, String email) {
+	public String cadastrar(String nome, String login, String senha, String cpf, Date data, String email) {
 		setNome(nome);	
 		setLogin(login);
 		setSenha(senha);
@@ -217,7 +217,7 @@ public class Cliente {
 	 * 
 	 * @return dataDeNascimento
 	 */
-	public String getDataDeNascimento() {
+	public Date getDataDeNascimento() {
 		return dataDeNascimento;
 	}
 	
@@ -226,7 +226,7 @@ public class Cliente {
 	 * 
 	 * @param data
 	 */
-	public void setDataDeNascimento(String data) {
+	public void setDataDeNascimento(Date data) {
 			this.dataDeNascimento = data;
 	}
 

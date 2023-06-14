@@ -83,10 +83,10 @@ public class Mainteste {
 			String dataNas1 = dataNas.getText();
 			
 			 
-//			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-//			Date data = formato.parse(dataNas1);
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			Date data = formato.parse(dataNas1);
 			
-			logar = cliente.cadastrar(nome1, login1, senha1, cpf1, dataNas1, email1);
+			logar = cliente.cadastrar(nome1, login1, senha1, cpf1, data, email1);
 			
 			if(logar.equals("N")) {
 				System.out.println("Digite uma parametro melhor");
