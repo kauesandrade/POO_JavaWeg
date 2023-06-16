@@ -28,8 +28,8 @@ public class TelaProduto {
 		cbCategoria.addItem("Lazer");
 		cbCategoria.addItem("Cozinha");
 		
-		JTable tabelaProdutos = new JTable(new Object[][] {"Batada", "1.95"},
-											new Object[] {"Nome", "Preço"});
+//		JTable tabelaProdutos = new JTable(new Object[][] {"Batada", "1.95"},
+//											new Object[] {"Nome", "Preço"});
 		
 		Object[] componentes = {lbNome, txNome, lbPreco, txPreco, lbCategoria, cbCategoria};
 		
@@ -38,7 +38,7 @@ public class TelaProduto {
 		Produto p = new Produto();
 		p.setNome(txNome.getText());
 		p.setPreco(Double.parseDouble(txPreco.getText()));
-//		p.setCategoria(String.substring(cbCategoria.getSelectedItem()));
+		p.setCategoria(String.substring(cbCategoria.getSelectedItem()));
 		
 		ListaProduto.add(p);
 		

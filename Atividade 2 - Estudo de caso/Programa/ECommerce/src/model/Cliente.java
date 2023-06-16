@@ -58,7 +58,27 @@ public class Cliente {
 		setDataDeNascimento(data);
 		setEmail(email);
 		
-		if (getNome() == null || getLogin() == null || getSenha() == null || 
+		if(getNome()==null) {
+			return "Digite um Nome valido!";
+		}
+		else if(getLogin()==null) {
+			return "Digite um Login valido!";
+		}
+		else if(getSenha()==null) {
+			return "Digite uma Senha valida!";
+		}
+		else if(getCpf() == null) {
+			return "Digite uma CPF valida!";
+		}
+		else if(getDataDeNascimento() == null) {
+			return "Digite uma Data de Nascimento valida!";
+		}
+		else if(getCpf() == null) {
+			return "Digite uma Email valida!";
+		}
+
+		
+		else if (getNome() == null || getLogin() == null || getSenha() == null || 
 			getCpf() == null || getDataDeNascimento() == null || getEmail() == null) {
 			return "N";
 		}else {
@@ -86,7 +106,7 @@ public class Cliente {
 				+"Data de Nascimento: "+this.dataDeNascimento;
 	}
 	
-	
+
 	/**
 	 * Método para retornar o nome do cliente
 	 * 

@@ -1,6 +1,7 @@
 package model;
 import java.util.ArrayList;
 import java.util.Date;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -8,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -24,8 +27,11 @@ public class Mainteste {
 	
 	 
 	 //--------------Tela Inicio-----------
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		telaInicial();
+		comprar();
+		
+//		telaInicial();
 	
 	}
 	
@@ -64,7 +70,7 @@ public class Mainteste {
 		
 		Object[] layoutTelaP = { btCadastro, btLogin, btSair};
 		
-		JOptionPane.showMessageDialog(null, layoutTelaP, "LOJA IRADA", JOptionPane.DEFAULT_OPTION);
+		JOptionPane.showMessageDialog(null, layoutTelaP, "LOJA IRADA", JOptionPane.CLOSED_OPTION);
 	}
 	
 	public static void cadastro() throws ParseException {
@@ -87,8 +93,8 @@ public class Mainteste {
 	
 //		do {
 			 
-			 Object[] co = {lbNome, nome, lbLogin, login, lbSenha, senha, lbEmail, email, lbCpf, cpf, lbDataNas, dataNas};
-			 JOptionPane.showMessageDialog(null, co, "Login", JOptionPane.OK_CANCEL_OPTION);
+			 Object[]layoutCadastro = {lbNome, nome, lbLogin, login, lbSenha, senha, lbEmail, email, lbCpf, cpf, lbDataNas, dataNas};
+			 JOptionPane.showMessageDialog(null, layoutCadastro, "Cadastro", JOptionPane.OK_CANCEL_OPTION);
 
 			String nome1 = nome.getText();
 			String login1 = login.getText();
@@ -104,23 +110,16 @@ public class Mainteste {
 			logar = cliente.cadastrar(nome1, login1, senha1, cpf1, data, email1);
 			
 			if(logar.equals("N")) {
-				JOptionPane.showMessageDialog(null, "Digite um parametro melhor", "Erro!!", JOptionPane.ERROR_MESSAGE);
-			}else {
+				System. exit(0);
+			}
+			else if(logar.equals("A")){
 				JOptionPane.showMessageDialog(null, "Cliente Cadastrado", "Confirmado", JOptionPane.DEFAULT_OPTION);
 				clientes.add(cliente);
+				
 			}
 			
 //		}while(logar == "N");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public static boolean login(){
 		
@@ -134,7 +133,7 @@ public class Mainteste {
 		
 	 String logar = "";
 		
-//		do {
+	 do {
 			
 			 JOptionPane.showMessageDialog(null, layoutLogin, "Login", JOptionPane.OK_CANCEL_OPTION);
 			 
@@ -159,7 +158,56 @@ public class Mainteste {
 			}
 			return true;
 			
-//		}while(logar != "A");
+	}while(logar != "A");
+	}
+	
+	public static void comprar() {
+		
+		JLabel lbCategoria = new JLabel("Categoria: ");
+		JComboBox cbCategoria = new JComboBox();
+		cbCategoria.addItem("Esportes");
+		cbCategoria.addItem("Infantil");
+		cbCategoria.addItem("Tecnologia");
+		cbCategoria.addItem("Lazer");
+		cbCategoria.addItem("Cozinha");
+		
+		
+//		
+//		Object[] componentes = {lbCategoria, cbCategoria};
+//		String resultado = JOptionPane.showInputDialog(null, componentes, "Categoria", JOptionPane.DEFAULT_OPTION);
+//		
+//		if(resultado == JOptionPane.CLOSED_OPTION) {
+//			
+//		}
+//		
+		
+//		Fazer como fechar |||S
+		
+		String categoria = cbCategoria.getSelectedItem().toString();
+		ArrayList<Produto> produtos = new ArrayList<Produto>();
+		JComboBox<String> comboBox1 = new JComboBox<String>();
+		
+		for(int i = 0; i < produtos.size(); i++) {
+			if(Produto.getCategoria().equals(categoria)) {
+				comboBox1.addItem(produtos.get(i).getNome());
+			}
+		}
+		
+		if(produtos.size() > 0) {
+			JOptionPane.showMessageDialog(null, comboBox1, ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
+			}
+		else {
+			JOptionPane.showMessageDialog(null, "Não há Produtos nessa categoria", ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
+			comprar();
+			}
+			
+		}
+		
+		
+		
+		
+		
+		
 	}
 	
 	
@@ -167,7 +215,5 @@ public class Mainteste {
 	
 	
 	
-	
-	
-}
+
 	

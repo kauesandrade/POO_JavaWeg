@@ -1,10 +1,13 @@
 package model;
 
+import java.awt.Component;
+import java.util.ArrayList;
+
 public class Produto {
 
 	private String nome;
 	private Double preco;
-	private String categoria;
+	private static String categoria;
 	private String avaliacao;
 	private String modelo;
 	private String marca;
@@ -25,7 +28,7 @@ public class Produto {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-	public String getCategoria() {
+	public static String getCategoria() {
 		return categoria;
 	}
 	public void setCategoria(String categoria) {
