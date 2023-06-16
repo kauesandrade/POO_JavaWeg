@@ -58,13 +58,13 @@ public class Cliente {
 		setDataDeNascimento(data);
 		setEmail(email);
 		
-		if(getNome()==null) {
+		if(getNome() == null) {
 			return "Digite um Nome valido!";
 		}
-		else if(getLogin()==null) {
+		else if(getLogin() == null) {
 			return "Digite um Login valido!";
 		}
-		else if(getSenha()==null) {
+		else if(getSenha() == null) {
 			return "Digite uma Senha valida!";
 		}
 		else if(getCpf() == null) {
@@ -77,7 +77,6 @@ public class Cliente {
 			return "Digite uma Email valida!";
 		}
 
-		
 		else if (getNome() == null || getLogin() == null || getSenha() == null || 
 			getCpf() == null || getDataDeNascimento() == null || getEmail() == null) {
 			return "N";
@@ -207,7 +206,9 @@ public class Cliente {
 	 * @param email
 	 */
 	public void setEmail(String email) {
-		this.email = email;
+		if(email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
+			this.email = email;
+		}
 	}
 	
 	
