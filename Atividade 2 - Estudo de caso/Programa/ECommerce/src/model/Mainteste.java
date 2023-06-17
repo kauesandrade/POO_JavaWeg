@@ -54,7 +54,7 @@ public class Mainteste {
 	
 	btCarrinho.addActionListener((ActionListener) new ActionListener(){
 		public void actionPerformed(ActionEvent e) {
-			
+			editProduto();
 		}
 	});
 	
@@ -68,8 +68,6 @@ public class Mainteste {
 	int opcao = JOptionPane.showInternalConfirmDialog(null, LayoutTelaPrincipal, "Tela Principal", JOptionPane.DEFAULT_OPTION);
 	
 	if(opcao == -1){
-		
-	}else {
 		
 	}
 	
@@ -260,7 +258,13 @@ public class Mainteste {
 			
 		}
 		
+	public static void editProduto() {
 		
+		JButton btFinalizarCompra = new JButton("Comprar");
+		JButton btCarrinho = new JButton("Carrinho");
+		JButton btProduto = new JButton("Produto");
+		Object[] LayoutTelaPrincipal = {btComprar, btCarrinho, btProduto};
+	}
 		
 		
 		
