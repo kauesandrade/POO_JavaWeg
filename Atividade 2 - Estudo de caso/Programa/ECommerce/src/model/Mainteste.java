@@ -32,6 +32,62 @@ public class Mainteste {
 		cliente.setSenha("123123");
 		clientes.add(cliente);
 		
+		telaInicial();
+		
+		
+	}
+		
+
+
+	public static void telaPrincipal() {
+		JButton btComprar = new JButton("Comprar");
+		JButton btCarrinho = new JButton("Carrinho");
+		JButton btProduto = new JButton("Produto");
+		Object[] LayoutTelaPrincipal = {btComprar, btCarrinho, btProduto};
+		
+	
+	btComprar.addActionListener((ActionListener) new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+			comprar();
+		}
+	});
+	
+	btCarrinho.addActionListener((ActionListener) new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+	});
+	
+	btProduto.addActionListener((ActionListener) new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+	});
+	
+	
+	int opcao = JOptionPane.showInternalConfirmDialog(null, LayoutTelaPrincipal, "Tela Principal", JOptionPane.DEFAULT_OPTION);
+	
+	if(opcao == -1){
+		
+	}else {
+		
+	}
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void telaInicial() {
 		JButton btCadastro = new JButton("Cadastrar");
 		JButton btLogin = new JButton("Login");
 		JButton btSair = new JButton("Sair");
@@ -67,60 +123,6 @@ public class Mainteste {
 		});
 		
 		JOptionPane.showMessageDialog(null, layoutTelaP, "Schaefer's SHOP", JOptionPane.CLOSED_OPTION);
-		
-	}
-		
-	
-		
-	
-	
-
-
-
-
-	public static void telaPrincipal() {
-		JButton btComprar = new JButton("Comprar");
-		JButton btCarrinho = new JButton("Carrinho");
-		JButton btProduto = new JButton("Produto");
-		Object[] LayoutTelaPrincipal = {btComprar, btCarrinho, btProduto};
-		
-	
-	btComprar.addActionListener((ActionListener) new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-			comprar();
-		}
-	});
-	
-	btCarrinho.addActionListener((ActionListener) new ActionListener(){
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	});
-	
-	btProduto.addActionListener((ActionListener) new ActionListener(){
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	});
-	
-	
-	int opcao = JOptionPane.showInternalConfirmDialog(null, LayoutTelaPrincipal, "Tela Principal", JOptionPane.DEFAULT_OPTION);
-	
-	if(opcao == -1){
-		
-	}
-	
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	public static void telaInicial() {
-		
 	}
 	
 	public static void cadastro() throws ParseException {
