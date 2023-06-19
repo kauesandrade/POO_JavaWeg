@@ -263,21 +263,20 @@ public class Mainteste {
 		
 	public static void carrinho() {
 		
-		ArrayList<String> produtosCarrinhoInfo = new ArrayList<String>();
-		
+		String produtosCarrinhoInfo = "";
 		
 		for(int i = 0; i < carrinhoProdutos.size(); i++) {
 			
-			produtosCarrinhoInfo.add("Nome: "+ carrinhoProdutos.get(i).getNome() +
+			produtosCarrinhoInfo += "\nNome: "+ carrinhoProdutos.get(i).getNome() +
 					"\nPreço: "+ carrinhoProdutos.get(i).getPreco() +
-					"\nQuantidade: 1\n");
+					"\nQuantidade: 1\n";
 		}
 		
 		JButton btFinalizarCompra = new JButton("Finalizar compra");
 		JButton btRemover = new JButton("Remover itens");
 		JButton btVoltar = new JButton("Voltar");
 		
-		Object[] layoutCarrinho = {produtosCarrinhoInfo, btFinalizarCompra, btRemover, btVoltar};
+		Object[] layoutCarrinho = {produtosCarrinhoInfo.toString(), btFinalizarCompra, btRemover, btVoltar};
 		
 		btFinalizarCompra.addActionListener((ActionListener) new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -326,10 +325,17 @@ public class Mainteste {
 	
 	public static void editProduto() {
 		
-		JOptionPane.showInternalConfirmDialog(null, cbProdutos, "Produto", JOptionPane.DEFAULT_OPTION);
-		String produtoSelecionado = cbProdutos.getSelectedItem().toString();
+		JComboBox<String> cbArr = new JComboBox<String>();
 		
-		System.out.println(produtoSelecionado);
+		for(int i = 0; i < carrinhoProdutos.size(); i++) {
+			cbArr.addItem(carrinhoProdutos.get(i).getNome());
+		}
+		
+		JOptionPane.showInternalConfirmDialog(null, cbArr, "Produto", JOptionPane.DEFAULT_OPTION);
+		String produtoSelecionado = cbArr.getSelectedItem().toString();
+		
+		
+		
 		
 		
 	}
@@ -445,8 +451,6 @@ public class Mainteste {
 		}
 	}
 	
-	
-	
 	private static void removerDoCarrinho() {
 		JComboBox<String> cbArr = new JComboBox<String>();
 		
@@ -458,8 +462,17 @@ public class Mainteste {
 		Object[] layoutRemoverDoCarrinho = {cbArr, titulo};
 		
 		JOptionPane.showConfirmDialog(null, layoutRemoverDoCarrinho, "Remover", JOptionPane.DEFAULT_OPTION );
+		
+		String nomeProduto = cbArr.getSelectedItem().toString();
+		
+		for(int i = 0; i < carrinhoProdutos.size(); i++) {
+			
+			if(carrinhoProdutos.get(i).getNome().equals(nomeProduto)){
+				carrinhoProdutos.remove(i);
+			}
+		}
 	}
-	
+
 	
 	}
 
