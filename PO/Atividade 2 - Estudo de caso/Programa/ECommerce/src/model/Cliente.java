@@ -33,6 +33,10 @@ public class Cliente {
 	private Date dataDeNascimento;
 	
 	
+	//Fazer alteração para o carrinho no cliente
+	//private Carrinho_de_compras carrinho = new Carrinho_de_compras();
+	
+	
 	public Cliente() {
 	}
 	
@@ -47,9 +51,10 @@ public class Cliente {
 		this.telefone = telefone;
 		this.dataDeNascimento = dataDeNascimento;
 	}
-	
-	
-	
+	/**
+	 * Método para retornar e cadastrar o cliente
+	 *
+	 */
 	public String cadastrar(String nome, String login, String senha, String cpf, Date data, String email) {
 		setNome(nome);	
 		setLogin(login);
@@ -84,10 +89,52 @@ public class Cliente {
 			
 			return "A";
 		}
+	}
+	/**
+	 * Método para retornar e editar os dados do cliente
+	 * 
+	 */
+		public String editDados(String nome, String login, String senha, String cpf, Date data, String email) {
+			setNome(nome);	
+			setLogin(login);
+			setSenha(senha);
+			setCpf(cpf);
+			setDataDeNascimento(data);
+			setEmail(email);
+			
+			if(getNome() == null) {
+				return "Digite um Nome valido!";
+			}
+			else if(getLogin() == null) {
+				return "Digite um Login valido!";
+			}
+			else if(getSenha() == null) {
+				return "Digite uma Senha valida!";
+			}
+			else if(getCpf() == null) {
+				return "Digite uma CPF valida!";
+			}
+			else if(getDataDeNascimento() == null) {
+				return "Digite uma Data de Nascimento valida!";
+			}
+			else if(getCpf() == null) {
+				return "Digite uma Email valida!";
+			}
+
+			else if (getNome() == null || getLogin() == null || getSenha() == null || 
+				getCpf() == null || getDataDeNascimento() == null || getEmail() == null) {
+				return "N";
+			}else {
+				
+				return "A";
+			}
 		
 		
 	}
-	
+	/**
+	* Método para retornar o e para fazer a verificação do login do cliente
+	* 
+	*/
 	public String logar(String login, String senha) {
 		if(this.login.equals(login) && this.senha.equals(senha)) {
 			return "A";
@@ -95,14 +142,24 @@ public class Cliente {
 		return "N";
 	}
 	
+	/**
+	 * Método para retornar os dados do cliente
+	 * 
+	 * @return "Nome: "+ this.nome
+				+"\nLogin: "+this.login
+				+"\nSenha: "+this.senha
+				+"\nEmail: "+this.email
+				+"\nCPF: "+this.cpf
+				+"\nData de Nascimento: "+this.dataDeNascimento;
+	 */
 	public String mostrarDados() {
 		
 		return "Nome: "+ this.nome
-				+"Login: "+this.login
-				+"Senha: "+this.senha
-				+"Email: "+this.email
-				+"CPF: "+this.cpf
-				+"Data de Nascimento: "+this.dataDeNascimento;
+				+"\nLogin: "+this.login
+				+"\nSenha: "+this.senha
+				+"\nEmail: "+this.email
+				+"\nCPF: "+this.cpf
+				+"\nData de Nascimento: "+this.dataDeNascimento;
 	}
 	
 

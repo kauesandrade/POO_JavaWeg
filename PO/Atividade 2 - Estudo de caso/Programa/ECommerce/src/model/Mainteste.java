@@ -52,12 +52,20 @@ public class Mainteste {
 
 
 	public static void telaPrincipal() {
+		JButton btPerfil = new JButton("Perfil");
 		JButton btComprar = new JButton("Comprar");
 		JButton btCarrinho = new JButton("Carrinho");
 		JButton btProduto = new JButton("Produto");
-		Object[] layoutTelaPrincipal = {btComprar, btCarrinho, btProduto};
+		Object[] layoutTelaPrincipal = {btPerfil, btComprar, btCarrinho, btProduto};
 		
 	
+	btPerfil.addActionListener((ActionListener) new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+			perfil();
+		}
+	});
+		
+		
 	btComprar.addActionListener((ActionListener) new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 			comprar();
@@ -241,7 +249,7 @@ public class Mainteste {
 			JOptionPane.showMessageDialog(null, cbArr, ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
 			selecNomeProduto = cbArr.getSelectedItem().toString();
 			}
-		else if(opcao == 0) {
+		else if(produtos.size() == 0) {
 			JOptionPane.showMessageDialog(null, "Não há Produtos nessa categoria", ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
 			comprar();
 		}
@@ -321,19 +329,75 @@ public class Mainteste {
 	JOptionPane.showInternalConfirmDialog(null, layoutPoduto, "Produto", JOptionPane.DEFAULT_OPTION);
 		
 	}
-		
 	
 	public static void editProduto() {
 		
 		JComboBox<String> cbArr = new JComboBox<String>();
 		
-		for(int i = 0; i < carrinhoProdutos.size(); i++) {
-			cbArr.addItem(carrinhoProdutos.get(i).getNome());
+		for(int i = 0; i < produtos.size(); i++) {
+			cbArr.addItem(produtos.get(i).getNome());
 		}
 		
 		JOptionPane.showInternalConfirmDialog(null, cbArr, "Produto", JOptionPane.DEFAULT_OPTION);
 		String produtoSelecionado = cbArr.getSelectedItem().toString();
 		
+		int produto =0;
+		
+		for(int i = 0; i < produtos.size(); i++) {
+			if(produtoSelecionado.equals(produtos.get(i).getNome())) {
+				produto = i;
+			}
+			
+			JLabel lbNome = new JLabel("Nome do produto");
+			JLabel lbPreco = new JLabel("Preço");
+			JLabel lbCategoria = new JLabel("Categoria");
+			JLabel lbModelo = new JLabel("Modelo");
+			JLabel lbMarca = new JLabel("Marca");
+			JLabel lbCor = new JLabel("Cor");
+			JLabel lbDescricao = new JLabel("Descrição");
+			JLabel lbLimite = new JLabel("Limite de comprar por pessoa");
+			JLabel lbQuantidade = new JLabel("Quantidade no estoque");
+			
+			JTextField txNome = new JTextField(""+produtos.get(produto).getNome());
+			JTextField txPreco = new JTextField(""+produtos.get(produto).getPreco());
+			JTextField txModelo = new JTextField(""+produtos.get(produto).getModelo());
+			JTextField txMarca = new JTextField(""+produtos.get(produto).getMarca());
+			JTextField txCor = new JTextField(""+produtos.get(produto).getCor());
+			JTextField txDescricao = new JTextField(""+produtos.get(produto).getDescricao());
+			JTextField txLimite = new JTextField(""+produtos.get(produto).getLimiteDeCompras());
+			JTextField txQuantidade = new JTextField(""+produtos.get(produto).getQuantidadeEstoque());
+			
+			Object[] layoutCadastrarProduto = {lbNome, txNome, lbPreco, txPreco, lbCategoria, cbCategorias,lbModelo,
+					txModelo,lbMarca, txMarca, lbCor, txCor, lbDescricao, txDescricao, lbLimite, txLimite, lbQuantidade, txQuantidade};
+			
+			int opcao = JOptionPane.showConfirmDialog(null, layoutCadastrarProduto, "Edição de Produto", JOptionPane.CANCEL_OPTION);
+			
+			String nome = txNome.getText();
+			Double preco = Double.parseDouble(txPreco.getText());
+			String categoria = cbCategorias.getSelectedItem().toString();
+			String modelo = txModelo.getText();
+			String marca = txMarca.getText();
+			String cor = txCor.getText();
+			String descricao = txDescricao.getText();
+			int limite = Integer.parseInt(txLimite.getText());
+			int quantidade = Integer.parseInt(txQuantidade.getText());
+			
+			String editProduto = produtos.get(produto).editarProduto(nome, preco, categoria, modelo,
+					marca, cor, descricao, limite, quantidade);
+			
+			if(opcao == -1){
+				
+			}else {
+				if(editProduto.equals("A")) {
+					JOptionPane.showConfirmDialog(null, "Produto Editado!!!", "Confirmado", JOptionPane.CANCEL_OPTION);
+				}
+				else if(editProduto != "A") {
+					JOptionPane.showConfirmDialog(null, editProduto, "Erro", JOptionPane.CANCEL_OPTION);
+					cadastrarProduto();
+				}
+			}
+			
+		}
 		
 		
 		
@@ -472,7 +536,91 @@ public class Mainteste {
 			}
 		}
 	}
+	
+	private static void perfil() {
+		
+		JButton btDados = new JButton("Dados do Perfil");
+		JButton btCompras = new JButton("Compras Feitas");
+		Object[] layoutPerfil = {btDados, btCompras};
+		
+		btDados.addActionListener((ActionListener) new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				JButton btEditDados = new JButton("Editar Dados do Perfil");
+				Object[] layoutPerfilDados = {clientes.get(logado).mostrarDados(), btEditDados};
+				
+				btEditDados.addActionListener((ActionListener) new ActionListener(){
+					public void actionPerformed(ActionEvent e) {
+					try {
+						editDados();
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+				
+			JOptionPane.showInternalConfirmDialog(null, layoutPerfilDados, "Dados", JOptionPane.CLOSED_OPTION);
+		}
+	});
+		
+		btCompras.addActionListener((ActionListener) new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+			
+		}
+	});
+		
+		JOptionPane.showConfirmDialog(null, layoutPerfil, "Perfil", JOptionPane.CLOSED_OPTION);
+		
+		
+	}
+	
+	
+	private static void editDados() throws ParseException {
+		JLabel lbNome = new JLabel("Nome:");
+		JLabel lbLogin = new JLabel("Login:");
+		JLabel lbSenha = new JLabel("Senha:");
+		JLabel lbEmail = new JLabel("Email:");
+		JLabel lbCpf = new JLabel("CPF:");
+		JLabel lbDataNas = new JLabel("Data de Nascimento:");
 
+		JTextField txNome = new JTextField(""+clientes.get(logado).getNome());
+		JTextField txLogin = new JTextField(""+clientes.get(logado).getLogin());
+		JPasswordField txSenha = new JPasswordField(""+clientes.get(logado).getSenha());
+		JTextField txEmail = new JTextField(""+clientes.get(logado).getEmail());
+		JTextField txCpf = new JTextField(""+clientes.get(logado).getCpf());
+		JTextField txDataNas = new JTextField(""+clientes.get(logado).getDataDeNascimento());
+		Object[]layoutCadastro = {lbNome, txNome, lbLogin, txLogin, lbSenha, txSenha, lbEmail, txEmail, lbCpf, txCpf, lbDataNas, txDataNas};
+		 
+		int opcao = JOptionPane.showInternalConfirmDialog(null, layoutCadastro, "Cadastro", JOptionPane.OK_CANCEL_OPTION);
+
+		String nome = txNome.getText();
+		String login = txLogin.getText();
+		String senha = String.valueOf(txSenha.getPassword());
+		String email = txEmail.getText();
+		String cpf = txCpf.getText();
+		String dataNas = txDataNas.getText();
+			
+			 
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date data = formato.parse(dataNas);
+			
+		String cadastrar = cliente.editDados(nome, login, senha, cpf, data, email);
+		
+		if(opcao == -1) {
+			
+		}
+		else {
+			if(cadastrar != "A") {
+				JOptionPane.showMessageDialog(null, cadastrar, "Erro", JOptionPane.DEFAULT_OPTION);
+				editDados();
+			}
+			else if(cadastrar.equals("A")){
+				JOptionPane.showMessageDialog(null, "Cliente editado", "Confirmado", JOptionPane.DEFAULT_OPTION);
+					
+			}
+		}
+	}
 	
 	}
 

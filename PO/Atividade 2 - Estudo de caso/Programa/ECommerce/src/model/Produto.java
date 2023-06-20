@@ -71,6 +71,42 @@ public class Produto {
 		return "A";
 		
 	}
+	
+	public String editarProduto(String nome, Double preco, String categoria, String modelo,
+			String marca, String cor, String descricao, int limiteDeCompras, int quantidadeEstoque) {
+		setNome(nome);
+		setPreco(preco);
+		setCategoria(categoria);
+		setModelo(modelo);
+		setMarca(marca);
+		setCor(cor);
+		setDescricao(descricao);
+		setLimiteDeCompras(limiteDeCompras);
+		setQuantidadeEstoque(quantidadeEstoque);
+		
+		if(getNome() == null) {
+			return "Digite um Nome valido!";
+		}else if(getPreco() == null) {
+			return "Digite um Preco valido!";
+		}else if(getCategoria() == null) {
+			return "Escolha uma Categoria valida!";
+		}else if(getModelo() == null) {
+			return "Digite um Modelo valido!";
+		}else if(getMarca() == null) {
+			return "Digite uma Marca valida!";
+		}else if(getCor() == null){
+			return "Digite uma Cor valida!";
+		}else if(getDescricao() == null) {
+			return "Digite uma Descrição valida!";
+		}else if(getLimiteDeCompras() == 0) {
+			return "Digite um Limite de compras valido!";
+		}else if(getQuantidadeEstoque() == 0) {
+			return "Digite uma Quantide maior que 0";
+		}
+		return "A";
+		
+	}
+
 
 	public String getNome() {
 		return nome;
