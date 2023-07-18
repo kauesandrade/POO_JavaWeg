@@ -60,6 +60,11 @@ public class telaInicial extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btSair = new JButton("Sair");
+		btSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btSair.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		btSair.setForeground(new Color(64, 0, 64));
 		btSair.setBackground(Color.WHITE);

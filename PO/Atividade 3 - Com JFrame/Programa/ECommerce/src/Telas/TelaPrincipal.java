@@ -20,6 +20,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Button;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaPrincipal extends JFrame {
 
@@ -59,11 +61,16 @@ public class TelaPrincipal extends JFrame {
 		btCadastraProduto.setBounds(10, 199, 121, 23);
 		telaPricipal.add(btCadastraProduto);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(298, 11, 121, 23);
-		telaPricipal.add(comboBox);
+		JComboBox cbCategorias = new JComboBox();
+		cbCategorias.setBounds(298, 11, 121, 23);
+		telaPricipal.add(cbCategorias);
 		
 		JButton btProcurar = new JButton("Procurar");
+		btProcurar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btProcurar.setBounds(319, 45, 89, 23);
 		telaPricipal.add(btProcurar);
 		
@@ -71,9 +78,9 @@ public class TelaPrincipal extends JFrame {
 		lbMostrarProdutos.setBounds(10, 15, 270, 173);
 		telaPricipal.add(lbMostrarProdutos);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(298, 95, 121, 22);
-		telaPricipal.add(comboBox_1);
+		JComboBox cbProdutos = new JComboBox();
+		cbProdutos.setBounds(298, 95, 121, 22);
+		telaPricipal.add(cbProdutos);
 		
 		JButton btSelecionarProduto = new JButton("Selecionar");
 		btSelecionarProduto.setBounds(319, 128, 89, 23);

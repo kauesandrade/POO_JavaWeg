@@ -5,21 +5,38 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Cliente;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.HeadlessException;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class TelaLogin extends JFrame {
-
+	
+	private static ArrayList<Cliente> clientes = new ArrayList();
+	private static int logado;
+	
 	private JPanel contentPane;
 	private JTextField txLogin;
 	private JPasswordField PfSenha;
+
+	public static int ClienteLogado() {
+		return logado;
+	}
+	
+	
 
 	/**
 	 * Launch the application.
@@ -78,6 +95,31 @@ public class TelaLogin extends JFrame {
 		contentPane.add(PfSenha);
 		
 		JButton btLogar = new JButton("Logar");
+		btLogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				clientes = TelaCadastro.ArrClientes();
+				
+				 String login1 = txLogin.getText();
+				 String senha1 = String.valueOf(PfSenha.getPassword());
+				
+				 String logar ="";
+				 
+				for(int i=0; i < clientes.size(); i++) {
+					logar = clientes.get(i).logar(login1, senha1);
+					if(logar.equals("A")){
+						JOptionPane.showMessageDialog(null, "Seja Bem-Vindo "+clientes.get(i).getNome(), "Login Efetuado", JOptionPane.DEFAULT_OPTION);
+						logado = i;
+						dispose();
+					}
+				}
+				
+				if(logar.equals("N")) {
+					JOptionPane.showMessageDialog(null, "Coloque um login valido!!", "Erro!!", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
 		btLogar.setBackground(Color.WHITE);
 		btLogar.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		btLogar.setBounds(171, 213, 89, 23);

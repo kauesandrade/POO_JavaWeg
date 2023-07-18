@@ -6,8 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
+
+import model.Cliente;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
@@ -15,16 +20,30 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
+
+
 
 public class TelaCadastro extends JFrame {
 
+	private static ArrayList<Cliente> clientes = new ArrayList();
 	private JPanel contentPane;
 	private JTextField txNome;
 	private JTextField txLogin;
-	private JTextField txSenha;
 	private JTextField txEmail;
+	private JPasswordField pfSenha;
 
+	public static ArrayList<Cliente> ArrClientes() {
+		return clientes;
+	}
+	
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -93,11 +112,6 @@ public class TelaCadastro extends JFrame {
 		lbLogin.setBounds(101, 83, 46, 14);
 		contentPane.add(lbLogin);
 		
-		txSenha = new JTextField();
-		txSenha.setColumns(10);
-		txSenha.setBounds(162, 111, 106, 20);
-		contentPane.add(txSenha);
-		
 		txEmail = new JTextField();
 		txEmail.setColumns(10);
 		txEmail.setBounds(162, 142, 106, 20);
@@ -144,12 +158,45 @@ public class TelaCadastro extends JFrame {
 		JButton btSalvar = new JButton("Salvar");
 		btSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Cliente cliente = new Cliente();
+					 
+				String nome = txNome.getText();
+				String login = txLogin.getText();
+				String senha = String.valueOf(pfSenha.getPassword());
+				String email = txEmail.getText();
+				String cpf = ftCpf.getText();
+				String dataNas = ftDataNas.getText().toString();
+					
+					 
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+				 	Date data = null;
+					try {
+						data = formato.parse(dataNas);
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				String cadastrar = cliente.cadastrar(nome, login, senha, cpf, data, email);
 				
+					if(cadastrar != "A") {
+						JOptionPane.showMessageDialog(null, cadastrar, "Erro", JOptionPane.DEFAULT_OPTION);
+					}
+					else if(cadastrar.equals("A")){
+						JOptionPane.showMessageDialog(null, "Cliente Cadastrado", "Confirmado", JOptionPane.DEFAULT_OPTION);
+						clientes.add(cliente);
+						dispose();
+							
+				}
 			}
 		});
 		btSalvar.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		btSalvar.setBackground(Color.WHITE);
 		btSalvar.setBounds(170, 235, 89, 23);
 		contentPane.add(btSalvar);
+		
+		pfSenha = new JPasswordField();
+		pfSenha.setBounds(162, 111, 106, 20);
+		contentPane.add(pfSenha);
 	}
 }

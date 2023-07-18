@@ -31,6 +31,12 @@ public class CadastrarProduto extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
+	
+//	public static void addInfo() {
+//		
+//	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -159,5 +165,10 @@ public class CadastrarProduto extends JFrame {
 		txQuantidadeEstoqueP.setColumns(10);
 		txQuantidadeEstoqueP.setBounds(197, 184, 37, 20);
 		contentPane.add(txQuantidadeEstoqueP);
+		
+		JButton btCadastrarP = new JButton("Cadastrar");
+		btCadastrarP.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
+		btCadastrarP.setBounds(312, 227, 112, 23);
+		contentPane.add(btCadastrarP);
 	}
 }
