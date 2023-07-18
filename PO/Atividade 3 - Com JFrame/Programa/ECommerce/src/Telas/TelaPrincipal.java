@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
@@ -25,10 +26,22 @@ import java.awt.event.ActionEvent;
 
 public class TelaPrincipal extends JFrame {
 
+	
+	private static JComboBox<String> cbCategorias = new JComboBox<String>();
+	
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		cbCategorias.addItem("Esportes");
+		cbCategorias.addItem("Infantil");
+		cbCategorias.addItem("Tecnologia");
+		cbCategorias.addItem("Lazer");
+		cbCategorias.addItem("Cozinha");
+		
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -69,6 +82,43 @@ public class TelaPrincipal extends JFrame {
 		btProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
+				
+				String categoria = cbCategorias.getSelectedItem().toString();
+				JComboBox<String> cbArr = new JComboBox<String>();
+				
+				for(int i = 0; i < produtos.size(); i++) {
+					
+					if(produtos.get(i).getCategoria().equals(categoria)) {
+						cbArr.addItem(produtos.get(i).getNome());
+					}
+				}
+				
+				String selecNomeProduto = "N";
+
+				if( produtos.size() > 0) {
+					JOptionPane.showMessageDialog(null, cbArr, ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
+					selecNomeProduto = cbArr.getSelectedItem().toString();
+					}
+				else if(produtos.size() == 0) {
+					JOptionPane.showMessageDialog(null, "Não há Produtos nessa categoria", ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
+					comprar();
+				}
+				else if(opcao == -1)   {
+					
+					}
+
+				if(selecNomeProduto != "N") {
+					for(int i = 0; i < produtos.size(); i++) {
+						if(produtos.get(i).getNome().equals(selecNomeProduto)) {
+							selecProduto = i;
+						}
+					}
+					mostrarProduto();
+					
+				}
+					
+				}
 			}
 		});
 		btProcurar.setBounds(319, 45, 89, 23);
