@@ -18,6 +18,8 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.Button;
+import javax.swing.JComboBox;
 
 public class TelaPrincipal extends JFrame {
 
@@ -51,6 +53,31 @@ public class TelaPrincipal extends JFrame {
 		
 		JPanel telaPricipal = new JPanel();
 		tabbedPane.addTab("Tela Principal", null, telaPricipal, null);
+		telaPricipal.setLayout(null);
+		
+		JButton btCadastraProduto = new JButton("Cadastrar Produto");
+		btCadastraProduto.setBounds(10, 199, 121, 23);
+		telaPricipal.add(btCadastraProduto);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(298, 11, 121, 23);
+		telaPricipal.add(comboBox);
+		
+		JButton btProcurar = new JButton("Procurar");
+		btProcurar.setBounds(319, 45, 89, 23);
+		telaPricipal.add(btProcurar);
+		
+		JLabel lbMostrarProdutos = new JLabel("Produtos");
+		lbMostrarProdutos.setBounds(10, 15, 270, 173);
+		telaPricipal.add(lbMostrarProdutos);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(298, 95, 121, 22);
+		telaPricipal.add(comboBox_1);
+		
+		JButton btSelecionarProduto = new JButton("Selecionar");
+		btSelecionarProduto.setBounds(319, 128, 89, 23);
+		telaPricipal.add(btSelecionarProduto);
 		
 		JPanel carrinho = new JPanel();
 		tabbedPane.addTab("Carrinho", null, carrinho, null);
@@ -81,10 +108,10 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.setBackgroundAt(2, new Color(0, 128, 128));
 		perfil.setLayout(null);
 		
-		JLabel lbUsuario = new JLabel("Ne");
-		lbUsuario.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
-		lbUsuario.setBounds(10, 11, 296, 195);
-		perfil.add(lbUsuario);
+		JLabel lbUsuarioInfo = new JLabel("Ne");
+		lbUsuarioInfo.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
+		lbUsuarioInfo.setBounds(10, 53, 296, 153);
+		perfil.add(lbUsuarioInfo);
 		
 		JButton btnNewButton = new JButton("Editir Perfil");
 		btnNewButton.setForeground(Color.BLACK);
@@ -97,6 +124,11 @@ public class TelaPrincipal extends JFrame {
 		lbIconPerfil.setIcon(new ImageIcon("C:\\Users\\kaue_s_andrade\\Documents\\GitHub\\PO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\image-removebg-preview (1).png"));
 		lbIconPerfil.setBounds(316, 44, 103, 127);
 		perfil.add(lbIconPerfil);
+		
+		JLabel lbUsuarioNome = new JLabel("User");
+		lbUsuarioNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
+		lbUsuarioNome.setBounds(10, 11, 162, 31);
+		perfil.add(lbUsuarioNome);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 	}
