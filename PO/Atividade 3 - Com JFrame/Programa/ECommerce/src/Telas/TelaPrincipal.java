@@ -5,12 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Produto;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -25,21 +30,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class TelaPrincipal extends JFrame {
-
-	
-	private static JComboBox<String> cbCategorias = new JComboBox<String>();
-	
 	
 	/**
 	 * Launch the application.
 	 */
+	
+	private ArrayList<Produto> produtos = new ArrayList <Produto>();
+	private static JComboBox<String> cbCategorias = new JComboBox<String>();
+	private static int selecProduto;
+	
 	public static void main(String[] args) {
-		
-		cbCategorias.addItem("Esportes");
-		cbCategorias.addItem("Infantil");
-		cbCategorias.addItem("Tecnologia");
-		cbCategorias.addItem("Lazer");
-		cbCategorias.addItem("Cozinha");
 		
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -74,39 +74,46 @@ public class TelaPrincipal extends JFrame {
 		btCadastraProduto.setBounds(10, 199, 121, 23);
 		telaPricipal.add(btCadastraProduto);
 		
-		JComboBox cbCategorias = new JComboBox();
+		cbCategorias.addItem("Esportes");
+		cbCategorias.addItem("Infantil");
+		cbCategorias.addItem("Tecnologia");
+		cbCategorias.addItem("Lazer");
+		cbCategorias.addItem("Cozinha");
 		cbCategorias.setBounds(298, 11, 121, 23);
 		telaPricipal.add(cbCategorias);
+		
+		JLabel lbMostrarProdutos = new JLabel("Produtos");
+		lbMostrarProdutos.setBounds(10, 15, 270, 173);
+		telaPricipal.add(lbMostrarProdutos);
+		
+		JComboBox<String> cbProdutos = new JComboBox<String>();
+		cbProdutos.setBounds(298, 95, 121, 22);
+		telaPricipal.add(cbProdutos);
 		
 		JButton btProcurar = new JButton("Procurar");
 		btProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				produtos = CadastrarProduto.produtos();
 				
 				String categoria = cbCategorias.getSelectedItem().toString();
-				JComboBox<String> cbArr = new JComboBox<String>();
 				
 				for(int i = 0; i < produtos.size(); i++) {
 					
 					if(produtos.get(i).getCategoria().equals(categoria)) {
-						cbArr.addItem(produtos.get(i).getNome());
+						cbProdutos.addItem(produtos.get(i).getNome());
 					}
 				}
 				
 				String selecNomeProduto = "N";
 
 				if( produtos.size() > 0) {
-					JOptionPane.showMessageDialog(null, cbArr, ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
-					selecNomeProduto = cbArr.getSelectedItem().toString();
+//					JOptionPane.showMessageDialog(null, cbArr, ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
+//					selecNomeProduto = cbArr.getSelectedItem().toString();
 					}
 				else if(produtos.size() == 0) {
 					JOptionPane.showMessageDialog(null, "Não há Produtos nessa categoria", ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
-					comprar();
 				}
-				else if(opcao == -1)   {
-					
-					}
 
 				if(selecNomeProduto != "N") {
 					for(int i = 0; i < produtos.size(); i++) {
@@ -114,23 +121,13 @@ public class TelaPrincipal extends JFrame {
 							selecProduto = i;
 						}
 					}
-					mostrarProduto();
 					
 				}
 					
 				}
-			}
 		});
 		btProcurar.setBounds(319, 45, 89, 23);
 		telaPricipal.add(btProcurar);
-		
-		JLabel lbMostrarProdutos = new JLabel("Produtos");
-		lbMostrarProdutos.setBounds(10, 15, 270, 173);
-		telaPricipal.add(lbMostrarProdutos);
-		
-		JComboBox cbProdutos = new JComboBox();
-		cbProdutos.setBounds(298, 95, 121, 22);
-		telaPricipal.add(cbProdutos);
 		
 		JButton btSelecionarProduto = new JButton("Selecionar");
 		btSelecionarProduto.setBounds(319, 128, 89, 23);
@@ -189,7 +186,15 @@ public class TelaPrincipal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 	}
+	
+	private static int selecProduto() {
+		return selecProduto;
+	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
+	}
+
+	public static JComboBox<String> categorias() {
+		return cbCategorias;
 	}
 }

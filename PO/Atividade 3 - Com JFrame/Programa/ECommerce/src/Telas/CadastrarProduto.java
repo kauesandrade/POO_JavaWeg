@@ -7,26 +7,37 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import model.Produto;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 public class CadastrarProduto extends JFrame {
+	
+	private static ArrayList<Produto> produtos = new ArrayList();
+	private JComboBox <String> cbCategoriaP = new JComboBox<String>();
 
 	private JPanel contentPane;
 	private JTextField txNomeP;
 	private JTextField txModeloP;
 	private JTextField txPrecoP;
 	private JTextField txCorP;
-	private JTextField textField;
+	private JTextField txDescricaoP;
 	private JTextField txLimiteCompraP;
 	private JTextField txQuantidadeEstoqueP;
+	private JTextField txMarcaP;
 
 	/**
 	 * Launch the application.
@@ -36,6 +47,7 @@ public class CadastrarProduto extends JFrame {
 //	public static void addInfo() {
 //		
 //	}
+	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -95,7 +107,7 @@ public class CadastrarProduto extends JFrame {
 		txModeloP.setBounds(10, 169, 157, 20);
 		contentPane.add(txModeloP);
 		
-		JComboBox cbCategoriaP = new JComboBox();
+		cbCategoriaP = TelaPrincipal.categorias();
 		cbCategoriaP.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		cbCategoriaP.setBounds(9, 129, 157, 22);
 		contentPane.add(cbCategoriaP);
@@ -130,45 +142,88 @@ public class CadastrarProduto extends JFrame {
 		lbCorP.setBounds(10, 195, 73, 14);
 		contentPane.add(lbCorP);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
-		textField.setColumns(10);
-		textField.setBounds(197, 64, 191, 56);
-		contentPane.add(textField);
+		txDescricaoP = new JTextField();
+		txDescricaoP.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
+		txDescricaoP.setColumns(10);
+		txDescricaoP.setBounds(196, 89, 191, 56);
+		contentPane.add(txDescricaoP);
 		
 		JLabel lbDescricaoP = new JLabel("Descricao");
 		lbDescricaoP.setForeground(Color.WHITE);
 		lbDescricaoP.setFont(new Font("MS PGothic", Font.PLAIN, 11));
-		lbDescricaoP.setBounds(197, 39, 89, 34);
+		lbDescricaoP.setBounds(196, 64, 89, 34);
 		contentPane.add(lbDescricaoP);
 		
 		JLabel lbLimiteCompraP = new JLabel("Limite de compra por pessoa");
 		lbLimiteCompraP.setForeground(Color.WHITE);
 		lbLimiteCompraP.setFont(new Font("MS PGothic", Font.PLAIN, 11));
-		lbLimiteCompraP.setBounds(197, 128, 130, 14);
+		lbLimiteCompraP.setBounds(196, 153, 130, 14);
 		contentPane.add(lbLimiteCompraP);
 		
 		txLimiteCompraP = new JTextField();
 		txLimiteCompraP.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		txLimiteCompraP.setColumns(10);
-		txLimiteCompraP.setBounds(197, 143, 37, 20);
+		txLimiteCompraP.setBounds(196, 168, 37, 20);
 		contentPane.add(txLimiteCompraP);
 		
 		JLabel lbQuantidadeEstoqueP = new JLabel("Quantidade existente no estoque");
 		lbQuantidadeEstoqueP.setForeground(Color.WHITE);
 		lbQuantidadeEstoqueP.setFont(new Font("MS PGothic", Font.PLAIN, 11));
-		lbQuantidadeEstoqueP.setBounds(197, 169, 157, 14);
+		lbQuantidadeEstoqueP.setBounds(196, 194, 157, 14);
 		contentPane.add(lbQuantidadeEstoqueP);
 		
 		txQuantidadeEstoqueP = new JTextField();
 		txQuantidadeEstoqueP.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		txQuantidadeEstoqueP.setColumns(10);
-		txQuantidadeEstoqueP.setBounds(197, 184, 37, 20);
+		txQuantidadeEstoqueP.setBounds(196, 209, 37, 20);
 		contentPane.add(txQuantidadeEstoqueP);
 		
+		txMarcaP = new JTextField();
+		txMarcaP.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
+		txMarcaP.setColumns(10);
+		txMarcaP.setBounds(196, 53, 157, 20);
+		contentPane.add(txMarcaP);
+		
+		JLabel lbMarca = new JLabel("Marca");
+		lbMarca.setForeground(Color.WHITE);
+		lbMarca.setFont(new Font("MS PGothic", Font.PLAIN, 11));
+		lbMarca.setBounds(196, 39, 73, 14);
+		contentPane.add(lbMarca);
+		
 		JButton btCadastrarP = new JButton("Cadastrar");
+		btCadastrarP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Produto produto = new Produto();
+				
+				String nome = txNomeP.getText();
+				Double preco = Double.parseDouble(txPrecoP.getText());
+				String categoria = cbCategoriaP.getSelectedItem().toString();
+				String modelo = txModeloP.getText();
+				String marca = txMarcaP.getText();
+				String cor = txCorP.getText();
+				String descricao = txDescricaoP.getText();
+				int limite = Integer.parseInt(txLimiteCompraP.getText());
+				int quantidade = Integer.parseInt(txQuantidadeEstoqueP.getText());
+				
+				String cadasProduto = produto.CadastrarProduto( nome, preco, categoria, modelo,
+						marca, cor, descricao, limite, quantidade);
+				
+					if(cadasProduto.equals("A")) {
+						produtos.add(produto);
+						JOptionPane.showConfirmDialog(null, "Produto Cadastrado!!!", "Confirmado", JOptionPane.CANCEL_OPTION);
+					}
+					else if(cadasProduto != "A") {
+						JOptionPane.showConfirmDialog(null, cadasProduto, "Erro", JOptionPane.CANCEL_OPTION);
+					}
+				}
+		});
 		btCadastrarP.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		btCadastrarP.setBounds(312, 227, 112, 23);
 		contentPane.add(btCadastrarP);
+		
 	}
+	public static ArrayList<Produto> produtos() {
+		
+		return produtos;
+}
 }

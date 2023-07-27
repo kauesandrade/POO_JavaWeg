@@ -30,7 +30,7 @@ import javax.swing.JPasswordField;
 
 public class TelaCadastro extends JFrame {
 
-	private static ArrayList<Cliente> clientes = new ArrayList();
+	private static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 	private JPanel contentPane;
 	private JTextField txNome;
 	private JTextField txLogin;
