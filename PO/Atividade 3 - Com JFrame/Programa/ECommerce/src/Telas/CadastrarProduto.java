@@ -107,7 +107,14 @@ public class CadastrarProduto extends JFrame {
 		txModeloP.setBounds(10, 169, 157, 20);
 		contentPane.add(txModeloP);
 		
-		cbCategoriaP = TelaPrincipal.categorias();
+//		cbCategoriaP = TelaPrincipal.categorias();
+		
+		cbCategoriaP.addItem("Esportes");
+		cbCategoriaP.addItem("Infantil");
+		cbCategoriaP.addItem("Tecnologia");
+		cbCategoriaP.addItem("Lazer");
+		cbCategoriaP.addItem("Cozinha");
+		
 		cbCategoriaP.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		cbCategoriaP.setBounds(9, 129, 157, 22);
 		contentPane.add(cbCategoriaP);
@@ -211,6 +218,7 @@ public class CadastrarProduto extends JFrame {
 					if(cadasProduto.equals("A")) {
 						produtos.add(produto);
 						JOptionPane.showConfirmDialog(null, "Produto Cadastrado!!!", "Confirmado", JOptionPane.CANCEL_OPTION);
+						dispose();
 					}
 					else if(cadasProduto != "A") {
 						JOptionPane.showConfirmDialog(null, cadasProduto, "Erro", JOptionPane.CANCEL_OPTION);
@@ -222,8 +230,8 @@ public class CadastrarProduto extends JFrame {
 		contentPane.add(btCadastrarP);
 		
 	}
-	public static ArrayList<Produto> produtos() {
-		
+	public static ArrayList<Produto> produtos() {	
 		return produtos;
 }
+	
 }

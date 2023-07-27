@@ -14,6 +14,7 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JMenuBar;
@@ -28,6 +29,7 @@ import java.awt.Button;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextPane;
 
 public class TelaPrincipal extends JFrame {
 	
@@ -38,6 +40,7 @@ public class TelaPrincipal extends JFrame {
 	private ArrayList<Produto> produtos = new ArrayList <Produto>();
 	private static JComboBox<String> cbCategorias = new JComboBox<String>();
 	private static int selecProduto;
+	private String dados;
 	
 	public static void main(String[] args) {
 		
@@ -70,21 +73,14 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.addTab("Tela Principal", null, telaPricipal, null);
 		telaPricipal.setLayout(null);
 		
-		JButton btCadastraProduto = new JButton("Cadastrar Produto");
-		btCadastraProduto.setBounds(10, 199, 121, 23);
-		telaPricipal.add(btCadastraProduto);
-		
 		cbCategorias.addItem("Esportes");
 		cbCategorias.addItem("Infantil");
 		cbCategorias.addItem("Tecnologia");
 		cbCategorias.addItem("Lazer");
 		cbCategorias.addItem("Cozinha");
+		
 		cbCategorias.setBounds(298, 11, 121, 23);
 		telaPricipal.add(cbCategorias);
-		
-		JLabel lbMostrarProdutos = new JLabel("Produtos");
-		lbMostrarProdutos.setBounds(10, 15, 270, 173);
-		telaPricipal.add(lbMostrarProdutos);
 		
 		JComboBox<String> cbProdutos = new JComboBox<String>();
 		cbProdutos.setBounds(298, 95, 121, 22);
@@ -94,6 +90,9 @@ public class TelaPrincipal extends JFrame {
 		btProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				cbProdutos.removeAllItems();
+				dados = "";
+				
 				produtos = CadastrarProduto.produtos();
 				
 				String categoria = cbCategorias.getSelectedItem().toString();
@@ -102,17 +101,36 @@ public class TelaPrincipal extends JFrame {
 					
 					if(produtos.get(i).getCategoria().equals(categoria)) {
 						cbProdutos.addItem(produtos.get(i).getNome());
+						
+						dados += produtos.get(i).getTudo();
+						
+						System.out.println(dados);
+						
+						JLabel lbMostrarProdutos = new JLabel("cudemacho"+dados);
+						lbMostrarProdutos.setBounds(10, 15, 270, 173);
+						telaPricipal.add(lbMostrarProdutos);
+						
 					}
+
 				}
-				
+					
+				}
+		});
+
+		btProcurar.setBounds(319, 45, 89, 23);
+		telaPricipal.add(btProcurar);
+		
+		JButton btSelecionarProduto = new JButton("Selecionar");
+		btSelecionarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				String selecNomeProduto = "N";
 
 				if( produtos.size() > 0) {
 					selecNomeProduto = cbProdutos.getSelectedItem().toString();
-					}''
+					}
 				
 				else if(produtos.size() == 0) {
-					JOptionPane.showMessageDialog(null, "Não há Produtos nessa categoria", ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
+//					JOptionPane.showMessageDialog(null, "Não há Produtos nessa categoria", ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
 				}
 
 				if(selecNomeProduto != "N") {
@@ -123,15 +141,26 @@ public class TelaPrincipal extends JFrame {
 					}
 					
 				}
-					
-				}
+			}
 		});
-		btProcurar.setBounds(319, 45, 89, 23);
-		telaPricipal.add(btProcurar);
-		
-		JButton btSelecionarProduto = new JButton("Selecionar");
 		btSelecionarProduto.setBounds(319, 128, 89, 23);
 		telaPricipal.add(btSelecionarProduto);
+		
+		JButton btCadastraProduto = new JButton("Cadastrar Produto");
+		btCadastraProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				CadastrarProduto cadastrarProduto = null;
+				try {
+					cadastrarProduto = new CadastrarProduto();
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+				cadastrarProduto.setVisible(true);
+			}
+		});
+		btCadastraProduto.setBounds(10, 199, 121, 23);
+		telaPricipal.add(btCadastraProduto);
 		
 		JPanel carrinho = new JPanel();
 		tabbedPane.addTab("Carrinho", null, carrinho, null);
@@ -192,9 +221,5 @@ public class TelaPrincipal extends JFrame {
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
-	}
-
-	public static JComboBox<String> categorias() {
-		return cbCategorias;
 	}
 }

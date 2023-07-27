@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 public class Produto {
 
 	public Produto() {
@@ -174,5 +176,12 @@ public class Produto {
 
 	public void setQuantidadeEstoque(int quantidadeEstoque) {
 		this.quantidadeEstoque = quantidadeEstoque;
+	}
+
+	public String getTudo() {
+	
+		return "Nome: "+nome+
+				"\nPreço: R$"+preco+
+				"\nMarca: "+marca+"\n";
 	}
 }
