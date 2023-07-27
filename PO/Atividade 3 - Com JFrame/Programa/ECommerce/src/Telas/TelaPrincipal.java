@@ -108,9 +108,9 @@ public class TelaPrincipal extends JFrame {
 				String selecNomeProduto = "N";
 
 				if( produtos.size() > 0) {
-//					JOptionPane.showMessageDialog(null, cbArr, ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
-//					selecNomeProduto = cbArr.getSelectedItem().toString();
-					}
+					selecNomeProduto = cbProdutos.getSelectedItem().toString();
+					}''
+				
 				else if(produtos.size() == 0) {
 					JOptionPane.showMessageDialog(null, "Não há Produtos nessa categoria", ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
 				}
