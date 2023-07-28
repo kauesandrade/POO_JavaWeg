@@ -90,6 +90,8 @@ public class TelaPrincipal extends JFrame {
 		cbProdutos.setBounds(298, 95, 121, 22);
 		telaPricipal.add(cbProdutos);
 		
+		DefaultListModel<String> modelo = new DefaultListModel<>();
+		
 		JButton btProcurar = new JButton("Procurar");
 		btProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,7 +103,6 @@ public class TelaPrincipal extends JFrame {
 				
 				String categoria = cbCategorias.getSelectedItem().toString();
 				
-				DefaultListModel<String> modelo = new DefaultListModel<>();
 				
 				for(int i = 0; i < produtos.size(); i++) {
 					
