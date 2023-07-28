@@ -22,7 +22,9 @@ public class Produto {
 	private String fotos;
 	private int limiteDeCompras;
 	private int quantidadeEstoque;
+	private int quatidadeCarrinho;
 	
+
 	public Produto(String nome, Double preco, int avaliacao, String modelo, String marca, String cor,
 			String descricao, String fotos, int limiteDeCompras, String categoria, int quantidadeEstoque) {
 		super();
@@ -176,6 +178,14 @@ public class Produto {
 
 	public void setQuantidadeEstoque(int quantidadeEstoque) {
 		this.quantidadeEstoque = quantidadeEstoque;
+	}
+	
+	public int getQuatidadeCarrinho() {
+		return quatidadeCarrinho;
+	}
+
+	public void setQuatidadeCarrinho(int quatidadeCarrinho) {
+		this.quatidadeCarrinho = quatidadeCarrinho;
 	}
 
 	public String getTudo() {

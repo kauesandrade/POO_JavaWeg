@@ -106,9 +106,7 @@ public class TelaPrincipal extends JFrame {
 						
 						System.out.println(dados);
 						
-						JLabel lbMostrarProdutos = new JLabel("cudemacho"+dados);
-						lbMostrarProdutos.setBounds(10, 15, 270, 173);
-						telaPricipal.add(lbMostrarProdutos);
+						JLabel lbMostrarProdutos = new JLabel(dados);
 						
 					}
 
@@ -116,7 +114,10 @@ public class TelaPrincipal extends JFrame {
 					
 				}
 		});
-
+		JLabel lbMostrarProdutos = new JLabel("");
+		lbMostrarProdutos.setBounds(10, 15, 270, 173);
+		telaPricipal.add(lbMostrarProdutos);
+		
 		btProcurar.setBounds(319, 45, 89, 23);
 		telaPricipal.add(btProcurar);
 		
@@ -141,6 +142,10 @@ public class TelaPrincipal extends JFrame {
 					}
 					
 				}
+				TelaProduto telaProduto = new TelaProduto();
+				telaProduto.setVisible(true);
+				
+				
 			}
 		});
 		btSelecionarProduto.setBounds(319, 128, 89, 23);
@@ -159,7 +164,7 @@ public class TelaPrincipal extends JFrame {
 				cadastrarProduto.setVisible(true);
 			}
 		});
-		btCadastraProduto.setBounds(10, 199, 121, 23);
+		btCadastraProduto.setBounds(10, 199, 178, 23);
 		telaPricipal.add(btCadastraProduto);
 		
 		JPanel carrinho = new JPanel();
@@ -216,7 +221,7 @@ public class TelaPrincipal extends JFrame {
 		setBounds(100, 100, 450, 300);
 	}
 	
-	private static int selecProduto() {
+	static int selecProduto() {
 		return selecProduto;
 	}
 
