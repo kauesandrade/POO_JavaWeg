@@ -21,7 +21,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JLabel;
+import javax.swing.JList;
+
 import java.awt.Font;
+
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -97,6 +101,8 @@ public class TelaPrincipal extends JFrame {
 				
 				String categoria = cbCategorias.getSelectedItem().toString();
 				
+				DefaultListModel<String> modelo = new DefaultListModel<>();
+				
 				for(int i = 0; i < produtos.size(); i++) {
 					
 					if(produtos.get(i).getCategoria().equals(categoria)) {
@@ -106,6 +112,11 @@ public class TelaPrincipal extends JFrame {
 						
 						System.out.println(dados);
 						
+						modelo.addElement(dados);
+						modelo.addElement("");
+						
+						
+						
 						JLabel lbMostrarProdutos = new JLabel(dados);
 						
 					}
@@ -114,6 +125,11 @@ public class TelaPrincipal extends JFrame {
 					
 				}
 		});
+		
+		JList ListaProdutos = new JList(modelo);
+		ListaProdutos.setBounds(10, 182, 270, -153);
+		telaPricipal.add(ListaProdutos);
+		
 		JLabel lbMostrarProdutos = new JLabel("");
 		lbMostrarProdutos.setBounds(10, 15, 270, 173);
 		telaPricipal.add(lbMostrarProdutos);
@@ -148,6 +164,7 @@ public class TelaPrincipal extends JFrame {
 				
 			}
 		});
+		
 		btSelecionarProduto.setBounds(319, 128, 89, 23);
 		telaPricipal.add(btSelecionarProduto);
 		
