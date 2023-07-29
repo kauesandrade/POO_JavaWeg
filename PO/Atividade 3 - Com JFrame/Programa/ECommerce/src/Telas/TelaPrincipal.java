@@ -215,7 +215,7 @@ public class TelaPrincipal extends JFrame {
 		lbIconCarrinho.setBounds(326, 40, 93, 106);
 		carrinho.add(lbIconCarrinho);
 		
-		JTable tbCarrinho = new JTable(new DefaultTableModel(null, new Object[]{"Produto", "Remov", "Add"}));
+		JTable tbCarrinho = new JTable(new DefaultTableModel(null, new Object[]{"Produto","Remover","Quatidade","Adicionar"}));
 		tbCarrinho.setToolTipText("");
 		tbCarrinho.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbCarrinho.setFillsViewportHeight(true);
@@ -236,9 +236,9 @@ public class TelaPrincipal extends JFrame {
 		    		
 		    		for(int i = 0; i < produtos.size(); i++) {
 		    			if(produtos.get(i).getQuatidadeCarrinho() > 0) {
-		    				System.out.print("aaa");
+		    				System.out.println("aaa");
 		    			
-		    				model.addRow(new Object[] {produtos.get(i).getNome(),"-","+"});
+		    				model.addRow(new Object[] {produtos.get(i).getNome(),"-",produtos.get(i).getQuatidadeCarrinho(),"+"});
 		    				
 		    				
 		    				
