@@ -111,6 +111,8 @@ public class TelaLogin extends JFrame {
 						JOptionPane.showMessageDialog(null, "Seja Bem-Vindo "+clientes.get(i).getNome(), "Login Efetuado", JOptionPane.DEFAULT_OPTION);
 						logado = i;
 						dispose();
+						TelaPrincipal TelaPrincipal = new TelaPrincipal();
+						TelaPrincipal.setVisible(true);
 					}
 				}
 				

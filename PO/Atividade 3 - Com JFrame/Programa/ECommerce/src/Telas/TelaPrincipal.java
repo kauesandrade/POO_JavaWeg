@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Cliente;
 import model.Produto;
 
 import javax.swing.JTabbedPane;
@@ -34,6 +35,12 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.border.EtchedBorder;
 
 public class TelaPrincipal extends JFrame {
 	
@@ -43,8 +50,10 @@ public class TelaPrincipal extends JFrame {
 	
 	private ArrayList<Produto> produtos = new ArrayList <Produto>();
 	private static JComboBox<String> cbCategorias = new JComboBox<String>();
+	private ArrayList<Cliente> clientes = new ArrayList();
 	private static int selecProduto;
 	private String dados;
+	private JTable tbCarrinho;
 	
 	public static void main(String[] args) {
 		
@@ -73,6 +82,7 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.setBounds(0, 0, 434, 261);
 		getContentPane().add(tabbedPane);
 		
+		
 		JPanel telaPricipal = new JPanel();
 		tabbedPane.addTab("Tela Principal", null, telaPricipal, null);
 		telaPricipal.setLayout(null);
@@ -90,7 +100,13 @@ public class TelaPrincipal extends JFrame {
 		cbProdutos.setBounds(298, 95, 121, 22);
 		telaPricipal.add(cbProdutos);
 		
-		DefaultListModel<String> modelo = new DefaultListModel<>();
+		JList<String> listProdutos = new JList<String>();
+		listProdutos.setBounds(10, 11, 278, 177);
+		telaPricipal.add(listProdutos);
+		
+		JScrollPane spProdutos = new JScrollPane(listProdutos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		spProdutos.setBounds(10, 11, 278, 177);
+		telaPricipal.add(spProdutos);
 		
 		JButton btProcurar = new JButton("Procurar");
 		btProcurar.addActionListener(new ActionListener() {
@@ -103,22 +119,21 @@ public class TelaPrincipal extends JFrame {
 				
 				String categoria = cbCategorias.getSelectedItem().toString();
 				
+				DefaultListModel<String> modeloProdutos = new DefaultListModel<>();
 				
 				for(int i = 0; i < produtos.size(); i++) {
 					
-					if(produtos.get(i).getCategoria().equals(categoria)) {
+					if(produtos.get(i).getCategoria().equals(categoria) && produtos.get(i).getQuantidadeEstoque() > 0) {
 						cbProdutos.addItem(produtos.get(i).getNome());
-						
-						dados += produtos.get(i).getTudo();
 						
 						System.out.println(dados);
 						
-						modelo.addElement(dados);
-						modelo.addElement("");
+						modeloProdutos.addElement("Produto: "+produtos.get(i).getNome()+"      "+"Avaliacao: "+produtos.get(i).getAvaliacao() );
+						modeloProdutos.addElement("Preço: "+produtos.get(i).getPreco()+"       "+"Marca: "+produtos.get(i).getMarca());
+						modeloProdutos.addElement(" ");
 						
+						listProdutos.setModel(modeloProdutos);
 						
-						
-						JLabel lbMostrarProdutos = new JLabel(dados);
 						
 					}
 
@@ -126,14 +141,6 @@ public class TelaPrincipal extends JFrame {
 					
 				}
 		});
-		
-		JList ListaProdutos = new JList(modelo);
-		ListaProdutos.setBounds(10, 182, 270, -153);
-		telaPricipal.add(ListaProdutos);
-		
-		JLabel lbMostrarProdutos = new JLabel("");
-		lbMostrarProdutos.setBounds(10, 15, 270, 173);
-		telaPricipal.add(lbMostrarProdutos);
 		
 		btProcurar.setBounds(319, 45, 89, 23);
 		telaPricipal.add(btProcurar);
@@ -190,6 +197,10 @@ public class TelaPrincipal extends JFrame {
 		carrinho.setLayout(null);
 		
 		JButton btRemoverItens = new JButton("Remover Itens");
+		btRemoverItens.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btRemoverItens.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		btRemoverItens.setBounds(60, 199, 155, 23);
 		carrinho.add(btRemoverItens);
@@ -199,25 +210,78 @@ public class TelaPrincipal extends JFrame {
 		btFinalizarCompra.setBounds(225, 199, 155, 23);
 		carrinho.add(btFinalizarCompra);
 		
-		JLabel lbCarrinho = new JLabel("a");
-		lbCarrinho.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
-		lbCarrinho.setBounds(21, 11, 267, 177);
-		carrinho.add(lbCarrinho);
-		
 		JLabel lbIconCarrinho = new JLabel("");
 		lbIconCarrinho.setIcon(new ImageIcon("C:\\Users\\kaue_s_andrade\\Documents\\GitHub\\PO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\carrinho-de-compras.png"));
-		lbIconCarrinho.setBounds(274, 23, 131, 150);
+		lbIconCarrinho.setBounds(326, 40, 93, 106);
 		carrinho.add(lbIconCarrinho);
+		
+		JTable tbCarrinho = new JTable(new DefaultTableModel(null, new Object[]{"Produto", "Remov", "Add"}));
+		tbCarrinho.setToolTipText("");
+		tbCarrinho.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tbCarrinho.setFillsViewportHeight(true);
+		tbCarrinho.setCellSelectionEnabled(true);
+		tbCarrinho.setBounds(10, 11, 311, 177);
+		carrinho.add(tbCarrinho);
+		
+		
+		DefaultTableModel model = (DefaultTableModel)tbCarrinho.getModel();
+		
+		
+		
+		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+		    public void stateChanged(javax.swing.event.ChangeEvent e) {
+		    	if(tabbedPane.getSelectedComponent() == carrinho) {
+		    		
+		    		
+		    		
+		    		for(int i = 0; i < produtos.size(); i++) {
+		    			if(produtos.get(i).getQuatidadeCarrinho() > 0) {
+		    				System.out.print("aaa");
+		    			
+		    				model.addRow(new Object[] {produtos.get(i).getNome(),"-","+"});
+		    				
+		    				
+		    				
+		    				
+		    			}
+		    		}
+		    		
+		    	}
+		    }
+		});
+	
+		
+
+		
+//		JList listCarrinho = new JList();
+//		listCarrinho.setBounds(10, 11, 301, 175);
+//		carrinho.add(listCarrinho);
+//		
+//		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+//		    public void stateChanged(javax.swing.event.ChangeEvent e) {
+//		    	if(tabbedPane.getSelectedComponent() == carrinho) {
+//		    		
+//		    		DefaultListModel<String> modeloCarrinho = new DefaultListModel<>();
+//		    		
+//		    		for(int i = 0; i < produtos.size(); i++) {
+//		    			if(produtos.get(i).getQuatidadeCarrinho() > 0) {
+//		    			
+//		    				modeloCarrinho.addElement("Produto: "+produtos.get(i).getNome()+"     "+"Preço: "+produtos.get(i).getPreco());
+//		    				modeloCarrinho.addElement("-");
+//		    				
+//		    				listCarrinho.setModel(modeloCarrinho);
+//		    			}
+//		    		}
+//		    		
+//		    	}
+//		    }
+//		});
+//		
 		
 		JPanel perfil = new JPanel();
 		tabbedPane.addTab("Perfil", null, perfil, null);
 		tabbedPane.setBackgroundAt(2, new Color(0, 128, 128));
 		perfil.setLayout(null);
-		
-		JLabel lbUsuarioInfo = new JLabel("Ne");
-		lbUsuarioInfo.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
-		lbUsuarioInfo.setBounds(10, 53, 296, 153);
-		perfil.add(lbUsuarioInfo);
 		
 		JButton btnNewButton = new JButton("Editir Perfil");
 		btnNewButton.setForeground(Color.BLACK);
@@ -231,10 +295,41 @@ public class TelaPrincipal extends JFrame {
 		lbIconPerfil.setBounds(316, 44, 103, 127);
 		perfil.add(lbIconPerfil);
 		
-		JLabel lbUsuarioNome = new JLabel("User");
-		lbUsuarioNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
-		lbUsuarioNome.setBounds(10, 11, 162, 31);
+		//TIRAR OS COMENTARIOS DEPOIS 
+		
+//		clientes = TelaCadastro.ArrClientes();
+//		int clienteLogado = TelaLogin.ClienteLogado();
+		
+		
+//		JLabel lbUsuarioNome = new JLabel(""+clientes.get(clienteLogado).getLogin());
+		JLabel lbUsuarioNome = new JLabel("");
+		lbUsuarioNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 30));
+		lbUsuarioNome.setBounds(10, 11, 235, 31);
 		perfil.add(lbUsuarioNome);
+		
+//		JLabel lbNome = new JLabel("Nome: "+clientes.get(clienteLogado).getNome());
+		JLabel lbNome = new JLabel("Nome: ");
+		lbNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
+		lbNome.setBounds(10, 64, 270, 23);
+		perfil.add(lbNome);
+		
+//		JLabel lbCpf = new JLabel("CPF: "+clientes.get(clienteLogado).getCpf());
+		JLabel lbCpf = new JLabel("CPF: ");
+		lbCpf.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
+		lbCpf.setBounds(10, 98, 207, 23);
+		perfil.add(lbCpf);
+		
+//		JLabel lbDataNasc = new JLabel("Data de nascimento: "+clientes.get(clienteLogado).getDataDeNascimento());
+		JLabel lbDataNasc = new JLabel("Data de nascimento: ");
+		lbDataNasc.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
+		lbDataNasc.setBounds(10, 132, 270, 23);
+		perfil.add(lbDataNasc);
+		
+//		JLabel lbEmail = new JLabel("Email: "+clientes.get(clienteLogado).getEmail());
+		JLabel lbEmail = new JLabel("Email: ");
+		lbEmail.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
+		lbEmail.setBounds(10, 166, 270, 23);
+		perfil.add(lbEmail);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 	}

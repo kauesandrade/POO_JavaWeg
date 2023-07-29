@@ -133,8 +133,14 @@ public class Produto {
 	public int getAvaliacao() {
 		return avaliacao;
 	}
+	int quant = 0;
 	public void setAvaliacao(int avaliacao) {
-		this.avaliacao = avaliacao;
+		
+		if(avaliacao <= 5 && avaliacao >=0) {
+			quant++;
+			this.avaliacao = (avaliacao + this.avaliacao) / quant;
+		}
+		
 	}
 	public String getModelo() {
 		return modelo;
