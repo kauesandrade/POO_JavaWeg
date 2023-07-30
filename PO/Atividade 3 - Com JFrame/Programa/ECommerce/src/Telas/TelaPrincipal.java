@@ -206,6 +206,14 @@ public class TelaPrincipal extends JFrame {
 		carrinho.add(btRemoverItens);
 		
 		JButton btFinalizarCompra = new JButton("Finalizar Compra");
+		btFinalizarCompra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+			}
+		});
 		btFinalizarCompra.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		btFinalizarCompra.setBounds(225, 199, 155, 23);
 		carrinho.add(btFinalizarCompra);
