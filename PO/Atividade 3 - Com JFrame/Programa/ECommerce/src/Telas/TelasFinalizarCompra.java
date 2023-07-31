@@ -85,10 +85,6 @@ public class TelasFinalizarCompra extends JFrame {
 		lbParcelas.setBounds(170, 183, 110, 14);
 		Valor.add(lbParcelas);
 		
-		JButton btComprar = new JButton("Comprar");
-		btComprar.setBounds(10, 199, 111, 23);
-		Valor.add(btComprar);
-		
 		rdCartao = new JRadioButton("Cartão de Crédito");
 		rdCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -172,10 +168,30 @@ public class TelasFinalizarCompra extends JFrame {
 		spFormaPagamento.setBounds(10, 11, 288, 162);
 		Valor.add(spFormaPagamento);
 		
-		JPanel Pagemento = new JPanel();
-		tabbedPane.addTab("Pagamento", null, Pagemento, null);
+		JButton btComprar = new JButton("Comprar");
+		btComprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JPanel Pagemento = new JPanel();
+				tabbedPane.addTab("Pagamento", null, Pagemento, null);
+				Pagemento.setLayout(null);
+				
+				JButton btnNewButton = new JButton("New button");
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JPanel Conclusao = new JPanel();
+						tabbedPane.addTab("Conclusão", null, Conclusao, null);
+					}
+				});
+				btnNewButton.setBounds(141, 81, 89, 23);
+				Pagemento.add(btnNewButton);
+			}
+		});
+		btComprar.setBounds(10, 199, 111, 23);
+		Valor.add(btComprar);
 		
-		JPanel Conclusao = new JPanel();
-		tabbedPane.addTab("Conclusão", null, Conclusao, null);
+		
+
+		
+
 	}
 }

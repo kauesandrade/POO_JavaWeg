@@ -210,6 +210,12 @@ public class TelaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				
+				TelasFinalizarCompra TelasFinalizarCompra = new TelasFinalizarCompra();
+				TelasFinalizarCompra.setVisible(true);
+				
+//				for(Produto prod : produtos.size()) {
+//					prod.getRow()
+//				}
 				
 				
 			}
@@ -223,7 +229,7 @@ public class TelaPrincipal extends JFrame {
 		lbIconCarrinho.setBounds(326, 40, 93, 106);
 		carrinho.add(lbIconCarrinho);
 		
-		JTable tbCarrinho = new JTable(new DefaultTableModel(null, new Object[]{"Produto","Remover","Quatidade","Adicionar"}));
+		JTable tbCarrinho = new JTable(new DefaultTableModel(null, new Object[]{"Produto","Preco","Adicionar","Quatidade","Remover"}));
 		
 		DefaultTableModel model = (DefaultTableModel)tbCarrinho.getModel();
 		
@@ -237,14 +243,14 @@ public class TelaPrincipal extends JFrame {
 				System.out.println(selectRow);
 				for(int j = 0; j < produtos.size(); j++) {
 				for(int i = 0; i < tbCarrinho.getRowHeight(); i++) {
-					if(selectColumn == 1 && produtos.get(j).getRow() == selectRow) {
-						if(produtos.get(j).getQuatidadeCarrinho() >=2) {
-							produtos.get(j).setQuatidadeCarrinho(produtos.get(j).getQuatidadeCarrinho() - 1);	
-						model.setValueAt(produtos.get(j).getQuatidadeCarrinho(), selectRow, 2);
+					if(selectColumn == 4 && produtos.get(j).getRow() == selectRow) {
+						if(produtos.get(j).getQuantidadeCarrinho() >=2) {
+							produtos.get(j).setQuantidadeCarrinho(produtos.get(j).getQuantidadeCarrinho() - 1);	
+						model.setValueAt(produtos.get(j).getQuantidadeCarrinho(), selectRow, 3);
 						break;
 						}else {
 	
-							produtos.get(j).setQuatidadeCarrinho(0);	
+							produtos.get(j).setQuantidadeCarrinho(0);	
 							model.removeRow(selectRow);
 							
 //							TelaConfirmacaoDeRemocao telaConfirmacaoDeRemocao = new TelaConfirmacaoDeRemocao();
@@ -259,10 +265,10 @@ public class TelaPrincipal extends JFrame {
 
 						}	
 					
-					else if(selectColumn == 3 && produtos.get(j).getRow() == selectRow) {
-						if(produtos.get(j).getQuatidadeCarrinho() < produtos.get(j).getLimiteDeCompras()) {
-							produtos.get(j).setQuatidadeCarrinho(produtos.get(j).getQuatidadeCarrinho() + 1);	
-							model.setValueAt(produtos.get(j).getQuatidadeCarrinho(), selectRow, 2);
+					else if(selectColumn == 2 && produtos.get(j).getRow() == selectRow) {
+						if(produtos.get(j).getQuantidadeCarrinho() < produtos.get(j).getLimiteDeCompras()) {
+							produtos.get(j).setQuantidadeCarrinho(produtos.get(j).getQuantidadeCarrinho() + 1);	
+							model.setValueAt(produtos.get(j).getQuantidadeCarrinho(), selectRow, 3);
 							break;
 						}else {
 							JOptionPane.showMessageDialog(null, "Você não pode adicionar mais quantidades desse mesmo produto no seu carrinho, Limite atingido!!!", "Limite Atingido", JOptionPane.DEFAULT_OPTION);
@@ -297,10 +303,10 @@ public class TelaPrincipal extends JFrame {
 		    		model.setRowCount(0);
 		    		
 		    		for(int i = 0; i < produtos.size(); i++) {
-		    			if(produtos.get(i).getQuatidadeCarrinho() > 0) {
+		    			if(produtos.get(i).getQuantidadeCarrinho() > 0) {
 		    				
 		    				produtos.get(i).setRow(i);
-		    				model.addRow(new Object[] {produtos.get(i).getNome(),"-",produtos.get(i).getQuatidadeCarrinho(),"+"});
+		    				model.addRow(new Object[] {produtos.get(i).getNome(),"R$ "+produtos.get(i).getPreco(),"+",produtos.get(i).getQuantidadeCarrinho(),"-"});
 		    				
 		    				
 		    			}

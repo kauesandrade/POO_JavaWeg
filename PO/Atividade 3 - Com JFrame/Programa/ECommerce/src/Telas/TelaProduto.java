@@ -83,7 +83,7 @@ public class TelaProduto extends JFrame {
 				
 				if( quantidade <= produtos.get(selecProduto).getQuantidadeEstoque() && quantidade <= produtos.get(selecProduto).getLimiteDeCompras()) {
 					
-					produtos.get(selecProduto).setQuatidadeCarrinho(quantidade);
+					produtos.get(selecProduto).setQuantidadeCarrinho(quantidade);
 					produtos.get(selecProduto).setQuantidadeEstoque(produtos.get(selecProduto).getQuantidadeEstoque() - quantidade);
 					dispose();
 				}

@@ -22,7 +22,7 @@ public class Produto {
 	private String fotos;
 	private int limiteDeCompras;
 	private int quantidadeEstoque;
-	private int quatidadeCarrinho;
+	private int quantidadeCarrinho;
 	private int row;
 	
 
@@ -187,12 +187,12 @@ public class Produto {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
 	
-	public int getQuatidadeCarrinho() {
-		return quatidadeCarrinho;
+	public int getQuantidadeCarrinho() {
+		return quantidadeCarrinho;
 	}
 
-	public void setQuatidadeCarrinho(int quatidadeCarrinho) {
-		this.quatidadeCarrinho = quatidadeCarrinho;
+	public void setQuantidadeCarrinho(int quantidadeCarrinho) {
+		this.quantidadeCarrinho = quantidadeCarrinho;
 	}
 	public int getRow() {
 		return row;

@@ -229,9 +229,18 @@ public class CadastrarProduto extends JFrame {
 		btCadastrarP.setBounds(312, 227, 112, 23);
 		contentPane.add(btCadastrarP);
 		
+		JButton btVoltar = new JButton("Voltar");
+		btVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btVoltar.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
+		btVoltar.setBounds(312, 11, 112, 23);
+		contentPane.add(btVoltar);
+		
 	}
 	public static ArrayList<Produto> produtos() {	
 		return produtos;
 }
-	
 }
