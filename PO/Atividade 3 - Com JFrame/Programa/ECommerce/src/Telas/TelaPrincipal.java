@@ -242,22 +242,39 @@ public class TelaPrincipal extends JFrame {
 							produtos.get(j).setQuatidadeCarrinho(produtos.get(j).getQuatidadeCarrinho() - 1);	
 						model.setValueAt(produtos.get(j).getQuatidadeCarrinho(), selectRow, 2);
 						break;
-						}else if(produtos.get(j).getQuatidadeCarrinho() == 1) {
-							TelaConfirmacaoDeRemocao telaConfirmacaoDeRemocao = new TelaConfirmacaoDeRemocao();
-							String opcao = telaConfirmacaoDeRemocao.opcao();
-							telaConfirmacaoDeRemocao.setVisible(true);
+						}else {
+	
+							produtos.get(j).setQuatidadeCarrinho(0);	
+							model.removeRow(selectRow);
 							
-								do {
-									
-								}while(telaConfirmacaoDeRemocao.isVisible() == true);
-								if(opcao == "R") {
-									produtos.get(j).setQuatidadeCarrinho(produtos.get(j).getQuatidadeCarrinho() - 1);	
-									model.setValueAt(produtos.get(j).getQuatidadeCarrinho(), selectRow, 2);
-								}
+//							TelaConfirmacaoDeRemocao telaConfirmacaoDeRemocao = new TelaConfirmacaoDeRemocao();
+//							String opcao = telaConfirmacaoDeRemocao.opcao();
+//							telaConfirmacaoDeRemocao.setVisible(true);
+//								if(opcao == "R") {
+//									produtos.get(j).setQuatidadeCarrinho(produtos.get(j).getQuatidadeCarrinho() - 1);	
+//									model.removeRow(selectRow);
+//								}
 							break;
 						}
 
 						}	
+					
+					else if(selectColumn == 3 && produtos.get(j).getRow() == selectRow) {
+						if(produtos.get(j).getQuatidadeCarrinho() < produtos.get(j).getLimiteDeCompras()) {
+							produtos.get(j).setQuatidadeCarrinho(produtos.get(j).getQuatidadeCarrinho() + 1);	
+							model.setValueAt(produtos.get(j).getQuatidadeCarrinho(), selectRow, 2);
+							break;
+						}else {
+							JOptionPane.showMessageDialog(null, "Você não pode adicionar mais quantidades desse mesmo produto no seu carrinho, Limite atingido!!!", "Limite Atingido", JOptionPane.DEFAULT_OPTION);
+							break;
+						}
+					}
+					
+					
+					
+					
+					
+					
 					}
 				}
 			}
