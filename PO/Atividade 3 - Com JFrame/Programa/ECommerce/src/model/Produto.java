@@ -23,6 +23,7 @@ public class Produto {
 	private int limiteDeCompras;
 	private int quantidadeEstoque;
 	private int quatidadeCarrinho;
+	private int row;
 	
 
 	public Produto(String nome, Double preco, int avaliacao, String modelo, String marca, String cor,
@@ -192,6 +193,13 @@ public class Produto {
 
 	public void setQuatidadeCarrinho(int quatidadeCarrinho) {
 		this.quatidadeCarrinho = quatidadeCarrinho;
+	}
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
 	}
 
 	public String getTudo() {

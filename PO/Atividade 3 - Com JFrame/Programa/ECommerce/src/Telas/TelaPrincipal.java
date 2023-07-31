@@ -224,31 +224,66 @@ public class TelaPrincipal extends JFrame {
 		carrinho.add(lbIconCarrinho);
 		
 		JTable tbCarrinho = new JTable(new DefaultTableModel(null, new Object[]{"Produto","Remover","Quatidade","Adicionar"}));
+		
+		DefaultTableModel model = (DefaultTableModel)tbCarrinho.getModel();
+		
+		tbCarrinho.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int selectRow = tbCarrinho.getSelectedRow();
+				int selectColumn = tbCarrinho.getSelectedColumn();
+					
+				System.out.println(selectColumn);
+				System.out.println(selectRow);
+				for(int j = 0; j < produtos.size(); j++) {
+				for(int i = 0; i < tbCarrinho.getRowHeight(); i++) {
+					if(selectColumn == 1 && produtos.get(j).getRow() == selectRow) {
+						if(produtos.get(j).getQuatidadeCarrinho() >=2) {
+							produtos.get(j).setQuatidadeCarrinho(produtos.get(j).getQuatidadeCarrinho() - 1);	
+						model.setValueAt(produtos.get(j).getQuatidadeCarrinho(), selectRow, 2);
+						break;
+						}else if(produtos.get(j).getQuatidadeCarrinho() == 1) {
+							TelaConfirmacaoDeRemocao telaConfirmacaoDeRemocao = new TelaConfirmacaoDeRemocao();
+							String opcao = telaConfirmacaoDeRemocao.opcao();
+							telaConfirmacaoDeRemocao.setVisible(true);
+							
+								do {
+									
+								}while(telaConfirmacaoDeRemocao.isVisible() == true);
+								if(opcao == "R") {
+									produtos.get(j).setQuatidadeCarrinho(produtos.get(j).getQuatidadeCarrinho() - 1);	
+									model.setValueAt(produtos.get(j).getQuatidadeCarrinho(), selectRow, 2);
+								}
+							break;
+						}
+
+						}	
+					}
+				}
+			}
+		});
+		
+		
+		
 		tbCarrinho.setToolTipText("");
 		tbCarrinho.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbCarrinho.setFillsViewportHeight(true);
 		tbCarrinho.setCellSelectionEnabled(true);
 		tbCarrinho.setBounds(10, 11, 311, 177);
 		carrinho.add(tbCarrinho);
-		
-		
-		DefaultTableModel model = (DefaultTableModel)tbCarrinho.getModel();
-		
-		
+		tbCarrinho.setDefaultEditor(Object.class, null);
 		
 		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
 		    public void stateChanged(javax.swing.event.ChangeEvent e) {
 		    	if(tabbedPane.getSelectedComponent() == carrinho) {
 		    		
-		    		
+		    		model.setRowCount(0);
 		    		
 		    		for(int i = 0; i < produtos.size(); i++) {
 		    			if(produtos.get(i).getQuatidadeCarrinho() > 0) {
-		    				System.out.println("aaa");
-		    			
+		    				
+		    				produtos.get(i).setRow(i);
 		    				model.addRow(new Object[] {produtos.get(i).getNome(),"-",produtos.get(i).getQuatidadeCarrinho(),"+"});
-		    				
-		    				
 		    				
 		    				
 		    			}
@@ -348,4 +383,7 @@ public class TelaPrincipal extends JFrame {
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
 	}
+	
+
+	
 }
