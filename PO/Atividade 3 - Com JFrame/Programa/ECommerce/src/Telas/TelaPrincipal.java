@@ -218,6 +218,8 @@ public class TelaPrincipal extends JFrame {
 //				}
 				
 				
+				
+				
 			}
 		});
 		btFinalizarCompra.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
