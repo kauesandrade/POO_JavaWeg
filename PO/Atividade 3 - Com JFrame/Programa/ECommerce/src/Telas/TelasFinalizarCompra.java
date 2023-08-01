@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Produto;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
@@ -16,6 +19,8 @@ import javax.swing.JProgressBar;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -26,6 +31,7 @@ public class TelasFinalizarCompra extends JFrame {
 	private JRadioButton rdPix;
 	private JRadioButton rdBoleto;
 	private ArrayList<Double> parcelas = new ArrayList();
+	private ArrayList<Produto> carrinhoProdutos = new ArrayList <Produto>();
 	private Double valor = 100.0; // PASSAR VALOR DA COMPRA PELO CARRINHO
 
 	/**
@@ -48,6 +54,9 @@ public class TelasFinalizarCompra extends JFrame {
 	 * Create the frame.
 	 */
 	public TelasFinalizarCompra() {
+		
+		carrinhoProdutos = TelaPrincipal.getCarrinhoProdutos();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -59,9 +68,6 @@ public class TelasFinalizarCompra extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 434, 261);
 		contentPane.add(tabbedPane);
-		
-		JPanel Endereco = new JPanel();
-		tabbedPane.addTab("Endereço", null, Endereco, null);
 		
 		JPanel Valor = new JPanel();
 		tabbedPane.addTab("Forma de Pagamento", null, Valor, null);
@@ -168,27 +174,47 @@ public class TelasFinalizarCompra extends JFrame {
 		spFormaPagamento.setBounds(10, 11, 288, 162);
 		Valor.add(spFormaPagamento);
 		
-		JButton btComprar = new JButton("Comprar");
-		btComprar.addActionListener(new ActionListener() {
+		JButton btProximoEndereco = new JButton("Continuar");
+		btProximoEndereco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JPanel Pagemento = new JPanel();
-				tabbedPane.addTab("Pagamento", null, Pagemento, null);
-				Pagemento.setLayout(null);
+				int i = 0;
+				if ()
+				JPanel Endereco = new JPanel();
+				tabbedPane.addTab("Endereço", null, Endereco, null);
+				Endereco.setLayout(null);
 				
-				JButton btnNewButton = new JButton("New button");
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						JPanel Conclusao = new JPanel();
-						tabbedPane.addTab("Conclusão", null, Conclusao, null);
-					}
-				});
-				btnNewButton.setBounds(141, 81, 89, 23);
-				Pagemento.add(btnNewButton);
+				JButton btProximoPagamento = new JButton("Continuar");
+				btProximoPagamento.setBounds(330, 199, 89, 23);
+				Endereco.add(btProximoPagamento);
+				
+//				JPanel Pagemento = new JPanel();
+//				tabbedPane.addTab("Pagamento", null, Pagemento, null);
+//				Pagemento.setLayout(null);
+//				
+//				JButton btnNewButton = new JButton("New button");
+//				btnNewButton.addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent e) {
+//						JPanel Conclusao = new JPanel();
+//						tabbedPane.addTab("Conclusão", null, Conclusao, null);
+//					}
+//				});
+//				btnNewButton.setBounds(141, 81, 89, 23);
+//				Pagemento.add(btnNewButton);
 			}
 		});
-		btComprar.setBounds(10, 199, 111, 23);
-		Valor.add(btComprar);
+		btProximoEndereco.setBounds(10, 199, 111, 23);
+		Valor.add(btProximoEndereco);
 		
+//		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+//		    public void stateChanged(javax.swing.event.ChangeEvent e) {
+//		    	if(tabbedPane.getSelectedComponent() == Valor ) {
+//		    		
+//		    		
+//		    		
+//		    	}
+//		    	
+//		    }
+//		});
 		
 
 		

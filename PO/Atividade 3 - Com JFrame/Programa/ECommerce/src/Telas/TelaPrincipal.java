@@ -49,6 +49,7 @@ public class TelaPrincipal extends JFrame {
 	 */
 	
 	private ArrayList<Produto> produtos = new ArrayList <Produto>();
+	private static ArrayList<Produto> carrinhoProdutos = new ArrayList <Produto>();
 	private static JComboBox<String> cbCategorias = new JComboBox<String>();
 	private ArrayList<Cliente> clientes = new ArrayList();
 	private static int selecProduto;
@@ -408,7 +409,9 @@ public class TelaPrincipal extends JFrame {
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
 	}
-	
 
+	public static ArrayList<Produto> getCarrinhoProdutos() {
+		return carrinhoProdutos;
+	}
 	
 }
