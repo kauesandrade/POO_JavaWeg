@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -42,6 +43,7 @@ public class TelasFinalizarCompra extends JFrame {
 	private ArrayList<Double> parcelas = new ArrayList();
 	private ArrayList<Produto> carrinhoProdutos = new ArrayList <Produto>();
 	private Double valor = 100.0; // PASSAR VALOR DA COMPRA PELO CARRINHO
+	private String formaPagamento;
 	private JLabel lbNomeEndereco;
 	private JTextField txNome;
 	private JTextField txCep;
@@ -52,6 +54,7 @@ public class TelasFinalizarCompra extends JFrame {
 	private JTextField txNomeTitular;
 	private JTextField txCodSeguranca;
 	private JTextField txNumero;
+	private JComboBox cbEnderecos;
 
 	/**
 	 * Launch the application.
@@ -75,6 +78,10 @@ public class TelasFinalizarCompra extends JFrame {
 	public TelasFinalizarCompra() {
 		
 		carrinhoProdutos = TelaPrincipal.getCarrinhoProdutos();
+		
+		for (Produto a : carrinhoProdutos) {
+			System.out.println(a.getNome());
+		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -230,7 +237,7 @@ public class TelasFinalizarCompra extends JFrame {
 		Valor.setLayout(null);
 		
 		JList listValores = new JList();
-		listValores.setBounds(313, 11, 111, 80);
+		listValores.setBounds(304, 11, 120, 55);
 		Valor.add(listValores);
 		
 		JLabel lbFormaPagamento = new JLabel("Forma de Pagamento");
@@ -255,6 +262,8 @@ public class TelasFinalizarCompra extends JFrame {
 					rdPix.setSelected(false);
 					rdBoleto.setSelected(false);
 					
+					formaPagamento = "Cartão de Crédito";
+					
 					parcelas.clear();
 					cbParcela.removeAllItems();
 					
@@ -269,12 +278,7 @@ public class TelasFinalizarCompra extends JFrame {
 					
 					
 				}
-				
-				
-				
-				
-				
-				
+
 			}
 		});
 		rdCartao.setBounds(315, 119, 109, 23);
@@ -286,6 +290,8 @@ public class TelasFinalizarCompra extends JFrame {
 				if(rdPix.isSelected()) {
 					rdCartao.setSelected(false);
 					rdBoleto.setSelected(false);
+					
+					formaPagamento = "Pix";
 					
 					parcelas.clear();
 					cbParcela.removeAllItems();
@@ -304,6 +310,8 @@ public class TelasFinalizarCompra extends JFrame {
 				if(rdBoleto.isSelected()) {
 					rdCartao.setSelected(false);
 					rdPix.setSelected(false);
+					
+					formaPagamento = "Boleto";
 					
 					parcelas.clear();
 					cbParcela.removeAllItems();
@@ -330,16 +338,51 @@ public class TelasFinalizarCompra extends JFrame {
 		spFormaPagamento.setBounds(10, 11, 288, 162);
 		Valor.add(spFormaPagamento);
 		
+		
+		DefaultListModel<String> modeloFormaProdutos = new DefaultListModel<>();
+		DefaultListModel<String> modeloValores = new DefaultListModel<>();
+		
+		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+		    public void stateChanged(javax.swing.event.ChangeEvent e) {
+		    	if(tabbedPane.getSelectedComponent() == Valor ) {
+		    		
+		    		listFormaPagamento.removeAll();
+		    		Double valorParcial = 0.0;
+		    		
+		    		for(Produto p : carrinhoProdutos) {
+		    			
+		    			modeloFormaProdutos.addElement("Nome: "+p.getNome()+"        "+"Preço: "+p.getPreco());
+		    			modeloFormaProdutos.addElement("Quantidade: "+p.getQuantidadeCarrinho());
+		    			
+		    			valorParcial += p.getPreco() * p.getQuantidadeCarrinho();
+		    			
+		    			listFormaPagamento.setModel(modeloFormaProdutos);
+		    			
+		    		}
+		    		
+		    		valor = valorParcial+valorParcial*0.1;
+		    		
+		    		modeloValores.addElement("Valor: "+valorParcial);
+		    		modeloValores.addElement("Frete: "+valorParcial*0.1);
+		    		modeloValores.addElement("Valor Total: "+valor);
+		    		listValores.setModel(modeloValores);
+		    		
+		    		
+		    	}
+		    	
+		    }
+		});
+		
+		
+		
+		
 		JButton btProximoPagamento = new JButton("Continuar");
 		btProximoPagamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
 				////////////////////////// ARRUNMAR A PARTE DE REMOVER/////////////////////////
 				for(Component n : tabbedPane.getComponents()) {
-					if(n.getName()== "Pagamento") {
-						n.removeNotify();
-					}
+					System.out.println(tabbedPane.getName()); 
 				}
 				
 				if(rdCartao.isSelected()) {
@@ -563,22 +606,90 @@ public class TelasFinalizarCompra extends JFrame {
 				
 			}
 
-			private void endereco(String text, int parseInt, String text2, int parseInt2, String string, String string2,
-					String string3, String text3) {
-				// TODO Auto-generated method stub
-				
-			}
+//			private void endereco(String text, int parseInt, String text2, int parseInt2, String string, String string2,
+//					String string3, String text3) {
+//				// TODO Auto-generated method stub
+//				
+//				
+//				
+//				
+//				
+//				
+//			}
 		});
 		btComprar.setBounds(155, 199, 136, 23);
 		Conclusao.add(btComprar);
 		
 		JList listItensConclusao = new JList();
-		listItensConclusao.setBounds(10, 11, 288, 162);
+		listItensConclusao.setBounds(10, 11, 278, 162);
 		Conclusao.add(listItensConclusao);
 		
 		JList listValoreConclusao = new JList();
-		listValoreConclusao.setBounds(308, 11, 111, 162);
+		listValoreConclusao.setBounds(294, 11, 125, 73);
 		Conclusao.add(listValoreConclusao);
+		
+		DefaultListModel<String> modeloValoresConclusao = new DefaultListModel<>();
+		
+		cbEnderecos = new JComboBox();
+		cbEnderecos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ArrayList<Endereco> enderecos = new ArrayList<>();
+				
+				enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
+				
+				for (Endereco endereco : enderecos) {
+					
+				}
+				
+			}
+		});
+		cbEnderecos.setBounds(294, 103, 125, 22);
+		Conclusao.add(cbEnderecos);
+		
+		JLabel lbEndereco = new JLabel("Endereço:");
+		lbEndereco.setBounds(298, 89, 88, 14);
+		Conclusao.add(lbEndereco);
+		
+		JList listInfoEndereco = new JList();
+		listInfoEndereco.setBounds(294, 130, 125, 73);
+		Conclusao.add(listInfoEndereco);
+		
+		
+
+		
+		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+	    public void stateChanged(javax.swing.event.ChangeEvent e) {
+	    	if(tabbedPane.getSelectedComponent() == Conclusao) {
+	    		
+	    		DefaultListModel<String> modeloProdutosConclusao = new DefaultListModel<>();
+	    		DefaultListModel<String> modeloValoresConclusao = new DefaultListModel<>();
+	    		
+	    		listItensConclusao.removeAll();
+	    		listValoreConclusao.removeAll();
+	    		
+	    		for(Produto p : carrinhoProdutos) {
+	    			
+	    			modeloProdutosConclusao.addElement("Nome: "+p.getNome()+"       "+"Quantidade: "+p.getQuantidadeCarrinho());
+	    			modeloProdutosConclusao.addElement("Preço Total: "+(p.getPreco()*p.getQuantidadeCarrinho()));
+	    			
+	    			listItensConclusao.setModel(modeloProdutosConclusao);
+	    		}
+	    		
+	    		modeloValoresConclusao.addElement("Valor Total: "+valor);
+	    		modeloValoresConclusao.addElement("Forma Pagamento: ");
+	    		modeloValoresConclusao.addElement(formaPagamento);
+	    		modeloValoresConclusao.addElement("Parcelas: "+cbParcela.getSelectedItem().toString());
+	    		
+	    		listValoreConclusao.setModel(modeloValoresConclusao);
+	    		
+	    	}
+	    	
+	    }
+	});
+		
+		
+		
 		
 		
 //		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {

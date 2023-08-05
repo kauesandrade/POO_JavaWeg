@@ -113,6 +113,7 @@ public class TelaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				cbProdutos.removeAllItems();
+				listProdutos.removeAll();
 				dados = "";
 				
 				produtos = CadastrarProduto.produtos();
@@ -209,16 +210,12 @@ public class TelaPrincipal extends JFrame {
 		btFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				for(Produto prod : produtos) {
+				carrinhoProdutos.add(prod);
+			}
 				
 				TelasFinalizarCompra TelasFinalizarCompra = new TelasFinalizarCompra();
-				TelasFinalizarCompra.setVisible(true);
-				
-//				for(Produto prod : produtos.size()) {
-//					prod.getRow()
-//				}
-				
-				
-				
+				TelasFinalizarCompra.setVisible(true);		
 				
 			}
 		});
