@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="Programa/ECommerce/jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="Programa/ECommerce/jgoodies-forms-1.8.0.jar"/>
 	<classpathentry kind="lib" path="Programa/ECommerce/miglayout15-swing.jar"/>
+	<classpathentry kind="src" path="/ECommerce"/>
 	<classpathentry kind="output" path="Programa/ECommerce/bin"/>
 </classpath>

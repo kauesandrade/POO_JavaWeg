@@ -26,6 +26,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
+@SuppressWarnings("serial")
 public class telaInicial extends JFrame {
 
 	private JPanel contentPane;

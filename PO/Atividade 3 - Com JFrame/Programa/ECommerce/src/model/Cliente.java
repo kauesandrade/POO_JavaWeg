@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -31,6 +32,8 @@ public class Cliente {
 	
 	/** Propriedade data de nascimento do cliente */
 	private Date dataDeNascimento;
+	
+	private static ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
 	
 	
 	//Fazer alteração para o carrinho no cliente
@@ -306,6 +309,15 @@ public class Cliente {
 	 */
 	public void setDataDeNascimento(Date data) {
 			this.dataDeNascimento = data;
+	}
+
+	
+	public ArrayList<Endereco> getArrEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(Endereco endereco) {
+		Cliente.enderecos.add(endereco);
 	}
 
 

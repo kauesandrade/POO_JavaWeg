@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.Cliente;
+import model.Endereco;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -32,8 +33,22 @@ public class TelaLogin extends JFrame {
 	private JTextField txLogin;
 	private JPasswordField PfSenha;
 
-	public static int ClienteLogado() {
-		return logado;
+	public static Cliente getClienteLogado() {
+		
+		return clientes.get(logado);
+	}
+	public static void setclienteLogado(Cliente cliente) {
+		clientes.get(logado).setCpf(cliente.getCpf());
+		clientes.get(logado).setDataDeNascimento(cliente.getDataDeNascimento());
+		clientes.get(logado).setEmail(cliente.getEmail());
+		clientes.get(logado).setLogin(cliente.getLogin());
+		clientes.get(logado).setNome(cliente.getNome());
+		clientes.get(logado).setSenha(cliente.getSenha());
+//		clientes.get(logado).setTelefone(cliente.getTelefone());
+		for(Endereco e : cliente.getArrEnderecos()) {
+			clientes.get(logado).setEnderecos(e);
+		}
+		
 	}
 	
 	
@@ -98,7 +113,7 @@ public class TelaLogin extends JFrame {
 		btLogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				clientes = TelaCadastro.ArrClientes();
+				clientes = TelaCadastro.getArrClientes();
 				
 				 String login1 = txLogin.getText();
 				 String senha1 = String.valueOf(PfSenha.getPassword());

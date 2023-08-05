@@ -1,10 +1,13 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Endereco {
 
 	private String identificacao;
 	private String rua;
 	private int cep;
+	private String pais;
 	private String cidade;
 	private String uf;
 	private int numero;
@@ -13,6 +16,19 @@ public class Endereco {
 	
 	
 	
+	public Endereco(String identificacao, int cep, String rua, int numero, String pais, String uf, String cidade,
+			String complemento) {
+		
+		super();
+		this.identificacao = identificacao;
+		this.rua = rua;
+		this.cep = cep;
+		this.pais = pais;
+		this.cidade = cidade;
+		this.uf = uf;
+		this.numero = numero;
+		this.complemento = complemento;
+	}
 	public String getIdentificacao() {
 		return identificacao;
 	}
@@ -54,6 +70,12 @@ public class Endereco {
 	}
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+	public String getPais() {
+		return pais;
+	}
+	public void setPais(String pais) {
+		this.pais = pais;
 	}
 	
 	

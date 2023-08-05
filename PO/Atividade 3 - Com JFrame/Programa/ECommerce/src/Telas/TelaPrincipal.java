@@ -51,7 +51,6 @@ public class TelaPrincipal extends JFrame {
 	private ArrayList<Produto> produtos = new ArrayList <Produto>();
 	private static ArrayList<Produto> carrinhoProdutos = new ArrayList <Produto>();
 	private static JComboBox<String> cbCategorias = new JComboBox<String>();
-	private ArrayList<Cliente> clientes = new ArrayList();
 	private static int selecProduto;
 	private String dados;
 	private JTable tbCarrinho;
@@ -364,43 +363,59 @@ public class TelaPrincipal extends JFrame {
 		lbIconPerfil.setBounds(316, 44, 103, 127);
 		perfil.add(lbIconPerfil);
 		
-		//TIRAR OS COMENTARIOS DEPOIS 
-		
-//		clientes = TelaCadastro.ArrClientes();
-//		int clienteLogado = TelaLogin.ClienteLogado();
 		
 		
-//		JLabel lbUsuarioNome = new JLabel(""+clientes.get(clienteLogado).getLogin());
-		JLabel lbUsuarioNome = new JLabel("");
-		lbUsuarioNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 30));
-		lbUsuarioNome.setBounds(10, 11, 235, 31);
-		perfil.add(lbUsuarioNome);
+		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+		    public void stateChanged(javax.swing.event.ChangeEvent e) {
+		    	if(tabbedPane.getSelectedComponent() == perfil) {
+		    		
+		    		
+		    		//TIRAR OS COMENTARIOS DEPOIS 
+		    		
+//		    		
+//		    		Cliente clienteLogado = TelaLogin.getClienteLogado();
+		    		
+		    		
+//		    		JLabel lbUsuarioNome = new JLabel(""+clienteLogado.getLogin());
+		    		JLabel lbUsuarioNome = new JLabel("");
+		    		lbUsuarioNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 30));
+		    		lbUsuarioNome.setBounds(10, 11, 235, 31);
+		    		perfil.add(lbUsuarioNome);
+		    		
+//		    		JLabel lbNome = new JLabel("Nome: "+clienteLogado.getNome());
+		    		JLabel lbNome = new JLabel("Nome: ");
+		    		lbNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
+		    		lbNome.setBounds(10, 64, 270, 23);
+		    		perfil.add(lbNome);
+		    		
+//		    		JLabel lbCpf = new JLabel("CPF: "+clienteLogado.getCpf());
+		    		JLabel lbCpf = new JLabel("CPF: ");
+		    		lbCpf.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
+		    		lbCpf.setBounds(10, 98, 207, 23);
+		    		perfil.add(lbCpf);
+		    		
+//		    		JLabel lbDataNasc = new JLabel("Data de nascimento: "+clienteLogado.getDataDeNascimento());
+		    		JLabel lbDataNasc = new JLabel("Data de nascimento: ");
+		    		lbDataNasc.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
+		    		lbDataNasc.setBounds(10, 132, 270, 23);
+		    		perfil.add(lbDataNasc);
+		    		
+//		    		JLabel lbEmail = new JLabel("Email: "+clienteLogado.getEmail());
+		    		JLabel lbEmail = new JLabel("Email: ");
+		    		lbEmail.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
+		    		lbEmail.setBounds(10, 166, 270, 23);
+		    		perfil.add(lbEmail);
+		    		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    		setBounds(100, 100, 450, 300);
+		    		
+		    	}
+		    }
+		});
 		
-//		JLabel lbNome = new JLabel("Nome: "+clientes.get(clienteLogado).getNome());
-		JLabel lbNome = new JLabel("Nome: ");
-		lbNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
-		lbNome.setBounds(10, 64, 270, 23);
-		perfil.add(lbNome);
 		
-//		JLabel lbCpf = new JLabel("CPF: "+clientes.get(clienteLogado).getCpf());
-		JLabel lbCpf = new JLabel("CPF: ");
-		lbCpf.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
-		lbCpf.setBounds(10, 98, 207, 23);
-		perfil.add(lbCpf);
 		
-//		JLabel lbDataNasc = new JLabel("Data de nascimento: "+clientes.get(clienteLogado).getDataDeNascimento());
-		JLabel lbDataNasc = new JLabel("Data de nascimento: ");
-		lbDataNasc.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
-		lbDataNasc.setBounds(10, 132, 270, 23);
-		perfil.add(lbDataNasc);
 		
-//		JLabel lbEmail = new JLabel("Email: "+clientes.get(clienteLogado).getEmail());
-		JLabel lbEmail = new JLabel("Email: ");
-		lbEmail.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
-		lbEmail.setBounds(10, 166, 270, 23);
-		perfil.add(lbEmail);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+	
 	}
 	
 	static int selecProduto() {

@@ -37,10 +37,12 @@ public class TelaCadastro extends JFrame {
 	private JTextField txEmail;
 	private JPasswordField pfSenha;
 
-	public static ArrayList<Cliente> ArrClientes() {
+	public static ArrayList<Cliente> getArrClientes() {
 		return clientes;
 	}
-	
+	public static ArrayList<Cliente> setArrClientes() {
+		return clientes;
+	}
 	
 	
 	
