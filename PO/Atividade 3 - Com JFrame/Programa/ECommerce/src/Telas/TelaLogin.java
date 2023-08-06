@@ -34,7 +34,6 @@ public class TelaLogin extends JFrame {
 	private JPasswordField PfSenha;
 
 	public static Cliente getClienteLogado() {
-		
 		return clientes.get(logado);
 	}
 	public static void setclienteLogado(Cliente cliente) {
@@ -45,9 +44,7 @@ public class TelaLogin extends JFrame {
 		clientes.get(logado).setNome(cliente.getNome());
 		clientes.get(logado).setSenha(cliente.getSenha());
 //		clientes.get(logado).setTelefone(cliente.getTelefone());
-		for(Endereco e : cliente.getArrEnderecos()) {
-			clientes.get(logado).setEnderecos(e);
-		}
+		clientes.get(logado).setArrEnderecos(cliente.getArrEnderecos());
 		
 	}
 	

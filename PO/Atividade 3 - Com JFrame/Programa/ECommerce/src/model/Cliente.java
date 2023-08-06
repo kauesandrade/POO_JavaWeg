@@ -29,7 +29,7 @@ public class Cliente {
 	
 	/** Propriedade telefone do cliente */
 	private String telefone;
-	
+
 	/** Propriedade data de nascimento do cliente */
 	private Date dataDeNascimento;
 	
@@ -311,16 +311,17 @@ public class Cliente {
 			this.dataDeNascimento = data;
 	}
 
-	
-	public ArrayList<Endereco> getArrEnderecos() {
-		return enderecos;
-	}
-
 	public void setEnderecos(Endereco endereco) {
 		Cliente.enderecos.add(endereco);
 	}
 
+	public static ArrayList<Endereco> getArrEnderecos() {
+		return enderecos;
+	}
 
+	public static void setArrEnderecos(ArrayList<Endereco> enderecos) {
+		Cliente.enderecos = enderecos;
+	}
 	
 	
 }

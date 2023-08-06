@@ -18,6 +18,8 @@ import java.awt.Font;
 import java.text.ParseException;
 
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaEditCadastro extends JFrame {
 
@@ -92,6 +94,11 @@ public class TelaEditCadastro extends JFrame {
 		contentPane.add(txNome);
 		
 		JButton btVoltar = new JButton("Voltar");
+		btVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btVoltar.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		btVoltar.setBackground(Color.WHITE);
 		btVoltar.setBounds(335, 5, 89, 23);

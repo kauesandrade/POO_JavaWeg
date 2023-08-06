@@ -114,6 +114,7 @@ public class TelaPrincipal extends JFrame {
 				
 				cbProdutos.removeAllItems();
 				listProdutos.removeAll();
+				
 				dados = "";
 				
 				produtos = CadastrarProduto.produtos();
@@ -150,6 +151,7 @@ public class TelaPrincipal extends JFrame {
 		btSelecionarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String selecNomeProduto = "N";
+				listProdutos.removeAll();
 
 				if( produtos.size() > 0) {
 					selecNomeProduto = cbProdutos.getSelectedItem().toString();
@@ -387,38 +389,30 @@ public class TelaPrincipal extends JFrame {
 		    	if(tabbedPane.getSelectedComponent() == perfil) {
 		    		
 		    		
-		    		//TIRAR OS COMENTARIOS DEPOIS 
+
+		    		Cliente clienteLogado = TelaLogin.getClienteLogado();
 		    		
-//		    		
-//		    		Cliente clienteLogado = TelaLogin.getClienteLogado();
-		    		
-		    		
-//		    		JLabel lbUsuarioNome = new JLabel(""+clienteLogado.getLogin());
-		    		JLabel lbUsuarioNome = new JLabel("");
+		    		JLabel lbUsuarioNome = new JLabel(""+clienteLogado.getLogin());
 		    		lbUsuarioNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 30));
 		    		lbUsuarioNome.setBounds(10, 11, 235, 31);
 		    		perfil.add(lbUsuarioNome);
 		    		
-//		    		JLabel lbNome = new JLabel("Nome: "+clienteLogado.getNome());
-		    		JLabel lbNome = new JLabel("Nome: ");
+		    		JLabel lbNome = new JLabel("Nome: "+clienteLogado.getNome());
 		    		lbNome.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
 		    		lbNome.setBounds(10, 64, 270, 23);
 		    		perfil.add(lbNome);
 		    		
-//		    		JLabel lbCpf = new JLabel("CPF: "+clienteLogado.getCpf());
-		    		JLabel lbCpf = new JLabel("CPF: ");
+		    		JLabel lbCpf = new JLabel("CPF: "+clienteLogado.getCpf());
 		    		lbCpf.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
 		    		lbCpf.setBounds(10, 98, 207, 23);
 		    		perfil.add(lbCpf);
 		    		
-//		    		JLabel lbDataNasc = new JLabel("Data de nascimento: "+clienteLogado.getDataDeNascimento());
-		    		JLabel lbDataNasc = new JLabel("Data de nascimento: ");
+		    		JLabel lbDataNasc = new JLabel("Data de nascimento: "+clienteLogado.getDataDeNascimento());
 		    		lbDataNasc.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
 		    		lbDataNasc.setBounds(10, 132, 270, 23);
 		    		perfil.add(lbDataNasc);
 		    		
-//		    		JLabel lbEmail = new JLabel("Email: "+clienteLogado.getEmail());
-		    		JLabel lbEmail = new JLabel("Email: ");
+		    		JLabel lbEmail = new JLabel("Email: "+clienteLogado.getEmail());
 		    		lbEmail.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
 		    		lbEmail.setBounds(10, 166, 270, 23);
 		    		perfil.add(lbEmail);

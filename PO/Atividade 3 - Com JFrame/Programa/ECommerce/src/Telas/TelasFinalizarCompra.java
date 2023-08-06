@@ -26,6 +26,7 @@ import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -44,7 +45,7 @@ public class TelasFinalizarCompra extends JFrame {
 	private JRadioButton rdBoleto;
 	private ArrayList<Double> parcelas = new ArrayList();
 	private ArrayList<Produto> carrinhoProdutos = new ArrayList <Produto>();
-	private Double valor = 100.0; // PASSAR VALOR DA COMPRA PELO CARRINHO
+	private Double valor = 0.0; // PASSAR VALOR DA COMPRA PELO CARRINHO
 	private String formaPagamento;
 	private JLabel lbNomeEndereco;
 	private JTextField txNome;
@@ -99,19 +100,7 @@ public class TelasFinalizarCompra extends JFrame {
 		
 		JPanel Endereco = new JPanel();
 		tabbedPane.addTab("Endereço", null, Endereco, null);
-		
-		JButton btProximoForma = new JButton("Continuar");
-		btProximoForma.setBounds(182, 199, 79, 23);
-		btProximoForma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int i = 0;
-				if(i==0) {	
-				
-				}
-			}
-		});
 		Endereco.setLayout(null);
-		Endereco.add(btProximoForma);
 		
 		lbNomeEndereco = new JLabel("Nome:");
 		lbNomeEndereco.setBounds(10, 1, 62, 23);
@@ -172,8 +161,9 @@ public class TelasFinalizarCompra extends JFrame {
 		Endereco.add(lbCidade);
 		
 		txComplemento = new JTextField();
+		txComplemento.setHorizontalAlignment(SwingConstants.LEFT);
 		txComplemento.setColumns(10);
-		txComplemento.setBounds(271, 163, 148, 49);
+		txComplemento.setBounds(271, 163, 148, 59);
 		Endereco.add(txComplemento);
 		
 		JLabel lbComplemento = new JLabel("Complemento:");
@@ -202,30 +192,27 @@ public class TelasFinalizarCompra extends JFrame {
 				Endereco endereco = new Endereco(txNome.getText(), ftCep.getText(), txLogradouro.getText(), Integer.parseInt(txNumero.getText()),
 	    				cbPais.getSelectedItem().toString(), cbEstado.getSelectedItem().toString(), cbCidade.getSelectedItem().toString(),
 	    				txComplemento.getText());
+				
 	    		Cliente clienteLogado = TelaLogin.getClienteLogado();
 	    		
-	    		int i = 0;
-	    		if(clienteLogado.getArrEnderecos().size() == 0) {
+	    		Boolean i = false;
+
 	    			for(Endereco ende : clienteLogado.getArrEnderecos()) {
-						if(ende == endereco) {
+						if(ende.getCep().equals(ftCep.getText()) || ende.getIdentificacao().equals(txNome.getText())) {
 							JOptionPane.showMessageDialog(null, "Você já adicionou esse endereço!!!", "Endereço já existente", JOptionPane.DEFAULT_OPTION);
-							i++;
+							i = true;
 				    		break;
 						}
-	    		}
-				
 				}
-				if(i == 0) {
-		    		clienteLogado.setEnderecos(endereco);
-		    		TelaLogin.setclienteLogado(clienteLogado);
+					if(i==false) {
+			    		clienteLogado.setEnderecos(endereco);
+			    		TelaLogin.setclienteLogado(clienteLogado);
+			    		JOptionPane.showMessageDialog(null, "Endereco cadastrado!!", "Sucesso!!", JOptionPane.DEFAULT_OPTION);
+
 				}
-
-	    		
-
-				
 			}
 		});
-		btSalvar.setBounds(182, 145, 79, 23);
+		btSalvar.setBounds(180, 201, 79, 23);
 		Endereco.add(btSalvar);		
 		
 		
@@ -238,8 +225,8 @@ public class TelasFinalizarCompra extends JFrame {
 		Valor.add(listValores);
 		
 		JLabel lbFormaPagamento = new JLabel("Forma de Pagamento");
-		lbFormaPagamento.setHorizontalAlignment(SwingConstants.CENTER);
 		lbFormaPagamento.setBounds(313, 98, 111, 14);
+		lbFormaPagamento.setHorizontalAlignment(SwingConstants.CENTER);
 		Valor.add(lbFormaPagamento);
 		
 		JComboBox cbParcela = new JComboBox();
@@ -247,11 +234,12 @@ public class TelasFinalizarCompra extends JFrame {
 		Valor.add(cbParcela);
 		
 		JLabel lbParcelas = new JLabel("Parcelas");
-		lbParcelas.setHorizontalAlignment(SwingConstants.CENTER);
 		lbParcelas.setBounds(170, 183, 110, 14);
+		lbParcelas.setHorizontalAlignment(SwingConstants.CENTER);
 		Valor.add(lbParcelas);
 		
 		rdCartao = new JRadioButton("Cartão de Crédito");
+		rdCartao.setBounds(315, 119, 109, 23);
 		rdCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -278,10 +266,10 @@ public class TelasFinalizarCompra extends JFrame {
 
 			}
 		});
-		rdCartao.setBounds(315, 119, 109, 23);
 		Valor.add(rdCartao);
 		
 		rdPix = new JRadioButton("Pix");
+		rdPix.setBounds(315, 145, 109, 23);
 		rdPix.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(rdPix.isSelected()) {
@@ -298,10 +286,10 @@ public class TelasFinalizarCompra extends JFrame {
 				}
 			}
 		});
-		rdPix.setBounds(315, 145, 109, 23);
 		Valor.add(rdPix);
 		
 		rdBoleto = new JRadioButton("Boleto");
+		rdBoleto.setBounds(315, 171, 109, 23);
 		rdBoleto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(rdBoleto.isSelected()) {
@@ -313,18 +301,19 @@ public class TelasFinalizarCompra extends JFrame {
 					parcelas.clear();
 					cbParcela.removeAllItems();
 					
-					for (int i = 0; i < 10; i++) {
+					for (int i = 0; i < 5; i++) {
 						
-						parcelas.add(valor/(i+1));
+						double num= 100/(i+1);
+						DecimalFormat formato = new DecimalFormat("#,##");      
+						num = Double.valueOf(formato.format(num));
 						
-						System.out.println(parcelas.get(i));
+						parcelas.add(num);
 						
 						cbParcela.addItem((i+1)+" X "+parcelas.get(i));
 					}
 				}
 			}
 		});
-		rdBoleto.setBounds(315, 171, 109, 23);
 		Valor.add(rdBoleto);
 		
 		JList listFormaPagamento = new JList();
@@ -344,6 +333,8 @@ public class TelasFinalizarCompra extends JFrame {
 		    	if(tabbedPane.getSelectedComponent() == Valor ) {
 		    		
 		    		listFormaPagamento.removeAll();
+		    		modeloFormaProdutos.removeAllElements();
+		    		
 		    		Double valorParcial = 0.0;
 		    		
 		    		for(Produto p : carrinhoProdutos) {
@@ -357,10 +348,15 @@ public class TelasFinalizarCompra extends JFrame {
 		    			
 		    		}
 		    		
-		    		valor = valorParcial+valorParcial*0.1;
+		    		valor = valorParcial;
 		    		
 		    		modeloValores.addElement("Valor: "+valorParcial);
-		    		modeloValores.addElement("Frete: "+valorParcial*0.1);
+		    		if(valorParcial*0.1 >=100) {
+			    		modeloValores.addElement("Frete: Grátis");
+		    		}else {
+			    		modeloValores.addElement("Frete: "+valorParcial*0.1);
+			    		valor += valorParcial*0.1;
+		    		}
 		    		modeloValores.addElement("Valor Total: "+valor);
 		    		listValores.setModel(modeloValores);
 		    		
@@ -370,351 +366,248 @@ public class TelasFinalizarCompra extends JFrame {
 		    }
 		});
 		
-		
-		
-		
 		JButton btProximoPagamento = new JButton("Continuar");
+		btProximoPagamento.setBounds(10, 199, 111, 23);
 		btProximoPagamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				////////////////////////// ARRUNMAR A PARTE DE REMOVER/////////////////////////
-				for(Component n : tabbedPane.getComponents()) {
-					System.out.println(tabbedPane.getName()); 
+				if(rdBoleto.isSelected() || rdPix.isSelected() || rdCartao.isSelected()) {
+				
+				JPanel Conclusao = new JPanel();
+				tabbedPane.addTab("Conclusão", null, Conclusao, null);
+				Conclusao.setLayout(null);
+				
+				JList listItensConclusao = new JList();
+				listItensConclusao.setBounds(10, 11, 278, 192);
+				Conclusao.add(listItensConclusao);
+				
+				JScrollPane scItensConclusao = new JScrollPane(listItensConclusao, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				scItensConclusao.setBounds(10, 11, 278, 192);
+				Conclusao.add(scItensConclusao);
+				
+				JList listValoreConclusao = new JList();
+				listValoreConclusao.setBounds(294, 11, 125, 73);
+				Conclusao.add(listValoreConclusao);
+				
+				JList listInfoEndereco = new JList();
+				listInfoEndereco.setBounds(294, 130, 125, 73);
+				Conclusao.add(listInfoEndereco);
+				
+				DefaultListModel<String> modeloEnderecoConclusao = new DefaultListModel<>();
+				
+				cbEnderecos = new JComboBox();
+				cbEnderecos.addActionListener(new ActionListener() {
+					@SuppressWarnings("unlikely-arg-type")
+					public void actionPerformed(ActionEvent e) {
+						
+						listInfoEndereco.removeAll();
+						modeloEnderecoConclusao.removeAllElements();
+						
+						ArrayList<Endereco> enderecos = new ArrayList<>();
+						enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
+						
+						for (Endereco endere : enderecos) {
+							if(endere.getIdentificacao().equals(cbEnderecos)) {
+								modeloEnderecoConclusao.addElement("CEP: "+endere.getCep());
+								modeloEnderecoConclusao.addElement(endere.getRua()+", "+endere.getNumero());
+								
+								listInfoEndereco.setModel(modeloEnderecoConclusao);
+							}
+							
+						}
+						
+					}
+				});
+				cbEnderecos.setBounds(294, 103, 125, 22);
+				Conclusao.add(cbEnderecos);
+				
+				JLabel lbEndereco = new JLabel("Endereço:");
+				lbEndereco.setBounds(298, 89, 88, 14);
+				Conclusao.add(lbEndereco);
+				
+				tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+			    public void stateChanged(javax.swing.event.ChangeEvent e) {
+			    	if(tabbedPane.getSelectedComponent() == Conclusao) {
+			    		
+			    		DefaultListModel<String> modeloProdutosConclusao = new DefaultListModel<>();
+			    		DefaultListModel<String> modeloValoresConclusao = new DefaultListModel<>();
+			    		DefaultListModel<String> modeloEnderecoConclusao = new DefaultListModel<>();
+			    		
+			    		listItensConclusao.removeAll();
+			    		listValoreConclusao.removeAll();
+			    		cbEnderecos.removeAllItems();
+			    		
+			    		for(Produto p : carrinhoProdutos) {
+			    			
+			    			modeloProdutosConclusao.addElement("Nome: "+p.getNome()+"       "+"Quantidade: "+p.getQuantidadeCarrinho());
+			    			modeloProdutosConclusao.addElement("Preço Total: "+(p.getPreco()*p.getQuantidadeCarrinho()));
+			    			
+			    			listItensConclusao.setModel(modeloProdutosConclusao);
+			    		}
+			    		
+			    		modeloValoresConclusao.addElement("Valor Total: "+valor);
+			    		modeloValoresConclusao.addElement("Forma Pagamento: ");
+			    		modeloValoresConclusao.addElement(formaPagamento);
+			    		modeloValoresConclusao.addElement("Parcelas: "+cbParcela.getSelectedItem().toString());
+			    		
+			    		listValoreConclusao.setModel(modeloValoresConclusao);
+			    		
+			    		
+						ArrayList<Endereco> enderecos = new ArrayList<>();
+						
+						enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
+						
+						for (Endereco endereco : enderecos) {
+							cbEnderecos.addItem(endereco.getIdentificacao());
+						}
+			    	}
+			    }
+			});
+			
+				JPanel Pagamento = new JPanel();
+				tabbedPane.addTab("Pagamento", null, Pagamento, null);
+				Pagamento.setLayout(null);
+				
+				
+				
+				
+				tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+				    public void stateChanged(javax.swing.event.ChangeEvent e) {
+				    	if(tabbedPane.getSelectedComponent() == Pagamento ) {
+				    		
+						
+				    		if(rdCartao.isSelected()) {
+								Pagamento.removeAll();
+								
+								JButton btProximoConclusao = new JButton("Continuar");
+								btProximoConclusao.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+						
+									}
+								});
+								btProximoConclusao.setBounds(330, 199, 89, 23);
+								Pagamento.add(btProximoConclusao);
+								
+								JLabel lbTitulo = new JLabel("Adicione um Cartão");
+								lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+								lbTitulo.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+								lbTitulo.setBounds(139, 7, 165, 23);
+								Pagamento.add(lbTitulo);
+								
+								txNumCartao = new JTextField();
+								txNumCartao.setForeground(new Color(114, 114, 114));
+								txNumCartao.setBounds(10, 43, 409, 29);
+								Pagamento.add(txNumCartao);
+								txNumCartao.setColumns(10);
+								
+								txNomeTitular = new JTextField();
+								txNomeTitular.setForeground(new Color(114, 114, 114));
+								txNomeTitular.setColumns(10);
+								txNomeTitular.setBounds(10, 95, 409, 29);
+								Pagamento.add(txNomeTitular);
+								
+								txCodSeguranca = new JTextField();
+								txCodSeguranca.setForeground(new Color(114, 114, 114));
+								txCodSeguranca.setColumns(10);
+								txCodSeguranca.setBounds(10, 147, 119, 29);
+								Pagamento.add(txCodSeguranca);
+								
+								JFormattedTextField ftDataValidade = new JFormattedTextField();
+								ftDataValidade.setBounds(10, 199, 119, 23);
+								Pagamento.add(ftDataValidade);
+								
+								JLabel lbNumCartao = new JLabel("Número do Cartão ( Apenas números):");
+								lbNumCartao.setBounds(10, 29, 206, 14);
+								Pagamento.add(lbNumCartao);
+								
+								JLabel lbNomeTitular = new JLabel("Digite o nome do titular:");
+								lbNomeTitular.setToolTipText("");
+								lbNomeTitular.setBounds(10, 83, 206, 14);
+								Pagamento.add(lbNomeTitular);
+								
+								JLabel lbCodSeguranca = new JLabel("Código de segurança:");
+								lbCodSeguranca.setBounds(10, 133, 206, 14);
+								Pagamento.add(lbCodSeguranca);
+								
+								JLabel lbDataValidade = new JLabel("Data Validade:");
+								lbDataValidade.setBounds(10, 187, 206, 14);
+								Pagamento.add(lbDataValidade);
+								
+								JButton btSalvar = new JButton("Salvar");
+								btSalvar.setBounds(226, 199, 89, 23);
+								Pagamento.add(btSalvar);
+								
+								
+								
+								Pagamento.validate();
+							}if(rdPix.isSelected()) {
+								Pagamento.removeAll();
+								
+								
+								JButton btProximoConclusao = new JButton("Continuar");
+								btProximoConclusao.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+						
+									}
+								});
+								btProximoConclusao.setBounds(330, 199, 89, 23);
+								Pagamento.add(btProximoConclusao);
+								
+								JLabel lbTitulo = new JLabel("PIX");
+								lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+								lbTitulo.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+								lbTitulo.setBounds(136, 11, 165, 23);
+								Pagamento.add(lbTitulo);
+								
+								JLabel lbQR = new JLabel("FOTO DO QR");
+								lbQR.setBounds(146, 45, 151, 143);
+								Pagamento.add(lbQR);
+								
+								
+								Pagamento.validate();
+							}
+							
+							if(rdBoleto.isSelected()) {
+								Pagamento.removeAll();
+								
+								
+								JButton btProximoConclusao = new JButton("Continuar");
+								btProximoConclusao.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+						
+									}
+								});
+								btProximoConclusao.setBounds(330, 199, 89, 23);
+								Pagamento.add(btProximoConclusao);
+								
+								JLabel lbTitulo = new JLabel("Boleto");
+								lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+								lbTitulo.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
+								lbTitulo.setBounds(136, 11, 165, 23);
+								Pagamento.add(lbTitulo);
+								
+								JLabel lbBoleto = new JLabel("FOTO BOLETO");
+								lbBoleto.setBounds(146, 45, 151, 143);
+								Pagamento.add(lbBoleto);
+								
+								
+								Pagamento.validate();
+							}
+				    		
+				    	
+				    	}
+				    }
+				});
+				
+				Valor.remove(btProximoPagamento);
+				
 				}
-				
-				if(rdCartao.isSelected()) {
-					JPanel Pagemento = new JPanel();
-					tabbedPane.addTab("Pagamento", null, Pagemento, null);
-					Pagemento.setLayout(null);
-					
-				}
-				
-
-				
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-//				int i = 0;
-//				if (i==1) {
-//				
-//				}
 			}
 		});
-		btProximoPagamento.setBounds(10, 199, 111, 23);
 		Valor.add(btProximoPagamento);
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//TELA PAGAMENTO CARTAO+++++++++++++++++++++++++++++++++++++++++++++++
-//		JPanel Pagemento = new JPanel();
-//		tabbedPane.addTab("Pagamento", null, Pagemento, null);
-//		Pagemento.setLayout(null);
-//		
-//		JButton btProximoConclusao = new JButton("Continuar");
-//		btProximoConclusao.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//			}
-//		});
-//		btProximoConclusao.setBounds(330, 199, 89, 23);
-//		Pagemento.add(btProximoConclusao);
-//		
-//		JLabel lbTitulo = new JLabel("Adicione um Cartão");
-//		lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-//		lbTitulo.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
-//		lbTitulo.setBounds(139, 7, 165, 23);
-//		Pagemento.add(lbTitulo);
-//		
-//		txNumCartao = new JTextField();
-//		txNumCartao.setForeground(new Color(114, 114, 114));
-//		txNumCartao.setBounds(10, 43, 409, 29);
-//		Pagemento.add(txNumCartao);
-//		txNumCartao.setColumns(10);
-//		
-//		txNomeTitular = new JTextField();
-//		txNomeTitular.setForeground(new Color(114, 114, 114));
-//		txNomeTitular.setColumns(10);
-//		txNomeTitular.setBounds(10, 95, 409, 29);
-//		Pagemento.add(txNomeTitular);
-//		
-//		txCodSeguranca = new JTextField();
-//		txCodSeguranca.setForeground(new Color(114, 114, 114));
-//		txCodSeguranca.setColumns(10);
-//		txCodSeguranca.setBounds(10, 147, 119, 29);
-//		Pagemento.add(txCodSeguranca);
-//		
-//		JFormattedTextField ftDataValidade = new JFormattedTextField();
-//		ftDataValidade.setBounds(10, 199, 119, 23);
-//		Pagemento.add(ftDataValidade);
-//		
-//		JLabel lbNumCartao = new JLabel("Número do Cartão ( Apenas números):");
-//		lbNumCartao.setBounds(10, 29, 206, 14);
-//		Pagemento.add(lbNumCartao);
-//		
-//		JLabel lbNomeTitular = new JLabel("Digite o nome do titular:");
-//		lbNomeTitular.setToolTipText("");
-//		lbNomeTitular.setBounds(10, 83, 206, 14);
-//		Pagemento.add(lbNomeTitular);
-//		
-//		JLabel lbCodSeguranca = new JLabel("Código de segurança:");
-//		lbCodSeguranca.setBounds(10, 133, 206, 14);
-//		Pagemento.add(lbCodSeguranca);
-//		
-//		JLabel lbDataValidade = new JLabel("Data Validade:");
-//		lbDataValidade.setBounds(10, 187, 206, 14);
-//		Pagemento.add(lbDataValidade);
-//		
-//		JButton btSalvar = new JButton("Salvar");
-//		btSalvar.setBounds(226, 199, 89, 23);
-//		Pagemento.add(btSalvar);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//TELA PAGAMENTO PIX E DE SER FEITA NO FINAL+++++++++++++++++++++++++++
-//		JPanel Pagemento = new JPanel();
-//		tabbedPane.addTab("Pagamento", null, Pagemento, null);
-//		Pagemento.setLayout(null);
-//		
-//		JButton btProximoConclusao = new JButton("Continuar");
-//		btProximoConclusao.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//			}
-//		});
-//		btProximoConclusao.setBounds(330, 199, 89, 23);
-//		Pagemento.add(btProximoConclusao);
-//		
-//		JLabel lbTitulo = new JLabel("PIX");
-//		lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-//		lbTitulo.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
-//		lbTitulo.setBounds(136, 11, 165, 23);
-//		Pagemento.add(lbTitulo);
-//		
-//		JLabel lbQR = new JLabel("FOTO DO QR");
-//		lbQR.setBounds(146, 45, 151, 143);
-//		Pagemento.add(lbQR);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//TELA PAGAMENTO PIX E DE SER FEITA NO FINAL+++++++++++++++++++++++++++
-//		JPanel Pagemento = new JPanel();
-//		tabbedPane.addTab("Pagamento", null, Pagemento, null);
-//		Pagemento.setLayout(null);
-//		
-//		JButton btProximoConclusao = new JButton("Continuar");
-//		btProximoConclusao.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//			}
-//		});
-//		btProximoConclusao.setBounds(330, 199, 89, 23);
-//		Pagemento.add(btProximoConclusao);
-//		
-//		JLabel lbTitulo = new JLabel("Boleto");
-//		lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-//		lbTitulo.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
-//		lbTitulo.setBounds(136, 11, 165, 23);
-//		Pagemento.add(lbTitulo);
-//		
-//		JLabel lbBoleto = new JLabel("FOTO BOLETO");
-//		lbBoleto.setBounds(146, 45, 151, 143);
-//		Pagemento.add(lbBoleto);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		JPanel Conclusao = new JPanel();
-		tabbedPane.addTab("Conclusão", null, Conclusao, null);
-		Conclusao.setLayout(null);
-		
-		JButton btComprar = new JButton("Comprar");
-		btComprar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				
-			}
-
-//			private void endereco(String text, int parseInt, String text2, int parseInt2, String string, String string2,
-//					String string3, String text3) {
-//				// TODO Auto-generated method stub
-//				
-//				
-//				
-//				
-//				
-//				
-//			}
-		});
-		btComprar.setBounds(148, 206, 136, 23);
-		Conclusao.add(btComprar);
-		
-		JList listItensConclusao = new JList();
-		listItensConclusao.setBounds(10, 11, 278, 192);
-		Conclusao.add(listItensConclusao);
-		
-		JList listValoreConclusao = new JList();
-		listValoreConclusao.setBounds(294, 11, 125, 73);
-		Conclusao.add(listValoreConclusao);
-		
-		JList listInfoEndereco = new JList();
-		listInfoEndereco.setBounds(294, 130, 125, 73);
-		Conclusao.add(listInfoEndereco);
-		
-		DefaultListModel<String> modeloEnderecoConclusao = new DefaultListModel<>();
-		
-		cbEnderecos = new JComboBox();
-		cbEnderecos.addActionListener(new ActionListener() {
-			@SuppressWarnings("unlikely-arg-type")
-			public void actionPerformed(ActionEvent e) {
-				
-				modeloEnderecoConclusao.removeAllElements();
-				
-				ArrayList<Endereco> enderecos = new ArrayList<>();
-				enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
-				
-				for (Endereco endereco : enderecos) {
-					if(endereco.getIdentificacao().equals(cbEnderecos)) {
-						modeloEnderecoConclusao.addElement("CEP: "+endereco.getCep());
-						modeloEnderecoConclusao.addElement(endereco.getRua()+", "+endereco.getNumero());
-						
-						listInfoEndereco.setModel(modeloEnderecoConclusao);
-					}
-					
-				}
-				
-			}
-		});
-		cbEnderecos.setBounds(294, 103, 125, 22);
-		Conclusao.add(cbEnderecos);
-		
-		JLabel lbEndereco = new JLabel("Endereço:");
-		lbEndereco.setBounds(298, 89, 88, 14);
-		Conclusao.add(lbEndereco);
-		
-		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
-	    public void stateChanged(javax.swing.event.ChangeEvent e) {
-	    	if(tabbedPane.getSelectedComponent() == Conclusao) {
-	    		
-	    		DefaultListModel<String> modeloProdutosConclusao = new DefaultListModel<>();
-	    		DefaultListModel<String> modeloValoresConclusao = new DefaultListModel<>();
-	    		DefaultListModel<String> modeloEnderecoConclusao = new DefaultListModel<>();
-	    		
-	    		listItensConclusao.removeAll();
-	    		listValoreConclusao.removeAll();
-	    		
-	    		for(Produto p : carrinhoProdutos) {
-	    			
-	    			modeloProdutosConclusao.addElement("Nome: "+p.getNome()+"       "+"Quantidade: "+p.getQuantidadeCarrinho());
-	    			modeloProdutosConclusao.addElement("Preço Total: "+(p.getPreco()*p.getQuantidadeCarrinho()));
-	    			
-	    			listItensConclusao.setModel(modeloProdutosConclusao);
-	    		}
-	    		
-	    		modeloValoresConclusao.addElement("Valor Total: "+valor);
-	    		modeloValoresConclusao.addElement("Forma Pagamento: ");
-	    		modeloValoresConclusao.addElement(formaPagamento);
-	    		modeloValoresConclusao.addElement("Parcelas: "+cbParcela.getSelectedItem().toString());
-	    		
-	    		listValoreConclusao.setModel(modeloValoresConclusao);
-	    		
-	    		
-				ArrayList<Endereco> enderecos = new ArrayList<>();
-				
-				enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
-				
-				for (Endereco endereco : enderecos) {
-					cbEnderecos.addItem(endereco.getIdentificacao());
-				}
-	    		
-	    	}
-	    	
-	    }
-	});
-		
-		
-		
-		
-		
-//		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
-//		    public void stateChanged(javax.swing.event.ChangeEvent e) {
-//		    	if(tabbedPane.getSelectedComponent() == Valor ) {
-//		    		
-//		    		
-//		    		
-//		    	}
-//		    	
-//		    }
-//		});
-		
 
 		
 
