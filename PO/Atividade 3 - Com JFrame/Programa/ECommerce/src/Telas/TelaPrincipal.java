@@ -214,7 +214,13 @@ public class TelaPrincipal extends JFrame {
 				carrinhoProdutos.add(prod);
 			}
 				
-				TelasFinalizarCompra TelasFinalizarCompra = new TelasFinalizarCompra();
+				TelasFinalizarCompra TelasFinalizarCompra = null;
+				try {
+					TelasFinalizarCompra = new TelasFinalizarCompra();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				TelasFinalizarCompra.setVisible(true);		
 				
 			}
@@ -349,6 +355,20 @@ public class TelaPrincipal extends JFrame {
 		perfil.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Editir Perfil");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				TelaEditCadastro TelaEditCadastro = null;
+				try {
+					TelaEditCadastro = new TelaEditCadastro();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				TelaEditCadastro.setVisible(true);
+				
+			}
+		});
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));

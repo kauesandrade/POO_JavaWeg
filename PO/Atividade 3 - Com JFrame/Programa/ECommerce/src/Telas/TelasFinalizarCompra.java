@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import model.Cliente;
 import model.Endereco;
@@ -25,6 +26,7 @@ import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
@@ -46,7 +48,6 @@ public class TelasFinalizarCompra extends JFrame {
 	private String formaPagamento;
 	private JLabel lbNomeEndereco;
 	private JTextField txNome;
-	private JTextField txCep;
 	private JTextField txLogradouro;
 	private JTextField txBairro;
 	private JTextField txComplemento;
@@ -74,8 +75,9 @@ public class TelasFinalizarCompra extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws ParseException 
 	 */
-	public TelasFinalizarCompra() {
+	public TelasFinalizarCompra() throws ParseException {
 		
 		carrinhoProdutos = TelaPrincipal.getCarrinhoProdutos();
 		
@@ -119,11 +121,6 @@ public class TelasFinalizarCompra extends JFrame {
 		txNome.setBounds(10, 19, 148, 20);
 		Endereco.add(txNome);
 		txNome.setColumns(10);
-		
-		txCep = new JTextField();
-		txCep.setColumns(10);
-		txCep.setBounds(10, 65, 148, 20);
-		Endereco.add(txCep);
 		
 		JLabel lbCep = new JLabel("CEP:");
 		lbCep.setBounds(10, 47, 62, 23);
@@ -192,22 +189,31 @@ public class TelasFinalizarCompra extends JFrame {
 		lbNumero.setBounds(10, 184, 62, 23);
 		Endereco.add(lbNumero);
 		
+		MaskFormatter mascaraCep = new MaskFormatter("##.###-###");
+		mascaraCep.setPlaceholderCharacter('_');
+		
+		JFormattedTextField ftCep = new JFormattedTextField(mascaraCep);
+		ftCep.setBounds(10, 64, 150, 21);
+		Endereco.add(ftCep);
+		
 		JButton btSalvar = new JButton("Salvar");
 		btSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Endereco endereco = new Endereco(txNome.getText(), Integer.parseInt(txCep.getText()), txLogradouro.getText(), Integer.parseInt(txNumero.getText()),
+				Endereco endereco = new Endereco(txNome.getText(), ftCep.getText(), txLogradouro.getText(), Integer.parseInt(txNumero.getText()),
 	    				cbPais.getSelectedItem().toString(), cbEstado.getSelectedItem().toString(), cbCidade.getSelectedItem().toString(),
 	    				txComplemento.getText());
 	    		Cliente clienteLogado = TelaLogin.getClienteLogado();
 	    		
 	    		int i = 0;
-				for(Endereco ende : clienteLogado.getArrEnderecos()) {
-					if(ende == endereco) {
-						JOptionPane.showMessageDialog(null, "Você já adicionou esse endereço!!!", "Endereço já existente", JOptionPane.DEFAULT_OPTION);
-						i++;
-			    		break;
-					}
-
+	    		if(clienteLogado.getArrEnderecos().size() == 0) {
+	    			for(Endereco ende : clienteLogado.getArrEnderecos()) {
+						if(ende == endereco) {
+							JOptionPane.showMessageDialog(null, "Você já adicionou esse endereço!!!", "Endereço já existente", JOptionPane.DEFAULT_OPTION);
+							i++;
+				    		break;
+						}
+	    		}
+				
 				}
 				if(i == 0) {
 		    		clienteLogado.setEnderecos(endereco);
@@ -220,16 +226,7 @@ public class TelasFinalizarCompra extends JFrame {
 			}
 		});
 		btSalvar.setBounds(182, 145, 79, 23);
-		Endereco.add(btSalvar);
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		Endereco.add(btSalvar);		
 		
 		
 		JPanel Valor = new JPanel();
@@ -617,28 +614,40 @@ public class TelasFinalizarCompra extends JFrame {
 //				
 //			}
 		});
-		btComprar.setBounds(155, 199, 136, 23);
+		btComprar.setBounds(148, 206, 136, 23);
 		Conclusao.add(btComprar);
 		
 		JList listItensConclusao = new JList();
-		listItensConclusao.setBounds(10, 11, 278, 162);
+		listItensConclusao.setBounds(10, 11, 278, 192);
 		Conclusao.add(listItensConclusao);
 		
 		JList listValoreConclusao = new JList();
 		listValoreConclusao.setBounds(294, 11, 125, 73);
 		Conclusao.add(listValoreConclusao);
 		
-		DefaultListModel<String> modeloValoresConclusao = new DefaultListModel<>();
+		JList listInfoEndereco = new JList();
+		listInfoEndereco.setBounds(294, 130, 125, 73);
+		Conclusao.add(listInfoEndereco);
+		
+		DefaultListModel<String> modeloEnderecoConclusao = new DefaultListModel<>();
 		
 		cbEnderecos = new JComboBox();
 		cbEnderecos.addActionListener(new ActionListener() {
+			@SuppressWarnings("unlikely-arg-type")
 			public void actionPerformed(ActionEvent e) {
 				
-				ArrayList<Endereco> enderecos = new ArrayList<>();
+				modeloEnderecoConclusao.removeAllElements();
 				
+				ArrayList<Endereco> enderecos = new ArrayList<>();
 				enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
 				
 				for (Endereco endereco : enderecos) {
+					if(endereco.getIdentificacao().equals(cbEnderecos)) {
+						modeloEnderecoConclusao.addElement("CEP: "+endereco.getCep());
+						modeloEnderecoConclusao.addElement(endereco.getRua()+", "+endereco.getNumero());
+						
+						listInfoEndereco.setModel(modeloEnderecoConclusao);
+					}
 					
 				}
 				
@@ -651,19 +660,13 @@ public class TelasFinalizarCompra extends JFrame {
 		lbEndereco.setBounds(298, 89, 88, 14);
 		Conclusao.add(lbEndereco);
 		
-		JList listInfoEndereco = new JList();
-		listInfoEndereco.setBounds(294, 130, 125, 73);
-		Conclusao.add(listInfoEndereco);
-		
-		
-
-		
 		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
 	    public void stateChanged(javax.swing.event.ChangeEvent e) {
 	    	if(tabbedPane.getSelectedComponent() == Conclusao) {
 	    		
 	    		DefaultListModel<String> modeloProdutosConclusao = new DefaultListModel<>();
 	    		DefaultListModel<String> modeloValoresConclusao = new DefaultListModel<>();
+	    		DefaultListModel<String> modeloEnderecoConclusao = new DefaultListModel<>();
 	    		
 	    		listItensConclusao.removeAll();
 	    		listValoreConclusao.removeAll();
@@ -682,6 +685,15 @@ public class TelasFinalizarCompra extends JFrame {
 	    		modeloValoresConclusao.addElement("Parcelas: "+cbParcela.getSelectedItem().toString());
 	    		
 	    		listValoreConclusao.setModel(modeloValoresConclusao);
+	    		
+	    		
+				ArrayList<Endereco> enderecos = new ArrayList<>();
+				
+				enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
+				
+				for (Endereco endereco : enderecos) {
+					cbEnderecos.addItem(endereco.getIdentificacao());
+				}
 	    		
 	    	}
 	    	
