@@ -45,6 +45,7 @@ public class TelasFinalizarCompra extends JFrame {
 	private JRadioButton rdBoleto;
 	private ArrayList<Double> parcelas = new ArrayList();
 	private ArrayList<Produto> carrinhoProdutos = new ArrayList <Produto>();
+	private static String enderecoEscolhido;
 	private Double valor = 0.0;
 	private String formaPagamento;
 	private JLabel lbNomeEndereco;
@@ -191,7 +192,7 @@ public class TelasFinalizarCompra extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Endereco endereco = new Endereco(txNome.getText(), ftCep.getText(), txLogradouro.getText(), Integer.parseInt(txNumero.getText()),
 	    				cbPais.getSelectedItem().toString(), cbEstado.getSelectedItem().toString(), cbCidade.getSelectedItem().toString(),
-	    				txComplemento.getText());
+	    				txComplemento.getText(), txBairro.getText());
 				
 	    		Cliente clienteLogado = TelaLogin.getClienteLogado();
 	    		
@@ -398,7 +399,8 @@ public class TelasFinalizarCompra extends JFrame {
 						modeloEnderecoConclusao.removeAllElements();
 						
 						ArrayList<Endereco> enderecos = new ArrayList<>();
-						enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
+						TelaLogin.getClienteLogado();
+						enderecos = Cliente.getArrEnderecos();
 						
 						for (Endereco endere : enderecos) {
 							if(endere.getIdentificacao().equals(cbEnderecos)) {
@@ -477,6 +479,19 @@ public class TelasFinalizarCompra extends JFrame {
 								btProximoConclusao.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 						
+										ArrayList<Endereco> enderecos = new ArrayList<>();
+										
+										enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
+										
+										if(enderecos.size() > 0  && txNumCartao.getText() != null && txNomeTitular.getText() != null && txCodSeguranca.getText() != null) {
+											enderecoEscolhido = cbEnderecos.getSelectedItem().toString();
+											TelaNotaFiscal TelaNotaFiscal = new TelaNotaFiscal();
+											TelaNotaFiscal.setVisible(true);
+											dispose();
+										}else {
+											JOptionPane.showMessageDialog(null, "Erro ao finalizar", "Erro", JOptionPane.DEFAULT_OPTION);
+										}
+										
 									}
 								});
 								btProximoConclusao.setBounds(330, 199, 89, 23);
@@ -538,10 +553,22 @@ public class TelasFinalizarCompra extends JFrame {
 								Pagamento.removeAll();
 								
 								
-								JButton btProximoConclusao = new JButton("Continuar");
+								JButton btProximoConclusao = new JButton("Comprar");
 								btProximoConclusao.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
-						
+										
+										ArrayList<Endereco> enderecos = new ArrayList<>();
+										
+										enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
+										
+										if(enderecos.size() > 0) {
+											enderecoEscolhido = cbEnderecos.getSelectedItem().toString();
+											TelaNotaFiscal TelaNotaFiscal = new TelaNotaFiscal();
+											TelaNotaFiscal.setVisible(true);
+											dispose();
+										}else {
+											JOptionPane.showMessageDialog(null, "Erro ao finalizar", "Erro", JOptionPane.DEFAULT_OPTION);
+										}
 									}
 								});
 								btProximoConclusao.setBounds(330, 199, 89, 23);
@@ -568,7 +595,18 @@ public class TelasFinalizarCompra extends JFrame {
 								JButton btProximoConclusao = new JButton("Continuar");
 								btProximoConclusao.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
-						
+										ArrayList<Endereco> enderecos = new ArrayList<>();
+										
+										enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
+										
+										if(enderecos.size() > 0) {
+											enderecoEscolhido = cbEnderecos.getSelectedItem().toString();
+											TelaNotaFiscal TelaNotaFiscal = new TelaNotaFiscal();
+											TelaNotaFiscal.setVisible(true);
+											dispose();
+										}else {
+											JOptionPane.showMessageDialog(null, "Erro ao finalizar", "Erro", JOptionPane.DEFAULT_OPTION);
+										}
 									}
 								});
 								btProximoConclusao.setBounds(330, 199, 89, 23);
@@ -600,10 +638,22 @@ public class TelasFinalizarCompra extends JFrame {
 		});
 		Valor.add(btProximoPagamento);
 		
-		
-				
-
-		
 
 	}
+	
+	public static Endereco getEdereco() {
+		
+
+		ArrayList<Endereco> enderecos = new ArrayList<>();
+		
+		enderecos = TelaLogin.getClienteLogado().getArrEnderecos();
+	
+		for(Endereco ender : enderecos) {
+			if(ender.getIdentificacao().equals(enderecoEscolhido)) {
+				return ender;
+			}
+		}
+		return null;
+	}
+
 }

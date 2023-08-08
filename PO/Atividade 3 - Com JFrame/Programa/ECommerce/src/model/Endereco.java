@@ -12,12 +12,13 @@ public class Endereco {
 	private String uf;
 	private int numero;
 	private String complemento;
+	private String bairro;
 	
 	
 	
 	
 	public Endereco(String identificacao, String cep, String rua, int numero, String pais, String uf, String cidade,
-			String complemento) {
+			String complemento, String bairro) {
 		
 		super();
 		this.identificacao = identificacao;
@@ -28,6 +29,15 @@ public class Endereco {
 		this.uf = uf;
 		this.numero = numero;
 		this.complemento = complemento;
+		this.bairro = bairro;
+		
+		
+	}
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 	public String getIdentificacao() {
 		return identificacao;

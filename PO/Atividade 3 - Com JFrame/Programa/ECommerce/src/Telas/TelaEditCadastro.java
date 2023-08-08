@@ -107,6 +107,8 @@ public class TelaEditCadastro extends JFrame {
 				String email = txEmail.getText();
 				
 				String opcao = cliente.editDados(nome, login, senha, email);
+				
+				System.out.println(nome);
 					
 				if (opcao.equals("A")) {
 					JOptionPane.showMessageDialog(null, "Cadastro Atualizado!!!", "Sucesso!!", JOptionPane.DEFAULT_OPTION);
