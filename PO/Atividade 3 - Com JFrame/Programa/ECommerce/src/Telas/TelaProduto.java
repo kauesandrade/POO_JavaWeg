@@ -10,6 +10,8 @@ import model.Produto;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -17,6 +19,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class TelaProduto extends JFrame {
 
@@ -62,7 +65,7 @@ public class TelaProduto extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lbQuantidadeP = new JLabel("Quantidade");
+		JLabel lbQuantidadeP = new JLabel("Quantidade:");
 		lbQuantidadeP.setForeground(new Color(255, 255, 255));
 		lbQuantidadeP.setBackground(new Color(255, 255, 255));
 		lbQuantidadeP.setHorizontalAlignment(SwingConstants.LEFT);
@@ -88,10 +91,10 @@ public class TelaProduto extends JFrame {
 					dispose();
 				}
 				else if (quantidade > produtos.get(selecProduto).getQuantidadeEstoque()) {
-					System.out.println("quantidade Maior q a do estoque///// TEM QUE FAZER TELA");
+					JOptionPane.showMessageDialog(null, "Quantidade escolhida maior que a do estoque atual!!", "ERRO!", JOptionPane.DEFAULT_OPTION);
 				}
 				else if (quantidade > produtos.get(selecProduto).getLimiteDeCompras()){
-					System.out.println("quantidade Maior q o limete de compra///// TEM QUE FAZER TELA");
+					JOptionPane.showMessageDialog(null, "Quantidade escolhida maior que a do limite de compra atual!!", "ERRO!", JOptionPane.DEFAULT_OPTION);
 				}
 			}
 		});
@@ -99,8 +102,9 @@ public class TelaProduto extends JFrame {
 		btComprar.setBounds(275, 225, 122, 23);
 		contentPane.add(btComprar);
 		
-		JLabel lbIconProduto = new JLabel("Imagem Produto");
-		lbIconProduto.setBounds(10, 45, 210, 155);
+		JLabel lbIconProduto = new JLabel("");
+		lbIconProduto.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\POO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\imgProduto.png"));
+		lbIconProduto.setBounds(58, 47, 100, 94);
 		contentPane.add(lbIconProduto);
 		
 		JButton btVoltar = new JButton("Voltar");
@@ -128,32 +132,32 @@ public class TelaProduto extends JFrame {
 		JLabel lbCor = new JLabel("Cor: "+produtos.get(selecProduto).getCor());
 		lbCor.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		lbCor.setForeground(new Color(255, 255, 255));
-		lbCor.setBounds(10, 194, 89, 24);
+		lbCor.setBounds(8, 149, 244, 24);
 		contentPane.add(lbCor);
 		
 		JLabel lbModelo = new JLabel("Modelo: "+produtos.get(selecProduto).getModelo());
 		lbModelo.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		lbModelo.setForeground(new Color(255, 255, 255));
-		lbModelo.setBounds(10, 225, 89, 24);
+		lbModelo.setBounds(10, 196, 244, 24);
 		contentPane.add(lbModelo);
 		
 		JLabel lbCategoria = new JLabel("Categoria: "+produtos.get(selecProduto).getCategoria());
 		lbCategoria.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		lbCategoria.setForeground(new Color(255, 255, 255));
-		lbCategoria.setBounds(109, 224, 89, 24);
+		lbCategoria.setBounds(8, 172, 244, 24);
 		contentPane.add(lbCategoria);
 		
 		JLabel lblQuantidadeEstoque = new JLabel("Quantidade Estoque: "+produtos.get(selecProduto).getQuantidadeEstoque());
 		lblQuantidadeEstoque.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		lblQuantidadeEstoque.setForeground(new Color(255, 255, 255));
-		lblQuantidadeEstoque.setBounds(107, 194, 145, 24);
+		lblQuantidadeEstoque.setBounds(279, 66, 145, 24);
 		contentPane.add(lblQuantidadeEstoque);
 		
 		JLabel lbDescricaoP = new JLabel("Descriçao do Produto: "+produtos.get(selecProduto).getDescricao());
 		lbDescricaoP.setForeground(new Color(255, 255, 255));
 		lbDescricaoP.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		lbDescricaoP.setVerticalAlignment(SwingConstants.TOP);
-		lbDescricaoP.setBounds(275, 45, 149, 109);
+		lbDescricaoP.setBounds(10, 229, 255, 24);
 		contentPane.add(lbDescricaoP);
 	}
 }

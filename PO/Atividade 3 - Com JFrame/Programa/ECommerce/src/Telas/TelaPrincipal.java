@@ -16,7 +16,9 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -53,7 +55,7 @@ public class TelaPrincipal extends JFrame {
 	private static JComboBox<String> cbCategorias = new JComboBox<String>();
 	private static int selecProduto;
 	private String dados;
-	private JTable tbCarrinho;
+
 	
 	public static void main(String[] args) {
 		
@@ -62,6 +64,7 @@ public class TelaPrincipal extends JFrame {
 			public void run() {
 				try {
 					TelaPrincipal frame = new TelaPrincipal();
+					frame.setBounds(100, 100, 450, 300);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -79,7 +82,7 @@ public class TelaPrincipal extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 434, 261);
+		tabbedPane.setBounds(0, 10, 434, 261);
 		getContentPane().add(tabbedPane);
 		
 		
@@ -156,10 +159,6 @@ public class TelaPrincipal extends JFrame {
 				if( produtos.size() > 0) {
 					selecNomeProduto = cbProdutos.getSelectedItem().toString();
 					}
-				
-				else if(produtos.size() == 0) {
-//					JOptionPane.showMessageDialog(null, "Não há Produtos nessa categoria", ("Categoira: "+categoria), JOptionPane.DEFAULT_OPTION);
-				}
 
 				if(selecNomeProduto != "N") {
 					for(int i = 0; i < produtos.size(); i++) {
@@ -199,15 +198,6 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.addTab("Carrinho", null, carrinho, null);
 		carrinho.setLayout(null);
 		
-		JButton btRemoverItens = new JButton("Remover Itens");
-		btRemoverItens.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btRemoverItens.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
-		btRemoverItens.setBounds(60, 199, 155, 23);
-		carrinho.add(btRemoverItens);
-		
 		JButton btFinalizarCompra = new JButton("Finalizar Compra");
 		btFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -228,12 +218,12 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		btFinalizarCompra.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
-		btFinalizarCompra.setBounds(225, 199, 155, 23);
+		btFinalizarCompra.setBounds(120, 198, 155, 23);
 		carrinho.add(btFinalizarCompra);
 		
 		JLabel lbIconCarrinho = new JLabel("");
-		lbIconCarrinho.setIcon(new ImageIcon("C:\\Users\\kaue_s_andrade\\Documents\\GitHub\\PO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\carrinho-de-compras.png"));
-		lbIconCarrinho.setBounds(326, 40, 93, 106);
+		lbIconCarrinho.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\POO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\imgCarrinho.png"));
+		lbIconCarrinho.setBounds(301, 37, 128, 120);
 		carrinho.add(lbIconCarrinho);
 		
 		JTable tbCarrinho = new JTable(new DefaultTableModel(null, new Object[]{"Produto","Preco","Adicionar","Quatidade","Remover"}));
@@ -246,27 +236,18 @@ public class TelaPrincipal extends JFrame {
 				int selectRow = tbCarrinho.getSelectedRow();
 				int selectColumn = tbCarrinho.getSelectedColumn();
 					
-				System.out.println(selectColumn);
-				System.out.println(selectRow);
 				for(int j = 0; j < produtos.size(); j++) {
 				for(int i = 0; i < tbCarrinho.getRowHeight(); i++) {
 					if(selectColumn == 4 && produtos.get(j).getRow() == selectRow) {
 						if(produtos.get(j).getQuantidadeCarrinho() >=2) {
 							produtos.get(j).setQuantidadeCarrinho(produtos.get(j).getQuantidadeCarrinho() - 1);	
+							produtos.get(j).setQuantidadeEstoque(produtos.get(j).getQuantidadeEstoque() + 1);
 						model.setValueAt(produtos.get(j).getQuantidadeCarrinho(), selectRow, 3);
 						break;
 						}else {
 	
 							produtos.get(j).setQuantidadeCarrinho(0);	
 							model.removeRow(selectRow);
-							
-//							TelaConfirmacaoDeRemocao telaConfirmacaoDeRemocao = new TelaConfirmacaoDeRemocao();
-//							String opcao = telaConfirmacaoDeRemocao.opcao();
-//							telaConfirmacaoDeRemocao.setVisible(true);
-//								if(opcao == "R") {
-//									produtos.get(j).setQuatidadeCarrinho(produtos.get(j).getQuatidadeCarrinho() - 1);	
-//									model.removeRow(selectRow);
-//								}
 							break;
 						}
 
@@ -275,6 +256,7 @@ public class TelaPrincipal extends JFrame {
 					else if(selectColumn == 2 && produtos.get(j).getRow() == selectRow) {
 						if(produtos.get(j).getQuantidadeCarrinho() < produtos.get(j).getLimiteDeCompras()) {
 							produtos.get(j).setQuantidadeCarrinho(produtos.get(j).getQuantidadeCarrinho() + 1);	
+							produtos.get(j).setQuantidadeEstoque(produtos.get(j).getQuantidadeEstoque() - 1);
 							model.setValueAt(produtos.get(j).getQuantidadeCarrinho(), selectRow, 3);
 							break;
 						}else {
@@ -299,7 +281,7 @@ public class TelaPrincipal extends JFrame {
 		tbCarrinho.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tbCarrinho.setFillsViewportHeight(true);
 		tbCarrinho.setCellSelectionEnabled(true);
-		tbCarrinho.setBounds(10, 11, 311, 177);
+		tbCarrinho.setBounds(10, 11, 286, 177);
 		carrinho.add(tbCarrinho);
 		tbCarrinho.setDefaultEditor(Object.class, null);
 		
@@ -322,34 +304,6 @@ public class TelaPrincipal extends JFrame {
 		    	}
 		    }
 		});
-	
-		
-
-		
-//		JList listCarrinho = new JList();
-//		listCarrinho.setBounds(10, 11, 301, 175);
-//		carrinho.add(listCarrinho);
-//		
-//		tabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
-//		    public void stateChanged(javax.swing.event.ChangeEvent e) {
-//		    	if(tabbedPane.getSelectedComponent() == carrinho) {
-//		    		
-//		    		DefaultListModel<String> modeloCarrinho = new DefaultListModel<>();
-//		    		
-//		    		for(int i = 0; i < produtos.size(); i++) {
-//		    			if(produtos.get(i).getQuatidadeCarrinho() > 0) {
-//		    			
-//		    				modeloCarrinho.addElement("Produto: "+produtos.get(i).getNome()+"     "+"Preço: "+produtos.get(i).getPreco());
-//		    				modeloCarrinho.addElement("-");
-//		    				
-//		    				listCarrinho.setModel(modeloCarrinho);
-//		    			}
-//		    		}
-//		    		
-//		    	}
-//		    }
-//		});
-//		
 		
 		JPanel perfil = new JPanel();
 		tabbedPane.addTab("Perfil", null, perfil, null);
@@ -378,7 +332,7 @@ public class TelaPrincipal extends JFrame {
 		perfil.add(btnNewButton);
 		
 		JLabel lbIconPerfil = new JLabel("");
-		lbIconPerfil.setIcon(new ImageIcon("C:\\Users\\kaue_s_andrade\\Documents\\GitHub\\PO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\image-removebg-preview (1).png"));
+		lbIconPerfil.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\POO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\imgLogin.png"));
 		lbIconPerfil.setBounds(316, 44, 103, 127);
 		perfil.add(lbIconPerfil);
 		
@@ -407,7 +361,10 @@ public class TelaPrincipal extends JFrame {
 		    		lbCpf.setBounds(10, 98, 207, 23);
 		    		perfil.add(lbCpf);
 		    		
-		    		JLabel lbDataNasc = new JLabel("Data de nascimento: "+clienteLogado.getDataDeNascimento());
+					SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+					String data = formato.format(clienteLogado.getDataDeNascimento());
+		    		
+		    		JLabel lbDataNasc = new JLabel("Data de nascimento: "+data);
 		    		lbDataNasc.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
 		    		lbDataNasc.setBounds(10, 132, 270, 23);
 		    		perfil.add(lbDataNasc);
@@ -431,9 +388,6 @@ public class TelaPrincipal extends JFrame {
 	
 	static int selecProduto() {
 		return selecProduto;
-	}
-
-	private static void addPopup(Component component, final JPopupMenu popup) {
 	}
 
 	public static ArrayList<Produto> getCarrinhoProdutos() {

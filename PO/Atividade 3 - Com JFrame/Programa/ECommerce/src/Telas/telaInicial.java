@@ -106,7 +106,7 @@ public class telaInicial extends JFrame {
 		contentPane.add(btLogin);
 		
 		JLabel lbLogo = new JLabel("KAUE SHOP");
-		lbLogo.setIcon(new ImageIcon("C:\\Users\\kaue_s_andrade\\Downloads\\5903430 (1).png"));
+		lbLogo.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\POO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\imgLoja.png"));
 		lbLogo.setForeground(new Color(255, 255, 255));
 		lbLogo.setBackground(new Color(255, 255, 255));
 		lbLogo.setBounds(137, 31, 165, 56);

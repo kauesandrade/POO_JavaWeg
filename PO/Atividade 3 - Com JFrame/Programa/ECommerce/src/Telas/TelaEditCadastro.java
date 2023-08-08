@@ -16,10 +16,15 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class TelaEditCadastro extends JFrame {
 
@@ -61,18 +66,6 @@ public class TelaEditCadastro extends JFrame {
 		Cliente cliente = TelaLogin.getClienteLogado();
 		
 		
-		MaskFormatter mascaraCpf = new MaskFormatter(""+cliente.getCpf());
-		mascaraCpf.setPlaceholderCharacter('_');
-		MaskFormatter mascaraDataNas = new MaskFormatter(""+cliente.getDataDeNascimento());
-		mascaraDataNas.setPlaceholderCharacter('_');
-		
-		JFormattedTextField ftDataNas = new JFormattedTextField(mascaraDataNas);
-		ftDataNas.setBounds(172, 194, 106, 20);
-		contentPane.add(ftDataNas);
-		
-		JFormattedTextField ftCpf = new JFormattedTextField(mascaraCpf);
-		ftCpf.setBounds(172, 163, 106, 20);
-		contentPane.add(ftCpf);
 		
 		txEmail = new JTextField(cliente.getEmail());
 		txEmail.setColumns(10);
@@ -105,20 +98,31 @@ public class TelaEditCadastro extends JFrame {
 		contentPane.add(btVoltar);
 		
 		JButton btSalvar = new JButton("Salvar");
+		btSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String nome = txNome.getText();
+				String login = txLogin.getText();
+				String senha = String.valueOf(pfSenha.getPassword());
+				String email = txEmail.getText();
+				
+				String opcao = cliente.editDados(nome, login, senha, email);
+					
+				if (opcao.equals("A")) {
+					JOptionPane.showMessageDialog(null, "Cadastro Atualizado!!!", "Sucesso!!", JOptionPane.DEFAULT_OPTION);
+					TelaLogin.setclienteLogado(cliente);
+					dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, opcao+"!!!", "Erro", JOptionPane.DEFAULT_OPTION);
+				}
+				
+				
+			}
+		});
 		btSalvar.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 11));
 		btSalvar.setBackground(Color.WHITE);
-		btSalvar.setBounds(180, 225, 89, 23);
+		btSalvar.setBounds(175, 185, 89, 23);
 		contentPane.add(btSalvar);
-		
-		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento:");
-		lblDataDeNascimento.setForeground(new Color(0, 0, 0));
-		lblDataDeNascimento.setBounds(31, 197, 97, 14);
-		contentPane.add(lblDataDeNascimento);
-		
-		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setForeground(new Color(0, 0, 0));
-		lblCpf.setBounds(111, 166, 46, 14);
-		contentPane.add(lblCpf);
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setForeground(new Color(0, 0, 0));
@@ -147,7 +151,8 @@ public class TelaEditCadastro extends JFrame {
 		lbTitulo.setBounds(142, 0, 170, 28);
 		contentPane.add(lbTitulo);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\POO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\imgLogin.png"));
 		lblNewLabel.setBounds(319, 85, 105, 106);
 		contentPane.add(lblNewLabel);
 	}

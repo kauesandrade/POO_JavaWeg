@@ -139,8 +139,8 @@ public class TelaCadastro extends JFrame {
 		lbDataNas.setBounds(21, 207, 97, 14);
 		contentPane.add(lbDataNas);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\kaue_s_andrade\\Downloads\\748137 (1).png"));
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\POO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\imgCadastro.png"));
 		lblNewLabel.setBounds(309, 95, 105, 106);
 		contentPane.add(lblNewLabel);
 		

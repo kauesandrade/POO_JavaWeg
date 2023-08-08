@@ -87,9 +87,8 @@ public class Cliente {
 
 		else if (getNome() == null || getLogin() == null || getSenha() == null || 
 			getCpf() == null || getDataDeNascimento() == null || getEmail() == null) {
-			return "N";
+			return "Erro no Cadastro";
 		}else {
-			
 			return "A";
 		}
 	}
@@ -97,12 +96,10 @@ public class Cliente {
 	 * Método para retornar e editar os dados do cliente
 	 * 
 	 */
-		public String editDados(String nome, String login, String senha, String cpf, Date data, String email) {
+		public String editDados(String nome, String login, String senha, String email) {
 			setNome(nome);	
 			setLogin(login);
 			setSenha(senha);
-			setCpf(cpf);
-			setDataDeNascimento(data);
 			setEmail(email);
 			
 			if(getNome() == null) {
@@ -115,22 +112,14 @@ public class Cliente {
 				return "Digite uma Senha valida!";
 			}
 			else if(getCpf() == null) {
-				return "Digite uma CPF valida!";
-			}
-			else if(getDataDeNascimento() == null) {
-				return "Digite uma Data de Nascimento valida!";
-			}
-			else if(getCpf() == null) {
 				return "Digite uma Email valida!";
 			}
 
 			else if (getNome() == null || getLogin() == null || getSenha() == null || 
 				getCpf() == null || getDataDeNascimento() == null || getEmail() == null) {
-				return "N";
-			}else {
-				
-				return "A";
+				return "Erro no Cadastro";
 			}
+			return "A";
 		
 		
 	}

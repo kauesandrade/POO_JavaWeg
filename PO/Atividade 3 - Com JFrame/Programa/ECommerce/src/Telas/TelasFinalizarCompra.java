@@ -45,7 +45,7 @@ public class TelasFinalizarCompra extends JFrame {
 	private JRadioButton rdBoleto;
 	private ArrayList<Double> parcelas = new ArrayList();
 	private ArrayList<Produto> carrinhoProdutos = new ArrayList <Produto>();
-	private Double valor = 0.0; // PASSAR VALOR DA COMPRA PELO CARRINHO
+	private Double valor = 0.0;
 	private String formaPagamento;
 	private JLabel lbNomeEndereco;
 	private JTextField txNome;
@@ -256,8 +256,6 @@ public class TelasFinalizarCompra extends JFrame {
 						
 						parcelas.add(valor/(i+1));
 						
-						System.out.println(parcelas.get(i));
-						
 						cbParcela.addItem((i+1)+" X "+parcelas.get(i));
 					}
 					
@@ -303,11 +301,7 @@ public class TelasFinalizarCompra extends JFrame {
 					
 					for (int i = 0; i < 5; i++) {
 						
-						double num= 100/(i+1);
-						DecimalFormat formato = new DecimalFormat("#,##");      
-						num = Double.valueOf(formato.format(num));
-						
-						parcelas.add(num);
+						parcelas.add(valor/(i+1));
 						
 						cbParcela.addItem((i+1)+" X "+parcelas.get(i));
 					}

@@ -94,7 +94,7 @@ public class TelaLogin extends JFrame {
 		JLabel lbSenha = new JLabel("Senha");
 		lbSenha.setForeground(Color.WHITE);
 		lbSenha.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 15));
-		lbSenha.setBounds(113, 147, 46, 20);
+		lbSenha.setBounds(108, 146, 80, 20);
 		contentPane.add(lbSenha);
 		
 		txLogin = new JTextField();
@@ -151,7 +151,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(btVoltar);
 		
 		JLabel lbLogoLogar = new JLabel("");
-		lbLogoLogar.setIcon(new ImageIcon("C:\\Users\\kaue_s_andrade\\Downloads\\image-removebg-preview (1).png"));
+		lbLogoLogar.setIcon(new ImageIcon("C:\\Users\\Aluno\\Desktop\\POO_Java\\PO\\Atividade 3 - Com JFrame\\assets\\imgLogin.png"));
 		lbLogoLogar.setBounds(319, 85, 105, 105);
 		contentPane.add(lbLogoLogar);
 	}
