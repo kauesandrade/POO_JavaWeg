@@ -1,14 +1,30 @@
-
+/**
+ * Classe serviços de Manutenção
+ * 
+ * @author Kauê Schaefer de Andrade
+ *
+ */
 public class ServicoManutencao {
+	
+	/** Propriedade custo da manutenção */
 	private float custo;
+	/** Propriedade	descrição da manutenção */
 	private String descricao;
 	
+	
+	/**
+	 * Método de construtor
+	 */
 	public ServicoManutencao() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	/**
+	 * Método de construtor
+	 * 
+	 * @param custo, descricao
+	 */
 	public ServicoManutencao(float custo, String descricao) {
 		super();
 		setCusto(custo);
