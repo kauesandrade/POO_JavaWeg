@@ -34,6 +34,22 @@ public class ProdutoWEG {
 	}
 	
 	/**
+	 * Método de construtor
+	 */
+	
+	public ProdutoWEG(String codigo, String tipo, float potencia, float tensao, String capacidade, float preco,
+			ServicoManutencao servico) {
+		super();
+		this.codigo = codigo;
+		this.tipo = tipo;
+		this.potencia = potencia;
+		this.tensao = tensao;
+		this.capacidade = capacidade;
+		this.preco = preco;
+		this.servico = servico;
+	}
+
+	/**
 	 * Método para realizar o serviço de manutenção de um produto
 	 */
 	public void realizarManutencao(ServicoManutencao servico) {

@@ -21,6 +21,18 @@ public class MotorEletrico extends ProdutoWEG {
 	}
 	
 	/**
+	 * Método de construtor
+	 */
+	
+	public MotorEletrico(String codigo, String tipo, float potencia, float tensao, String capacidade, float preco,
+			ServicoManutencao servico, String tipoDeEnrolamento, String eficiencia) {
+		super(codigo, tipo, potencia, tensao, capacidade, preco, servico);
+		this.tipoDeEnrolamento = tipoDeEnrolamento;
+		this.eficiencia = eficiencia;
+	}
+
+
+	/**
 	 * Método para retornar o tipo de enrolamento do motor
 	 * 
 	 * @return tipoDeEnrolamento
@@ -28,6 +40,7 @@ public class MotorEletrico extends ProdutoWEG {
 	public String getTipoDeEnrolamento() {
 		return tipoDeEnrolamento;
 	}
+
 	/**
 	 * Procedimento para verificar o tipo de enrolamento do motor
 	 * 

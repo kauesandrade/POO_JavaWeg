@@ -20,6 +20,18 @@ public class Gerador extends ProdutoWEG {
 	}
 	
 	/**
+	 * Método construtor
+	 */
+	
+	public Gerador(String codigo, String tipo, float potencia, float tensao, String capacidade, float preco,
+			ServicoManutencao servico, String tipoDeCombustivel, String autonomia) {
+		super(codigo, tipo, potencia, tensao, capacidade, preco, servico);
+		this.tipoDeCombustivel = tipoDeCombustivel;
+		this.autonomia = autonomia;
+	}
+	
+	
+	/**
 	 * Método para retornar o tipo de combustível do gerador
 	 * 
 	 * @return tipoDeCombustivel
@@ -27,6 +39,7 @@ public class Gerador extends ProdutoWEG {
 	public String getTipoDeCombustivel() {
 		return tipoDeCombustivel;
 	}
+
 	/**
 	 * Procedimento para verificar o tipo de combustível do gerador
 	 * 

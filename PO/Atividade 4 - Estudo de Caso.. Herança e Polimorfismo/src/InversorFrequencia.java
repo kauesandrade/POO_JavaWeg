@@ -21,7 +21,18 @@ public class InversorFrequencia extends ProdutoWEG {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Método construtor 
+	 */
 	
+	public InversorFrequencia(String codigo, String tipo, float potencia, float tensao, String capacidade, float preco,
+			ServicoManutencao servico, String capacidadeDeFrequencia, float numeroDeFases) {
+		super(codigo, tipo, potencia, tensao, capacidade, preco, servico);
+		this.capacidadeDeFrequencia = capacidadeDeFrequencia;
+		this.numeroDeFases = numeroDeFases;
+	}
+
+
 	/**
 	 * Método para retornar a capacidade de frequência do inversor
 	 * 
