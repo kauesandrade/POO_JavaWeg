@@ -52,8 +52,8 @@ public class WEG {
 			return "Não há produtos adicionados!!";
 		} else {
 			for (int i = 0; i < listProdutosDisponiveis.size(); i++) {
-				produtos = produtos + ((i + 1) + " - Tipo/nome: " + listProdutosDisponiveis.get(i).getTipo()
-						+ " Código: " + listProdutosDisponiveis.get(i).getCodigo() + "\n");
+				produtos = produtos + "\n" + ((i + 1) + " - Tipo/nome: " + listProdutosDisponiveis.get(i).getTipo()
+						+ "\n    Código: " + listProdutosDisponiveis.get(i).getCodigo() + "\n");
 			}
 		}
 
@@ -75,8 +75,8 @@ public class WEG {
 		} else {
 			for (int i = 0; i < listProdutosDisponiveis.size(); i++) {
 				if (listProdutosDisponiveis.get(i).getServico() != null)
-					servicos = servicos + ((i + 1) + " - " + listProdutosDisponiveis.get(i).getTipo() + " custo: "
-							+ listProdutosDisponiveis.get(i).getServico().getCusto() + " descrição: "
+					servicos = servicos + "\n" +((i + 1) + " - " + listProdutosDisponiveis.get(i).getTipo() + "\n    Custo: "
+							+ listProdutosDisponiveis.get(i).getServico().getCusto() + "\n    Descrição: "
 							+ listProdutosDisponiveis.get(i).getServico().getDescricao() + "\n");
 			}
 		}

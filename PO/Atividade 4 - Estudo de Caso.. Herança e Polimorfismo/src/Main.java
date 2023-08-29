@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -64,6 +63,7 @@ public class Main {
 	public static void addProduto() {
 
 		int opcao = 0;
+		System.out.println("\n!==========================!");
 		System.out.println("O que deseja adicionar?" + "\n 1 - Motor Eletrico" + "\n 2 - Inversor de Frequência"
 				+ "\n 3 - Gerador" + "\n 0 - Voltar");
 
@@ -82,21 +82,21 @@ public class Main {
 			break;
 
 		case 1:
-			System.out.println("Digite o código do motor eletrico: ");
+			System.out.println("\nDigite o código do motor eletrico: ");
 			codigo = sc.next();
-			System.out.println("Digite o tipo / nome do motor eletrico: ");
+			System.out.println("\nDigite o tipo / nome do motor eletrico: ");
 			tipo = sc.next();
-			System.out.println("Digite a potência do motor eletrico: ");
+			System.out.println("\nDigite a potência do motor eletrico: ");
 			potencia = sc.nextFloat();
-			System.out.println("Digite a tensão do motor eletrico: ");
+			System.out.println("\nDigite a tensão do motor eletrico: ");
 			tensao = sc.nextFloat();
-			System.out.println("Digite a capacidade do motor eletrico: ");
+			System.out.println("\nDigite a capacidade do motor eletrico: ");
 			capacidade = sc.next();
-			System.out.println("Digite o preço do motor eletrico: ");
+			System.out.println("\nDigite o preço do motor eletrico: ");
 			preco = sc.nextFloat();
-			System.out.println("Digite o tipo de enrolamento do motor eletrico: ");
+			System.out.println("\nDigite o tipo de enrolamento do motor eletrico: ");
 			String enrolamento = sc.next();
-			System.out.println("Digite a eficiencia do motor eletrico: ");
+			System.out.println("\nDigite a eficiencia do motor eletrico: ");
 			String eficiencia = sc.next();
 
 			MotorEletrico ME = new MotorEletrico(codigo, tipo, potencia, tensao, capacidade, preco, null, enrolamento,
@@ -108,21 +108,21 @@ public class Main {
 			break;
 
 		case 2:
-			System.out.println("Digite o código do inversor de frequência: ");
+			System.out.println("\nDigite o código do inversor de frequência: ");
 			codigo = sc.next();
-			System.out.println("Digite o tipo / nome do inversor de frequência: ");
+			System.out.println("\nDigite o tipo / nome do inversor de frequência: ");
 			tipo = sc.next();
-			System.out.println("Digite a potência do inversor de frequência: ");
+			System.out.println("\nDigite a potência do inversor de frequência: ");
 			potencia = sc.nextFloat();
-			System.out.println("Digite a tensão do inversor de frequência: ");
+			System.out.println("\nDigite a tensão do inversor de frequência: ");
 			tensao = sc.nextFloat();
-			System.out.println("Digite a capacidade do inversor de frequência: ");
+			System.out.println("\nDigite a capacidade do inversor de frequência: ");
 			capacidade = sc.next();
-			System.out.println("Digite o preço do inversor de frequência: ");
+			System.out.println("\nDigite o preço do inversor de frequência: ");
 			preco = sc.nextFloat();
-			System.out.println("Digite a capacidade de frequência do inversor de frequência: ");
+			System.out.println("\nDigite a capacidade de frequência do inversor de frequência: ");
 			String capacidadeFrequencia = sc.next();
-			System.out.println("Digite o número de fases do inversor de frequência: ");
+			System.out.println("\nDigite o número de fases do inversor de frequência: ");
 			float numFases = sc.nextFloat();
 
 			InversorFrequencia FE = new InversorFrequencia(codigo, tipo, potencia, tensao, capacidade, preco, null,
@@ -134,21 +134,21 @@ public class Main {
 			break;
 
 		case 3:
-			System.out.println("Digite o código do gerador: ");
+			System.out.println("\nDigite o código do gerador: ");
 			codigo = sc.next();
-			System.out.println("Digite o tipo / nome do gerador: ");
+			System.out.println("\nDigite o tipo / nome do gerador: ");
 			tipo = sc.next();
-			System.out.println("Digite a potência do gerador: ");
+			System.out.println("\nDigite a potência do gerador: ");
 			potencia = sc.nextFloat();
-			System.out.println("Digite a tensão do gerador: ");
+			System.out.println("\nDigite a tensão do gerador: ");
 			tensao = sc.nextFloat();
-			System.out.println("Digite a capacidade do gerador: ");
+			System.out.println("\nDigite a capacidade do gerador: ");
 			capacidade = sc.next();
-			System.out.println("Digite o preço do gerador: ");
+			System.out.println("\nDigite o preço do gerador: ");
 			preco = sc.nextFloat();
-			System.out.println("Digite o tipo de combustível do gerador: ");
+			System.out.println("\nDigite o tipo de combustível do gerador: ");
 			String tipoDeCombustivel = sc.next();
-			System.out.println("Digite a autonomia do gerador: ");
+			System.out.println("\nDigite a autonomia do gerador: ");
 			String autonomia = sc.next();
 
 			Gerador GE = new Gerador(codigo, tipo, potencia, tensao, capacidade, preco, null, tipoDeCombustivel,
@@ -169,6 +169,7 @@ public class Main {
 	 */
 
 	public static void rmvProduto() {
+		System.out.println("\n!===========================!");
 		System.out.println("Qual produto deseja remover: ");
 		System.out.println(weg.listarProdutosDisponiveis());
 		System.out.println("0 - Voltar");
@@ -181,7 +182,7 @@ public class Main {
 			comeco();
 		} else if (opcao > 0 && opcao <= weg.getArrListaProdutosDisponiveis().size()) {
 
-			System.out.println("Você tem certeza?");
+			System.out.println("\nVocê tem certeza?");
 			System.out.println("1 - Sim / 2 - Não");
 
 			int certeza = sc.nextInt();
@@ -204,30 +205,36 @@ public class Main {
 	 */
 
 	public static void addManutencao() {
-
+		
+		System.out.println("\n!========================================!");
 		System.out.println("Qual produto deseja adicionar Manuteção: ");
 		System.out.println(weg.listarProdutosDisponiveis());
-		System.out.println("0 - Voltar");
 
-		int opcao = 0;
+		if (weg.getArrListaProdutosDisponiveis().size()!=0) {
+			System.out.println("0 - Voltar");
+			int opcao = 0;
 
-		opcao = sc.nextInt();
+			opcao = sc.nextInt();
 
-		if (opcao == 0) {
-			comeco();
-		} else {
-			System.out.println("Digite o custo da manutenção: ");
-			float custo = sc.nextFloat();
-			System.out.println("Digite a descrição da manutenção: ");
-			String manutencao = sc.next();
+			if (opcao == 0) {
+				comeco();
+			} else {
+				System.out.println("\nDigite o custo da manutenção: ");
+				float custo = sc.nextFloat();
+				System.out.println("\nDigite a descrição da manutenção: ");
+				String manutencao = sc.next();
 
-			ServicoManutencao SM = new ServicoManutencao(custo, manutencao);
+				ServicoManutencao SM = new ServicoManutencao(custo, manutencao);
 
-			weg.addServicoManutencao(SM, opcao);
+				weg.addServicoManutencao(SM, opcao);
 
-			System.out.println("Serviço de manutenção adicionado!!!");
+				System.out.println("\nServiço de manutenção adicionado com sucesso!!!\n");
+				comeco();
+			}
+		}else {
 			comeco();
 		}
+		
 	}
 	
 	/**
@@ -236,8 +243,9 @@ public class Main {
 	 */
 
 	public static void verServicosManutencao() {
+		System.out.println("\n!====================================!");
 		System.out.println("Os serviços de manutenção disponíveis: ");
-		System.out.println("\n" + weg.listarServicosManutencao() + "\n");
+		System.out.println(weg.listarServicosManutencao() + "\n");
 		comeco();
 	}
 	
@@ -247,6 +255,8 @@ public class Main {
 	 */
 
 	public static void verProdutos() {
+		
+		System.out.println("\n!======================!");
 		System.out.println("Aqui estão os produtos: ");
 		System.out.println(weg.listarProdutosDisponiveis() + "\n");
 		comeco();
