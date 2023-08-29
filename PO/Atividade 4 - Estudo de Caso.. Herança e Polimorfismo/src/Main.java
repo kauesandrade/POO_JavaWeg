@@ -29,7 +29,7 @@ public class Main {
 		System.out.println("!===========Bem Vindo a WEG!!===========!");
 		System.out.println("O que deseja fazer? " + "\n 1 - Adicionar um novo produto" + "\n 2 - Remover produto"
 				+ "\n 3 - Ver Produtos" + "\n 4 - Adicionar serviço de manutenção" + "\n 5 - Ver serviços de manutenção"
-				+ "\n 0 - Sair");
+				+ "\n 0 - Sair" );
 
 		opcao = sc.nextInt();
 
