@@ -2,80 +2,86 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-	
+
 	private static Scanner sc = new Scanner(System.in);
 	private static WEG weg = new WEG();
-	
+
+	/**
+	 * Método principal que inicia a interação com o usuário.
+	 *
+	 * @param args Os argumentos de linha de comando.
+	 */
+
 	public static void main(String[] args) {
-		
+
 		comeco();
-		
-		
-		
+
+	}
+
+	/**
+	 * Método que fará a interação inicial com o usuário e iniciará os outros métodos
+	 * 
+	 */
+	
+	public static void comeco() {
+
+		int opcao = 0;
+
+		System.out.println("!===========Bem Vindo a WEG!!===========!");
+		System.out.println("O que deseja fazer? " + "\n 1 - Adicionar um novo produto" + "\n 2 - Remover produto"
+				+ "\n 3 - Ver Produtos" + "\n 4 - Adicionar serviço de manutenção" + "\n 5 - Ver serviços de manutenção"
+				+ "\n 0 - Sair");
+
+		opcao = sc.nextInt();
+
+		switch (opcao) {
+		case 0:
+			break;
+		case 1:
+			addProduto();
+			break;
+		case 2:
+			rmvProduto();
+			break;
+		case 3:
+			verProdutos();
+			break;
+		case 4:
+			addManutencao();
+			break;
+		case 5:
+			verServicosManutencao();
+			break;
+		}
 
 	}
 	
-	public static void comeco() {
-		
+	/**
+	 * Método para adicionar um novo produto
+	 * 
+	 */
+
+	public static void addProduto() {
+
 		int opcao = 0;
-		
-		System.out.println("!===========Bem Vindo a WEG!!===========!");
-		System.out.println("O que deseja fazer? "
-							+ "\n 1 - Adicionar um novo produto"
-							+ "\n 2 - Remover produto"
-							+ "\n 3 - Editar produto"
-							+ "\n 4 - Realizar manutenção"
-							+ "\n 5 - Ver Produtos"
-							+ "\n 0 - Sair");
-		
+		System.out.println("O que deseja adicionar?" + "\n 1 - Motor Eletrico" + "\n 2 - Inversor de Frequência"
+				+ "\n 3 - Gerador" + "\n 0 - Voltar");
+
 		opcao = sc.nextInt();
-		
-		switch (opcao){
-		case 0 :
-			break;
-		case 1 :
-			addProduto();
-			break;
-		case 2 :
-			rmvProduto();
-			break;
-		case 3 :
-			edtProduto();
-			break;
-		case 4 :
-			realizarManutencao();
-			break;
-		case 5 :
-			verProdutos();
-			break;
-		}
-		
-	}
-	
-	public static void addProduto(){
-		
-		int opcao = 0;
-		System.out.println("O que deseja adicionar?"
-				+"\n 1 - Motor Eletrico"
-				+"\n 2 - Inversor de Frequência"
-				+"\n 3 - Gerador"
-				+"\n 0 - Voltar");
-		
-		opcao = sc.nextInt();
-		
+
 		String codigo = "";
 		String tipo = "";
 		float potencia = 0;
 		float tensao = 0;
 		String capacidade = "";
 		float preco = 0;
-		
-		switch(opcao) {
-		case 0 :
+
+		switch (opcao) {
+		case 0:
 			comeco();
 			break;
-		
-		case 1 :
+
+		case 1:
 			System.out.println("Digite o código do motor eletrico: ");
 			codigo = sc.next();
 			System.out.println("Digite o tipo / nome do motor eletrico: ");
@@ -92,15 +98,16 @@ public class Main {
 			String enrolamento = sc.next();
 			System.out.println("Digite a eficiencia do motor eletrico: ");
 			String eficiencia = sc.next();
-			
-			MotorEletrico ME = new MotorEletrico(codigo, tipo, potencia, tensao, capacidade, preco, null, enrolamento, eficiencia);
-			
+
+			MotorEletrico ME = new MotorEletrico(codigo, tipo, potencia, tensao, capacidade, preco, null, enrolamento,
+					eficiencia);
+
 			weg.addProdutoDisponivel(ME);
 			System.out.println("\n!!! Produto Adicionar com sucesso !!!\n");
 			comeco();
 			break;
-			
-		case 2 :
+
+		case 2:
 			System.out.println("Digite o código do inversor de frequência: ");
 			codigo = sc.next();
 			System.out.println("Digite o tipo / nome do inversor de frequência: ");
@@ -117,15 +124,16 @@ public class Main {
 			String capacidadeFrequencia = sc.next();
 			System.out.println("Digite o número de fases do inversor de frequência: ");
 			float numFases = sc.nextFloat();
-			
-			InversorFrequencia FE = new InversorFrequencia(codigo, tipo, potencia, tensao, capacidade, preco, null, capacidadeFrequencia, numFases);
-			
+
+			InversorFrequencia FE = new InversorFrequencia(codigo, tipo, potencia, tensao, capacidade, preco, null,
+					capacidadeFrequencia, numFases);
+
 			weg.addProdutoDisponivel(FE);
 			System.out.println("\n!!! Produto Adicionar com sucesso !!!\n");
 			comeco();
 			break;
-			
-		case 3 : 
+
+		case 3:
 			System.out.println("Digite o código do gerador: ");
 			codigo = sc.next();
 			System.out.println("Digite o tipo / nome do gerador: ");
@@ -142,58 +150,105 @@ public class Main {
 			String tipoDeCombustivel = sc.next();
 			System.out.println("Digite a autonomia do gerador: ");
 			String autonomia = sc.next();
-			
-			Gerador GE = new Gerador(codigo, tipo, potencia, tensao, capacidade, preco, null, tipoDeCombustivel, autonomia);
-			
+
+			Gerador GE = new Gerador(codigo, tipo, potencia, tensao, capacidade, preco, null, tipoDeCombustivel,
+					autonomia);
+
 			weg.addProdutoDisponivel(GE);
-			
+
 			System.out.println("\n!!! Produto Adicionar com sucesso !!!\n");
 			comeco();
 			break;
 		}
-		
-		
-		
-		
-		
+
 	}
+	
+	/**
+	 * Método que removerá um produto já adicionado
+	 * 
+	 */
+
 	public static void rmvProduto() {
 		System.out.println("Qual produto deseja remover: ");
 		System.out.println(weg.listarProdutosDisponiveis());
 		System.out.println("0 - Voltar");
-		
+
 		int opcao = 0;
-		
+
 		opcao = sc.nextInt();
-		
-		if(opcao == 0) {
+
+		if (opcao == 0) {
 			comeco();
-		}else if (opcao > 0 && opcao <= weg.ArrListaProdutosDisponiveis().size()){
-			
+		} else if (opcao > 0 && opcao <= weg.getArrListaProdutosDisponiveis().size()) {
+
 			System.out.println("Você tem certeza?");
 			System.out.println("1 - Sim / 2 - Não");
-			
+
 			int certeza = sc.nextInt();
-			
-			if(certeza == 1) {
+
+			if (certeza == 1) {
 				weg.rmvProduto(opcao);
 				System.out.println("\n!!! Produto Removido com Sucesso!!!\n");
-			}else {
+				comeco();
+			} else {
 				rmvProduto();
 			}
-			
+
 		}
-		
+
 	}
-	public static void edtProduto() {
-		
+	
+	/**
+	 * Método que adicionara um serviço de manutenção ao produto
+	 * 
+	 */
+
+	public static void addManutencao() {
+
+		System.out.println("Qual produto deseja adicionar Manuteção: ");
+		System.out.println(weg.listarProdutosDisponiveis());
+		System.out.println("0 - Voltar");
+
+		int opcao = 0;
+
+		opcao = sc.nextInt();
+
+		if (opcao == 0) {
+			comeco();
+		} else {
+			System.out.println("Digite o custo da manutenção: ");
+			float custo = sc.nextFloat();
+			System.out.println("Digite a descrição da manutenção: ");
+			String manutencao = sc.next();
+
+			ServicoManutencao SM = new ServicoManutencao(custo, manutencao);
+
+			weg.addServicoManutencao(SM, opcao);
+
+			System.out.println("Serviço de manutenção adicionado!!!");
+			comeco();
+		}
 	}
-	public static void realizarManutencao() {
-		
+	
+	/**
+	 * Método para ver os serviços de manutenção existentes
+	 * 
+	 */
+
+	public static void verServicosManutencao() {
+		System.out.println("Os serviços de manutenção disponíveis: ");
+		System.out.println("\n" + weg.listarServicosManutencao() + "\n");
+		comeco();
 	}
+	
+	/**
+	 * Método para ver os produtos existentes
+	 * 
+	 */
+
 	public static void verProdutos() {
 		System.out.println("Aqui estão os produtos: ");
-		System.out.println(weg.listarProdutosDisponiveis()+"\n");
+		System.out.println(weg.listarProdutosDisponiveis() + "\n");
 		comeco();
 	}
 

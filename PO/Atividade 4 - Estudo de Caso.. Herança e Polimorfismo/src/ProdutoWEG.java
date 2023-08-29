@@ -1,13 +1,13 @@
 
 /**
- * Superclasse dos produtos da WEG 
+ * Superclasse dos produtos da WEG
  * 
  * @author Kauê Schaefer de Andrade
  *
  */
 
 public class ProdutoWEG {
-	
+
 	/** Propriedade código do produto */
 	private String codigo;
 	/** Propriedade tipo do produto */
@@ -22,21 +22,20 @@ public class ProdutoWEG {
 	private float preco;
 	/** Propriedade Serviço de Manutenção */
 	private ServicoManutencao servico;
-	
-	
+
 	/**
 	 * Método de construtor
 	 */
-	
+
 	public ProdutoWEG() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * Método de construtor
 	 */
-	
+
 	public ProdutoWEG(String codigo, String tipo, float potencia, float tensao, String capacidade, float preco,
 			ServicoManutencao servico) {
 		super();
@@ -55,8 +54,7 @@ public class ProdutoWEG {
 	public void realizarManutencao(ServicoManutencao servico) {
 		this.servico = servico;
 	};
-	
-	
+
 	/**
 	 * Método para retornar serviço de Manutenção
 	 * 
@@ -65,6 +63,7 @@ public class ProdutoWEG {
 	public ServicoManutencao getServico() {
 		return servico;
 	}
+
 	/**
 	 * Procedimento para verificar o serviço de manutenção
 	 * 
@@ -73,8 +72,7 @@ public class ProdutoWEG {
 	public void setServico(ServicoManutencao servico) {
 		this.servico = servico;
 	}
-	
-	
+
 	/**
 	 * Método para retornar o código do produto
 	 * 
@@ -83,6 +81,7 @@ public class ProdutoWEG {
 	public String getCodigo() {
 		return codigo;
 	}
+
 	/**
 	 * Procedimento para verificar o código do produto
 	 * 
@@ -91,8 +90,7 @@ public class ProdutoWEG {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	
-	
+
 	/**
 	 * Método para retornar o tipo do produto
 	 * 
@@ -101,6 +99,7 @@ public class ProdutoWEG {
 	public String getTipo() {
 		return tipo;
 	}
+
 	/**
 	 * Procedimento para verificar o tipo do produto
 	 * 
@@ -109,8 +108,7 @@ public class ProdutoWEG {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
-	
+
 	/**
 	 * Método para retornar a potência do produto
 	 * 
@@ -119,6 +117,7 @@ public class ProdutoWEG {
 	public float getPotencia() {
 		return potencia;
 	}
+
 	/**
 	 * Procedimento para verificar a potência do produto
 	 * 
@@ -127,8 +126,7 @@ public class ProdutoWEG {
 	public void setPotencia(float potencia) {
 		this.potencia = potencia;
 	}
-	
-	
+
 	/**
 	 * Método para retornar a tensão do produto
 	 * 
@@ -137,6 +135,7 @@ public class ProdutoWEG {
 	public float getTensao() {
 		return tensao;
 	}
+
 	/**
 	 * Procedimento para verificar a tensão do produto
 	 *
@@ -145,8 +144,7 @@ public class ProdutoWEG {
 	public void setTensao(float tensao) {
 		this.tensao = tensao;
 	}
-	
-	
+
 	/**
 	 * Método para retornar a capacidade do produto
 	 * 
@@ -155,6 +153,7 @@ public class ProdutoWEG {
 	public String getCapacidade() {
 		return capacidade;
 	}
+
 	/**
 	 * Procedimento para verificar a capacidade do produto
 	 * 
@@ -163,8 +162,7 @@ public class ProdutoWEG {
 	public void setCapacidade(String capacidade) {
 		this.capacidade = capacidade;
 	}
-	
-	
+
 	/**
 	 * Método para retornar o preço do produto
 	 * 
@@ -173,6 +171,7 @@ public class ProdutoWEG {
 	public float getPreco() {
 		return preco;
 	}
+
 	/**
 	 * Procedimento para verificar o preço do produto
 	 * 
@@ -181,6 +180,9 @@ public class ProdutoWEG {
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}
-	
-	
+
+	public ServicoManutencao realizarManutenção() {
+		return this.servico;
+	}
+
 }
