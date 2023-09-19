@@ -94,22 +94,22 @@ public class Nave {
 	
 	public void moverNave() {
 		if(postX < 1536 - nave.getWidth()) {
-			if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+			if(Gdx.input.isKeyPressed(Input.Keys.D)) {
 				this.postX += velocidade;
 			}
 		}
 		if(postX > 0) {
-			if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+			if(Gdx.input.isKeyPressed(Input.Keys.A)) {
 				this.postX -= velocidade;
 			}
 		}
 		if(postY < 864 - nave.getHeight()) {
-			if(Gdx.input.isKeyPressed(Input.Keys.A)){
+			if(Gdx.input.isKeyPressed(Input.Keys.W)){
 				this.postY += velocidade;
 			}
 		}
 		if(postY > 0) {
-			if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+			if(Gdx.input.isKeyPressed(Input.Keys.S)) {
 				this.postY -= velocidade;
 			}
 		}

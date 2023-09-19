@@ -33,7 +33,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		for(Rectangle m : meteoro.getMeteoros()) {
 			batch.draw(meteoro.getImgMeteoro(), m.x, m.y);
 		}
-		meteoro.spawnMeteoros();
+		meteoro.moverMeteoros();
+		meteoro.setNave(nave);
 		nave.moverNave();
 		nave.atirar();
 		batch.end();
@@ -45,5 +46,4 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.dispose();
 		img.dispose();
 	}
-	
 }
