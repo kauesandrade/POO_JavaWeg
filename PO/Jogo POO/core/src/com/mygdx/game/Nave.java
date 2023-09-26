@@ -19,11 +19,18 @@ public class Nave {
 	private Texture imgLazerVermelho = new Texture("lazerVermelho.png");
 	private Sprite lazerVermelho = new Sprite(imgLazerVermelho);
 	
-	boolean ataque = false;
+	private boolean ataque = false;
 	private float tiroX = postX;
 	private float tiroY = postY;
 	
 	
+	
+	public boolean isAtaque() {
+		return ataque;
+	}
+	public void setAtaque(boolean ataque1) {
+		this.ataque = ataque1;
+	}
 	
 	public float getTiroX() {
 		return tiroX;
@@ -69,6 +76,9 @@ public class Nave {
 
 	public int getEscudos() {
 		return escudos;
+	}
+	public void setEscudos(int escudos) {
+			this.escudos = escudos;
 	}
 
 	public float getVelocidade() {
@@ -117,12 +127,11 @@ public class Nave {
 	}
 	
 	public void atirar() {
-
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && !ataque) {
 			ataque = true;
 			tiroY = postY;
 		}
-		
 		if(ataque) {
 			if(tiroX < 1536) {
 				tiroX += 5;
@@ -137,6 +146,12 @@ public class Nave {
 		}
 	}
 	
-	
+	public void perderEscudo() {
+		if(this.escudos > 0) {
+			this.escudos--;
+		}else if (this.escudos <= 0){
+			//System.out.println("O jogo acabou");
+		}
+	}
 	
 }

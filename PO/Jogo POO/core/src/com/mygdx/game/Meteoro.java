@@ -17,6 +17,8 @@ public class Meteoro {
 	private long ultimoNanoTime = 0;
 	private Nave nave =  new Nave();
 	
+	private int pontos = 0;
+	
 	public void setNave(Nave nave) {
 		this.nave = nave;
 	}
@@ -40,17 +42,26 @@ public class Meteoro {
 				iter.remove();
 			}
 			if(colicao(meteoro.x, meteoro.y, meteoro.height, meteoro.width, nave.getTiroX(), nave.getTiroY(), nave.getLazerVermelho().getHeight() , nave.getImgLazerVermelho().getWidth())) {
+				nave.setAtaque(false);
+				pontos += 100;
+				iter.remove();
+			}else if(colicao(meteoro.x, meteoro.y, meteoro.height, meteoro.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
+				nave.perderEscudo();
 				iter.remove();
 			}
 		}
 	}
 	
+
+
 	public boolean colicao(float x1, float y1, float h1, float w1, float x2, float y2, float h2, float w2) {
 		if(x1 + w1 > x2 && x1 < x2 + w2 && y1 + h1 > y2 && y1 < y2 + h2) {
 			return true;
 		}
 		return false;
 	}
+	
+	
 
 	public Array<Rectangle> getMeteoros() {
 		return meteoros;
@@ -64,7 +75,13 @@ public class Meteoro {
 		this.imgMeteoro = imgMeteoro;
 	}
 
-		
+	public int getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(int pontos) {
+		this.pontos = pontos;
+	}
 	
 	
 }
