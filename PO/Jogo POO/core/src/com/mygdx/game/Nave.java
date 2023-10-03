@@ -150,7 +150,7 @@ public class Nave {
 		if(this.escudos > 0) {
 			this.escudos--;
 		}else if (this.escudos <= 0){
-			//System.out.println("O jogo acabou");
+			System.out.println("O jogo acabou");
 		}
 	}
 	

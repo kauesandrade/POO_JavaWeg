@@ -12,12 +12,10 @@ import java.util.Iterator ;
 
 public class Meteoro {
 	
-	Array<Rectangle> meteoros = new Array<Rectangle>();
+	private Array<Rectangle> meteoros = new Array<Rectangle>();
 	private Texture imgMeteoro = new Texture("meteoro.png");
 	private long ultimoNanoTime = 0;
 	private Nave nave =  new Nave();
-	
-	private int pontos = 0;
 	
 	public void setNave(Nave nave) {
 		this.nave = nave;
@@ -41,9 +39,9 @@ public class Meteoro {
 			if(meteoro.x + meteoro.getWidth() < 0) {
 				iter.remove();
 			}
+			
 			if(colicao(meteoro.x, meteoro.y, meteoro.height, meteoro.width, nave.getTiroX(), nave.getTiroY(), nave.getLazerVermelho().getHeight() , nave.getImgLazerVermelho().getWidth())) {
 				nave.setAtaque(false);
-				pontos += 100;
 				iter.remove();
 			}else if(colicao(meteoro.x, meteoro.y, meteoro.height, meteoro.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
 				nave.perderEscudo();
@@ -73,14 +71,6 @@ public class Meteoro {
 
 	public void setImgMeteoro(Texture imgMeteoro) {
 		this.imgMeteoro = imgMeteoro;
-	}
-
-	public int getPontos() {
-		return pontos;
-	}
-
-	public void setPontos(int pontos) {
-		this.pontos = pontos;
 	}
 	
 	

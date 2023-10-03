@@ -16,6 +16,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Nave nave;
 	Meteoro meteoro;
+//	Alien alien;
+//	SpawnAliensClass spAliens;
 	Texture img;
 	
 	private FreeTypeFontGenerator gerador;
@@ -37,6 +39,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("space.png");
 		meteoro = new Meteoro();
+//		alien = new Alien();
+//		spAliens = new SpawnAliensClass();
 	}
 
 	@Override
@@ -46,12 +50,21 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.draw(img, 0, 0);
 		batch.draw(nave.getLazerVermelho(), nave.getTiroX() , nave.getTiroY());
 		batch.draw(nave.getNave(), nave.getPostX() , nave.getPostY());
+		
 		for(Rectangle m : meteoro.getMeteoros()) {
 			batch.draw(meteoro.getImgMeteoro(), m.x, m.y);
 		}
-		bitMap.draw(batch, "Pontuacao: " + meteoro.getPontos(), 20, Gdx.graphics.getHeight() - 20);
+//		for(Rectangle a : alien.getAlien()) {
+//			batch.draw(meteoro.getImgMeteoro(), a.x, a.y);
+//		}
+//		
+//		alien.spawn();
+		
+//		bitMap.draw(batch, "Pontuacao: " + spAliens.getPontos(), 20, Gdx.graphics.getHeight() - 20);
 		meteoro.moverMeteoros();
 		meteoro.setNave(nave);
+//		spAliens.setNave(nave);
+//		spAliens.spawn();
 		nave.moverNave();
 		nave.atirar();
 		batch.end();
