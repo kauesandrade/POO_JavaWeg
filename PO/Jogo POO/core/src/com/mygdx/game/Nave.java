@@ -92,8 +92,9 @@ public class Nave {
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			if(arrTiros.size < 5) {
-				switch (habilidade) {
-					
+				switch (tipoTiro) {
+				case "Bomba":
+					arrTiros.add(new Atirar());
 				}
 			arrTiros.add(new Atirar(postX, postY));
 			}
