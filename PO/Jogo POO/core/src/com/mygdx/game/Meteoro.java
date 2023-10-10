@@ -16,6 +16,7 @@ public class Meteoro {
 	private Texture imgMeteoro = new Texture("meteoro.png");
 	private long ultimoNanoTime = 0;
 	private Nave nave =  new Nave();
+//	private Colisao cs = new Colisao()
 	
 	public void setNave(Nave nave) {
 		this.nave = nave;
@@ -39,14 +40,16 @@ public class Meteoro {
 			if(meteoro.x + meteoro.getWidth() < 0) {
 				iter.remove();
 			}
+		
+		
 			
-			if(colicao(meteoro.x, meteoro.y, meteoro.height, meteoro.width, nave.getTiroX(), nave.getTiroY(), nave.getLazerVermelho().getHeight() , nave.getImgLazerVermelho().getWidth())) {
-				nave.setAtaque(false);
-				iter.remove();
-			}else if(colicao(meteoro.x, meteoro.y, meteoro.height, meteoro.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
-				nave.perderEscudo();
-				iter.remove();
-			}
+			
+//			if(colicao(meteoro.x, meteoro.y, meteoro.height, meteoro.width, nave.getTiroX(), nave.getTiroY(), nave.getLazerVermelho().getHeight() , nave.getImgLazerVermelho().getWidth())) {
+//				iter.remove();
+//			}else if(colicao(meteoro.x, meteoro.y, meteoro.height, meteoro.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
+//				nave.perderEscudo();
+//				iter.remove();
+//			}
 		}
 	}
 	

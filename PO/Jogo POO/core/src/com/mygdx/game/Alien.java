@@ -12,9 +12,15 @@ import com.badlogic.gdx.utils.Array;
 
 public class Alien {
 
-	private Array<Rectangle> aliens = new Array<Rectangle>();
 	private Texture imgAlien = new Texture("meteoro.png");
+	private String tipo;
+	private int escudo;
+	private int postX;
+	private int postY;
 	
+	public void atirar() {
+		
+	}
 	
 	
 }

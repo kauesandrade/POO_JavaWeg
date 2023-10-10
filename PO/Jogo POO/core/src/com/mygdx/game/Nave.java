@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 
@@ -14,51 +16,10 @@ public class Nave {
 	private int escudos = 3;
 	private float velocidade = 10;
 	private float postX = 100;
-	private float postY = 100;
+	private float postY = 100;	
 	
-	private Texture imgLazerVermelho = new Texture("lazerVermelho.png");
-	private Sprite lazerVermelho = new Sprite(imgLazerVermelho);
-	
-	private boolean ataque = false;
-	private float tiroX = postX;
-	private float tiroY = postY;
-	
-	
-	
-	public boolean isAtaque() {
-		return ataque;
-	}
-	public void setAtaque(boolean ataque1) {
-		this.ataque = ataque1;
-	}
-	
-	public float getTiroX() {
-		return tiroX;
-	}
-	public void setTiroX(float tiroX) {
-		this.tiroX = tiroX;
-	}
-	
-	public float getTiroY() {
-		return tiroY;
-	}
-	public void setTiroY(float tiroY) {
-		this.tiroY = tiroY;
-	}
-	
-	public Texture getImgLazerVermelho() {
-		return imgLazerVermelho;
-	}
-	public void setImgLazerVermelho(Texture imgLazerVermelho) {
-		this.imgLazerVermelho = imgLazerVermelho;
-	}
-	
-	public Sprite getLazerVermelho() {
-		return lazerVermelho;
-	}
-	public void setLazerVermelho(Sprite lazerVermelho) {
-		this.lazerVermelho = lazerVermelho;
-	}
+	private Array<Atirar> arrTiros = new Array<>();
+	private String tipoTiro = "" ;
 	
 	public Texture getImgNave() {
 		return imgNave;
@@ -126,24 +87,36 @@ public class Nave {
 	
 	}
 	
+	
 	public void atirar() {
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && !ataque) {
-			ataque = true;
-			tiroY = postY;
-		}
-		if(ataque) {
-			if(tiroX < 1536) {
-				tiroX += 5;
-			}else {
-				tiroX = postX;
-				ataque = false;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+			if(arrTiros.size < 5) {
+				switch (habilidade) {
+					
+				}
+			arrTiros.add(new Atirar(postX, postY));
 			}
 		}
-		else {
-			tiroX = postX;
-			tiroY = postY;
+	}
+	
+	public void renderBalas(SpriteBatch batch) {
+		for(Atirar tiro : arrTiros) {
+			tiro.render(batch);
 		}
+	}
+	
+	public void removerBalas() {
+		Array<Atirar> removerTiros = new Array<>();
+		for(Atirar tiro : arrTiros) {
+			tiro.update();
+			if(tiro.remover) {
+				removerTiros.add(tiro);
+			}
+
+		}	
+		arrTiros.removeAll(removerTiros, false);
+		
 	}
 	
 	public void perderEscudo() {
