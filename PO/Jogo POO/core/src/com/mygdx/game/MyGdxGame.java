@@ -17,11 +17,14 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Nave nave;
 	Meteoro meteoro;
+	Colisao colisao;
 	Texture img;
 	
 	private FreeTypeFontGenerator gerador;
 	private FreeTypeFontGenerator.FreeTypeFontParameter parametro;
 	private BitmapFont bitMap;
+	
+	//FAZER COLISAO COM OS TIROS E OS METEOROS E REMOVER OS METEOROS QUANDO ATINGIR
 	
 	@Override
 	public void create () {
@@ -36,6 +39,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("space.png");
 		meteoro = new Meteoro();
+		colisao = new Colisao(nave, meteoro);
 	}
 
 	@Override
@@ -44,15 +48,13 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(img, 0, 0);
 		batch.draw(nave.getNave(), nave.getPostX() , nave.getPostY());
-		for(Rectangle m : meteoro.getMeteoros()) {
-			batch.draw(meteoro.getImgMeteoro(), m.x, m.y);
-		}
 		meteoro.moverMeteoros();
-		meteoro.setNave(nave);
+		meteoro.desenharMeteoro(batch);
 		nave.moverNave();
 		nave.atirar();
 		nave.renderBalas(batch);
 		nave.removerBalas();
+		colisao.colisaoMeteoro();
 	
 		batch.end();
 		

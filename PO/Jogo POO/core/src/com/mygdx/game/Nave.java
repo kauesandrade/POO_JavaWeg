@@ -4,6 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+
+import tiros.Tiro;
+import tiros.TiroBomba;
+import tiros.TiroNormal;
+
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 
@@ -18,8 +23,8 @@ public class Nave {
 	private float postX = 100;
 	private float postY = 100;	
 	
-	private Array<Atirar> arrTiros = new Array<>();
-	private String tipoTiro = "" ;
+	private Array<Tiro> arrTiros = new Array<>();
+	private String tipoTiro = "Normal" ;
 	
 	public Texture getImgNave() {
 		return imgNave;
@@ -27,7 +32,6 @@ public class Nave {
 	public void setImgNave(Texture imgNave) {
 		this.imgNave = imgNave;
 	}
-
 	public Sprite getNave() {
 		return nave;
 	}
@@ -62,6 +66,12 @@ public class Nave {
 	public void setPostY(float postY) {
 		this.postY = postY;
 	}
+	public Array<Tiro> getArrTiros() {
+		return arrTiros;
+	}
+	public void setArrTiros(Array<Tiro> arrTiros) {
+		this.arrTiros = arrTiros;
+	}
 	
 	public void moverNave() {
 		if(postX < 1536 - nave.getWidth()) {
@@ -93,25 +103,27 @@ public class Nave {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			if(arrTiros.size < 5) {
 				switch (tipoTiro) {
+				case "Normal":
+					arrTiros.add(new TiroNormal(postX, postY));
+					break;
 				case "Bomba":
-					arrTiros.add(new Atirar());
+					arrTiros.add(new TiroBomba(postX, postY));
 				}
-			arrTiros.add(new Atirar(postX, postY));
 			}
 		}
 	}
 	
 	public void renderBalas(SpriteBatch batch) {
-		for(Atirar tiro : arrTiros) {
+		for(Tiro tiro : arrTiros) {
 			tiro.render(batch);
 		}
 	}
 	
 	public void removerBalas() {
-		Array<Atirar> removerTiros = new Array<>();
-		for(Atirar tiro : arrTiros) {
+		Array<Tiro> removerTiros = new Array<>();
+		for(Tiro tiro : arrTiros) {
 			tiro.update();
-			if(tiro.remover) {
+			if(tiro.isRemover()) {
 				removerTiros.add(tiro);
 			}
 
