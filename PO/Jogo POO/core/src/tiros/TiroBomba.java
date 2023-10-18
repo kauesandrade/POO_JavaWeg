@@ -6,8 +6,8 @@ public class TiroBomba extends Tiro {
 
 	public TiroBomba(float x, float y) {
 		super(x, y);
-		imgTiro = new Texture("nave.png");
-		velocidade = 100;
+		imgTiro = new Texture("tiroBomba.png");
+		velocidade = 5;
 	}
 
 }

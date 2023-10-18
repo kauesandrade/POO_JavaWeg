@@ -108,6 +108,7 @@ public class Nave {
 					break;
 				case "Bomba":
 					arrTiros.add(new TiroBomba(postX, postY));
+					break;
 				}
 			}
 		}
