@@ -25,7 +25,11 @@ public class Nave {
 	
 	private Array<Tiro> arrTiros = new Array<>();
 	private String tipoTiro = "Normal" ;
+	private Colisao colisao;
 	
+	public Nave(Colisao colisao) {
+		this.colisao = colisao;
+	}
 	public Texture getImgNave() {
 		return imgNave;
 	}
@@ -104,10 +108,10 @@ public class Nave {
 			if(arrTiros.size < 5) {
 				switch (tipoTiro) {
 				case "Normal":
-					arrTiros.add(new TiroNormal(postX, postY));
+					arrTiros.add(new TiroNormal(postX, postY, colisao));
 					break;
 				case "Bomba":
-					arrTiros.add(new TiroBomba(postX, postY));
+					arrTiros.add(new TiroBomba(postX, postY, colisao));
 					break;
 				}
 			}

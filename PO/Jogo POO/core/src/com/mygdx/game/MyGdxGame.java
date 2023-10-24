@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+
+import powerUps.PowerUp;
+
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -15,16 +18,17 @@ import com.badlogic.gdx.graphics.Color;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
+	Texture img;
+	
 	Nave nave;
 	Meteoro meteoro;
 	Colisao colisao;
-	Texture img;
+	PowerUp powerUp;
+	
 	
 	private FreeTypeFontGenerator gerador;
 	private FreeTypeFontGenerator.FreeTypeFontParameter parametro;
 	private BitmapFont bitMap;
-	
-	//FAZER COLISAO COM OS TIROS E OS METEOROS E REMOVER OS METEOROS QUANDO ATINGIR
 	
 	@Override
 	public void create () {
@@ -35,11 +39,14 @@ public class MyGdxGame extends ApplicationAdapter {
 		parametro.borderColor = Color.BLACK;
 		parametro.color = Color.WHITE;
 		bitMap = gerador.generateFont(parametro);
-		nave = new Nave();
 		batch = new SpriteBatch();
 		img = new Texture("space.png");
-		meteoro = new Meteoro();
-		colisao = new Colisao(nave, meteoro);
+		
+		nave = new Nave(colisao);
+		colisao = new Colisao(nave);
+		meteoro = new Meteoro(colisao);
+		powerUp = new PowerUp(colisao);
+		
 	}
 
 	@Override
@@ -50,12 +57,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.draw(nave.getNave(), nave.getPostX() , nave.getPostY());
 		meteoro.moverMeteoros();
 		meteoro.desenharMeteoro(batch);
+		powerUp.moverMeteoros();
+		powerUp.desenharMeteoro(batch);
 		nave.moverNave();
 		nave.atirar();
 		nave.renderBalas(batch);
 		nave.removerBalas();
-		colisao.colisaoMeteoro();
-	
 		batch.end();
 		
 	}
@@ -65,4 +72,5 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.dispose();
 		img.dispose();
 	}
+	
 }

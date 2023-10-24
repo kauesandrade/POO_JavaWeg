@@ -13,40 +13,22 @@ import java.util.Iterator ;
 
 public class Meteoro {
 	
-	private Array<Rectangle> meteoros = new Array<Rectangle>();
 	private Texture imgMeteoro = new Texture("meteoro.png");
-	private long ultimoNanoTime = 0;
+	private Spawn spawn;
 
-	public void desenharMeteoro(SpriteBatch batch) {
-		for(Rectangle m : meteoros) {
-			batch.draw(imgMeteoro, m.x, m.y);
-		}
+	public Meteoro(Colisao colisao) {
+		spawn = new Spawn(imgMeteoro, colisao);
 	}
-
+	
+	public void desenharMeteoro(SpriteBatch batch) {
+		spawn.desenhar(batch);
+	}
 	public void spawnMeteoros() {
-		Rectangle meteoro = new Rectangle(1536 - imgMeteoro.getWidth(), MathUtils.random(0, 864 - imgMeteoro.getHeight()), imgMeteoro.getWidth(), imgMeteoro.getHeight());
-		meteoros.add(meteoro);
-		ultimoNanoTime = TimeUtils.nanoTime();
+		spawn.spawn();
 	}
 	
 	public void moverMeteoros() {
-		
-		if(TimeUtils.nanoTime() - ultimoNanoTime > 999999999) {
-			this.spawnMeteoros();
-		}
-
-		for( Iterator<Rectangle> iter = meteoros.iterator(); iter.hasNext();) {
-			Rectangle meteoro = iter.next();
-			meteoro.x -= 8;
-			if(meteoro.x + meteoro.getWidth() < 0) {
-				iter.remove();
-			}
-			
-		}
-	}
-
-	public Array<Rectangle> getMeteoros() {
-		return meteoros;
+		spawn.moverX(999999999, 8);
 	}
 
 	public Texture getImgMeteoro() {

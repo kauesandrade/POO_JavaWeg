@@ -1,10 +1,8 @@
 package tiros;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Colisao;
 
 public abstract class Tiro{
 	
@@ -13,10 +11,12 @@ public abstract class Tiro{
 	protected float tiroX;
 	protected float velocidade;
 	protected boolean remover = false;
+	private Colisao colisao;
 	
-	public Tiro(float x, float y) {
+	public Tiro(float x, float y, Colisao colisao) {
 		this.tiroX = x;
 		this.tiroY = y;
+		this.colisao = colisao;
 	}
 	
 	
