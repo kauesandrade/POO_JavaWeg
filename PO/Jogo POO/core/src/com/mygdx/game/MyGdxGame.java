@@ -19,7 +19,6 @@ import com.badlogic.gdx.graphics.Color;
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
-	
 	Nave nave;
 	Meteoro meteoro;
 	Colisao colisao;
@@ -41,7 +40,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		bitMap = gerador.generateFont(parametro);
 		batch = new SpriteBatch();
 		img = new Texture("space.png");
-		
 		nave = new Nave(colisao);
 		colisao = new Colisao(nave);
 		meteoro = new Meteoro(colisao);
