@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package objetos;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import tiros.Tiro;
 import tiros.TiroBomba;
 import tiros.TiroNormal;
+import utilitarios.Colisao;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
@@ -105,7 +106,7 @@ public class Nave {
 	public void atirar() {
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			if(arrTiros.size < 5) {
+			if(arrTiros.size < 3) {
 				switch (tipoTiro) {
 				case "Normal":
 					arrTiros.add(new TiroNormal(postX+200, postY+100, colisao));

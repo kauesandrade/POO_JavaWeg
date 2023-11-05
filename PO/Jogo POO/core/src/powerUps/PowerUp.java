@@ -2,8 +2,9 @@ package powerUps;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Colisao;
-import com.mygdx.game.Spawn;
+
+import utilitarios.Colisao;
+import utilitarios.Spawn;
 
 public class PowerUp  {
 	
@@ -22,7 +23,7 @@ public class PowerUp  {
 	}
 	
 	public void moverMeteoros() {
-		spawn.moverXReturn(99999999999.0, 4);
+		spawn.moverXPowerUps(99999999999.0, 4);
 	}
 
 	public Texture getImgMeteoro() {

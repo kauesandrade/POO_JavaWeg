@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package objetos;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,6 +8,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Predicate;
 import com.badlogic.gdx.utils.TimeUtils;
+
+import utilitarios.Colisao;
+import utilitarios.Spawn;
+
 import java.util.Iterator ;
 
 
@@ -28,7 +32,7 @@ public class Meteoro {
 	}
 	
 	public void moverMeteoros() {
-		spawn.moverX(999999999, 8);
+		spawn.moverX(499999999, 8);
 	}
 
 	public Texture getImgMeteoro() {

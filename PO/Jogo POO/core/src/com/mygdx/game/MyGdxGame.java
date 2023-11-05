@@ -7,8 +7,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 
+import objetos.Alien;
+import objetos.Meteoro;
+import objetos.Nave;
 import powerUps.PowerUp;
+import utilitarios.Colisao;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
@@ -24,7 +29,9 @@ public class MyGdxGame extends ApplicationAdapter {
 	Alien alien;
 	Colisao colisao;
 	PowerUp powerUp;
-	
+	float ultimoNanoTime;
+	int pontos;
+	int time;
 	
 	private FreeTypeFontGenerator gerador;
 	private FreeTypeFontGenerator.FreeTypeFontParameter parametro;
@@ -39,6 +46,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		parametro.borderColor = Color.BLACK;
 		parametro.color = Color.WHITE;
 		bitMap = gerador.generateFont(parametro);
+		
 		batch = new SpriteBatch();
 		img = new Texture("space.png");
 		nave = new Nave(colisao);
@@ -47,6 +55,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		alien = new Alien(colisao);
 		powerUp = new PowerUp(colisao);
 		
+		time = 999999999;
 	}
 
 	@Override
@@ -55,6 +64,16 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(img, 0, 0);
 		batch.draw(nave.getNave(), nave.getPostX() , nave.getPostY());
+		
+		bitMap.draw(batch, "Pontos: " + pontos, 40, Gdx.graphics.getHeight() - 40);
+		if(TimeUtils.nanoTime() - ultimoNanoTime > time) {
+			pontos += 10;
+			ultimoNanoTime = TimeUtils.nanoTime();
+			if(pontos % 100 == 0) {
+				time-=10000;
+			}
+		}
+		
 		meteoro.moverMeteoros();
 		meteoro.desenharMeteoro(batch);
 		alien.moverAlien();
@@ -65,6 +84,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		nave.atirar();
 		nave.renderBalas(batch);
 		nave.removerBalas();
+		
+		
 		batch.end();
 		
 	}

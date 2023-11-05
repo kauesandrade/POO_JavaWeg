@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package utilitarios;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
@@ -6,6 +6,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
+import objetos.Alien;
+import objetos.Meteoro;
+import objetos.Nave;
 import tiros.Tiro;
 
 public class Colisao {
@@ -35,6 +38,13 @@ public class Colisao {
 	}
 	
 	public Boolean colisaoRectangleNave(Rectangle r) {
+		if(colicao(r.x, r.y, r.height, r.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
+			nave.perderEscudo();
+			return true;
+		}
+		return false;
+	}
+	public Boolean colisaoNavePoweup(Rectangle r) {
 		if(colicao(r.x, r.y, r.height, r.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
 			return true;
 		}

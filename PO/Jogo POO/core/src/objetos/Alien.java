@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package objetos;
 
 import java.util.Iterator;
 
@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+
+import utilitarios.Colisao;
+import utilitarios.Spawn;
 
 public class Alien {
 

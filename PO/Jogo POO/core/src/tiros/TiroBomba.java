@@ -1,7 +1,8 @@
 package tiros;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.Colisao;
+
+import utilitarios.Colisao;
 
 public class TiroBomba extends Tiro {
 

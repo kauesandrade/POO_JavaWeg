@@ -2,7 +2,8 @@ package tiros;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Colisao;
+
+import utilitarios.Colisao;
 
 public abstract class Tiro{
 	

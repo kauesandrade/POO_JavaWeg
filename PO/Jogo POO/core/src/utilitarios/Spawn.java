@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package utilitarios;
 
 import java.util.Iterator;
 
@@ -15,7 +15,7 @@ public class Spawn {
 	private float ultimoNanoTime = 0;
 	private Texture img;
 	private Colisao colisao = new Colisao();
-	private boolean baixo = true;
+//	private boolean baixo = true;
 	
 	public Spawn(Texture img, Colisao colisao) {
 		this.img = img;
@@ -52,7 +52,7 @@ public class Spawn {
 		}
 	}
 	
-	public String moverXReturn(double time, int velocidade) {
+	public String moverXPowerUps(double time, int velocidade) {
 		
 		if(TimeUtils.nanoTime() - ultimoNanoTime > time) {
 			this.spawn();
@@ -61,7 +61,7 @@ public class Spawn {
 		for( Iterator<Rectangle> iter = rectangles.iterator(); iter.hasNext();) {
 			Rectangle r = iter.next();
 			r.x -= velocidade;
-			if(r.x + r.getWidth() < 0 || colisao.colisaoRectangleNave(r)) {
+			if(r.x + r.getWidth() < 0 || colisao.colisaoNavePoweup(r)) {
 				iter.remove();
 				return "a";
 			}
