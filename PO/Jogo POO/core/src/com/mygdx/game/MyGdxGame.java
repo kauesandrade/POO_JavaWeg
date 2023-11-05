@@ -49,7 +49,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		
 		batch = new SpriteBatch();
 		img = new Texture("space.png");
-		nave = new Nave(colisao);
+		nave = new Nave();
 		colisao = new Colisao(nave, meteoro, alien);
 		meteoro = new Meteoro(colisao);
 		alien = new Alien(colisao);
@@ -62,9 +62,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
+		
 		batch.draw(img, 0, 0);
 		batch.draw(nave.getNave(), nave.getPostX() , nave.getPostY());
-		
+		batch.draw(nave.getImgEscudos(), 350, Gdx.graphics.getHeight() - 75);
 		bitMap.draw(batch, "Pontos: " + pontos, 40, Gdx.graphics.getHeight() - 40);
 		if(TimeUtils.nanoTime() - ultimoNanoTime > time) {
 			pontos += 10;

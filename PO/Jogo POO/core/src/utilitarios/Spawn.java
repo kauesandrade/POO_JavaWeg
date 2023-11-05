@@ -30,8 +30,6 @@ public class Spawn {
 
 	public void spawn() {
 		Rectangle r = new Rectangle(1536 - img.getWidth(), MathUtils.random(0, 864 - img.getHeight()), img.getWidth(), img.getHeight());
-//		System.out.println("X: x = " + r.x);
-//		System.out.println("X: x = " + r.y);
 		rectangles.add(r);
 		ultimoNanoTime = TimeUtils.nanoTime();
 	}

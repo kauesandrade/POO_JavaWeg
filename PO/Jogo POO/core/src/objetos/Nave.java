@@ -13,33 +13,32 @@ import utilitarios.Colisao;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 
-
 public class Nave {
-	
+
 	private Texture imgNave = new Texture("nave.png");
 	private Sprite nave = new Sprite(imgNave);
-	
+
 	private int escudos = 3;
 	private float velocidade = 10;
 	private float postX = 100;
-	private float postY = 100;	
-	
+	private float postY = 100;
+
 	private Array<Tiro> arrTiros = new Array<>();
-	private String tipoTiro = "Normal" ;
+	private String tipoTiro = "Normal";
 	private Colisao colisao;
-	
-	public Nave(Colisao colisao) {
-		this.colisao = colisao;
-	}
+
 	public Texture getImgNave() {
 		return imgNave;
 	}
+
 	public void setImgNave(Texture imgNave) {
 		this.imgNave = imgNave;
 	}
+
 	public Sprite getNave() {
 		return nave;
 	}
+
 	public void setNave(Sprite nave) {
 		this.nave = nave;
 	}
@@ -47,103 +46,111 @@ public class Nave {
 	public int getEscudos() {
 		return escudos;
 	}
-	public void setEscudos(int escudos) {
-			this.escudos = escudos;
-	}
 
-	public float getVelocidade() {
-		return velocidade;
-	}
-	public void setVelocidade(float velocidade) {
-		this.velocidade = velocidade;
+	public void setEscudos(int escudos) {
+		this.escudos = escudos;
 	}
 
 	public float getPostX() {
 		return postX;
 	}
-	public void setPostX(float postX) {
-		this.postX = postX;
-	}
 
 	public float getPostY() {
 		return postY;
 	}
-	public void setPostY(float postY) {
-		this.postY = postY;
-	}
+
 	public Array<Tiro> getArrTiros() {
 		return arrTiros;
 	}
+
 	public void setArrTiros(Array<Tiro> arrTiros) {
 		this.arrTiros = arrTiros;
 	}
-	
+
 	public void moverNave() {
-		if(postX < 1536 - nave.getWidth()) {
-			if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+		if (postX < 1536 - nave.getWidth()) {
+			if (Gdx.input.isKeyPressed(Input.Keys.D)) {
 				this.postX += velocidade;
 			}
 		}
-		if(postX > 0) {
-			if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+		if (postX > 0) {
+			if (Gdx.input.isKeyPressed(Input.Keys.A)) {
 				this.postX -= velocidade;
 			}
 		}
-		if(postY < 864 - nave.getHeight()) {
-			if(Gdx.input.isKeyPressed(Input.Keys.W)){
+		if (postY < 864 - nave.getHeight()) {
+			if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 				this.postY += velocidade;
 			}
 		}
-		if(postY > 0) {
-			if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+		if (postY > 0) {
+			if (Gdx.input.isKeyPressed(Input.Keys.S)) {
 				this.postY -= velocidade;
 			}
 		}
-	
+
 	}
-	
-	
+
 	public void atirar() {
-		
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			if(arrTiros.size < 3) {
+
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+			if (arrTiros.size < 3) {
 				switch (tipoTiro) {
 				case "Normal":
-					arrTiros.add(new TiroNormal(postX+200, postY+100, colisao));
+					arrTiros.add(new TiroNormal(postX + 200, postY + 100, colisao));
 					break;
 				case "Bomba":
-					arrTiros.add(new TiroBomba(postX+100, postY+100, colisao));
+					arrTiros.add(new TiroBomba(postX + 100, postY + 100, colisao));
 					break;
 				}
 			}
 		}
 	}
-	
+
 	public void renderBalas(SpriteBatch batch) {
-		for(Tiro tiro : arrTiros) {
+		for (Tiro tiro : arrTiros) {
 			tiro.render(batch);
 		}
 	}
-	
+
 	public void removerBalas() {
 		Array<Tiro> removerTiros = new Array<>();
-		for(Tiro tiro : arrTiros) {
+		for (Tiro tiro : arrTiros) {
 			tiro.update();
-			if(tiro.isRemover()) {
+			if (tiro.isRemover()) {
 				removerTiros.add(tiro);
 			}
 
-		}	
+		}
 		arrTiros.removeAll(removerTiros, false);
-		
+
 	}
-	
+
 	public void perderEscudo() {
-		if(this.escudos > 0) {
+		if (this.escudos > 0) {
 			this.escudos--;
-		}else if (this.escudos <= 0){
+		} else if (this.escudos <= 0) {
 			System.out.println("O jogo acabou");
 		}
 	}
-	
+
+	public Texture getImgEscudos() {
+		Texture t;
+		if(escudos == 1) {
+			t = new Texture("escudos1.png");
+			return t;
+		}else if(escudos == 2) {
+			t = new Texture("escudos2.png");
+			return t;
+		}else if(escudos == 3) {
+			t = new Texture("escudos3.png");
+			return t;
+		}else {
+			t = new Texture("escudos0.png");
+			return t;
+		}
+		
+
+	}
+
 }
