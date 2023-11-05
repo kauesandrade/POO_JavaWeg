@@ -21,6 +21,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	Texture img;
 	Nave nave;
 	Meteoro meteoro;
+	Alien alien;
 	Colisao colisao;
 	PowerUp powerUp;
 	
@@ -41,8 +42,9 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("space.png");
 		nave = new Nave(colisao);
-		colisao = new Colisao(nave);
+		colisao = new Colisao(nave, meteoro, alien);
 		meteoro = new Meteoro(colisao);
+		alien = new Alien(colisao);
 		powerUp = new PowerUp(colisao);
 		
 	}
@@ -55,6 +57,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.draw(nave.getNave(), nave.getPostX() , nave.getPostY());
 		meteoro.moverMeteoros();
 		meteoro.desenharMeteoro(batch);
+		alien.moverAlien();
+		alien.desenharAlien(batch);
 		powerUp.moverMeteoros();
 		powerUp.desenharMeteoro(batch);
 		nave.moverNave();

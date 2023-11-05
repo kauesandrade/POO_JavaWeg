@@ -108,10 +108,10 @@ public class Nave {
 			if(arrTiros.size < 5) {
 				switch (tipoTiro) {
 				case "Normal":
-					arrTiros.add(new TiroNormal(postX, postY, colisao));
+					arrTiros.add(new TiroNormal(postX+200, postY+100, colisao));
 					break;
 				case "Bomba":
-					arrTiros.add(new TiroBomba(postX, postY, colisao));
+					arrTiros.add(new TiroBomba(postX+100, postY+100, colisao));
 					break;
 				}
 			}
