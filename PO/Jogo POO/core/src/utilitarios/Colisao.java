@@ -43,13 +43,6 @@ public class Colisao {
 		super();
 	}
 	
-	public boolean colisaoRectagle(Rectangle r1, Rectangle r2) {
-		if(colicao(r1.x, r1.y, r1.height, r1.width, r2.x, r2.y, r2.height, r2.width)) {
-			return true;
-		}
-		return false;
-	}
-	
 	public Boolean colisaoRectangleNave(Rectangle r) {
 		if(colicao(r.x, r.y, r.height, r.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
 			nave.perderEscudo();
@@ -57,16 +50,13 @@ public class Colisao {
 		}
 		return false;
 	}
-//	public Boolean colisaoNavePoweup(Rectangle r) {
-//		if(colicao(r.x, r.y, r.height, r.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
-//			return true;
-//		}
-//		return false;
-//	}
+	
 	public Boolean colisaoTiro(Rectangle r) {
 		for(Tiro t : arrTiros) {
 			if(colicao(r.x, r.y, r.height, r.width, t.getTiroX(), t.getTiroY(), t.getImgTiro().getHeight() , t.getImgTiro().getWidth())) {
-				t.setRemover(true);
+				if(t.getImgTiro().toString() != "tiroBomba.png") {
+					t.setRemover(true);
+				}
 				nave.setArrTiros(arrTiros);
 				return true;
 			}

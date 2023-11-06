@@ -14,7 +14,7 @@ public class PowerUp  {
 	protected float PowerUpX;
 	protected float velocidade = 5;
 	protected boolean remover = false;
-	private Colisao colisao;
+	protected Colisao colisao;
 	
 	public PowerUp(float x, float y, Colisao colisao) {
 		this.PowerUpX = x;
@@ -69,7 +69,7 @@ public class PowerUp  {
 
 
 	public void ativarPowerUp() {
-		colisao.getNave().ganharEscudo();
+		
 	}
 
 	

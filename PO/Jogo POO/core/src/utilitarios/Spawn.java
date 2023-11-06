@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
+import powerUps.BombaTiro;
 import powerUps.Escudo;
 import powerUps.PowerUp;
 import tiros.Tiro;
@@ -100,12 +101,11 @@ public class Spawn {
 	public void spawnPowerUps(String tipo) {
 		switch (tipo) {
 		case "escudo":
-			arrPowerUps.add(new Escudo(1536 , MathUtils.random(0, 864 ), colisao));
+			arrPowerUps.add(new Escudo(1536, MathUtils.random(0, 864), colisao));
 			System.out.println("ADD: "+arrPowerUps);
 			break;
 		case "tiroBomba":
-			arrPowerUps.add(new PowerUp(1536,
-					MathUtils.random(0, 864 - img.getHeight()), colisao));
+			arrPowerUps.add(new BombaTiro(1536, MathUtils.random(0, 864), colisao));
 			break;
 		}
 		

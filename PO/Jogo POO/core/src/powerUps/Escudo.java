@@ -8,8 +8,12 @@ public class Escudo  extends PowerUp{
 
 	public Escudo(float x, float y, Colisao colisao) {
 		super(x, y, colisao);
-		this.imgPowerUp = new Texture("escudo1.png");
+		this.imgPowerUp = new Texture("escudo.png");
 	}
 
-
+	@Override
+	public void ativarPowerUp() {
+		colisao.getNave().ganharEscudo();
+	}
+	
 }

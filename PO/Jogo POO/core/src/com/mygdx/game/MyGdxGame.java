@@ -80,16 +80,15 @@ public class MyGdxGame extends ApplicationAdapter {
 				if(nave.getEscudos() == 0 || nave.getEscudos() == 1) {
 					spawnPowerUp.spawnPowerUps("escudo");
 				}
-//					else {
-//					int numeroSorteado = MathUtils.random(1, 3);
-//					switch(numeroSorteado) {
-//					case 1: spawnPowerUp.spawnPowerUps("tiroBomba");
-//						break;
-//					case 2: spawnPowerUp.spawnPowerUps("escudo");
-//						break;
-//					case 3: spawnPowerUp.spawnPowerUps("escudo");
-//					}
-//				}
+					else {
+					int numeroSorteado = MathUtils.random(1, 2);
+					switch(numeroSorteado) {
+					case 1: spawnPowerUp.spawnPowerUps("tiroBomba");
+						break;
+					case 2: spawnPowerUp.spawnPowerUps("escudo");
+						break;
+					}
+				}
 				
 				time-=10000;
 			}
