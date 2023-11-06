@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -14,10 +15,12 @@ import objetos.Meteoro;
 import objetos.Nave;
 import powerUps.PowerUp;
 import utilitarios.Colisao;
+import utilitarios.Spawn;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer.Random;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.Color;
 
@@ -29,9 +32,12 @@ public class MyGdxGame extends ApplicationAdapter {
 	Alien alien;
 	Colisao colisao;
 	PowerUp powerUp;
+	Spawn spawnPowerUp;
+	
 	float ultimoNanoTime;
 	int pontos;
 	int time;
+	
 	
 	private FreeTypeFontGenerator gerador;
 	private FreeTypeFontGenerator.FreeTypeFontParameter parametro;
@@ -53,8 +59,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		colisao = new Colisao(nave, meteoro, alien);
 		meteoro = new Meteoro(colisao);
 		alien = new Alien(colisao);
-		powerUp = new PowerUp(colisao);
-		
+		spawnPowerUp = new Spawn(colisao);
+
 		time = 999999999;
 	}
 
@@ -71,16 +77,30 @@ public class MyGdxGame extends ApplicationAdapter {
 			pontos += 10;
 			ultimoNanoTime = TimeUtils.nanoTime();
 			if(pontos % 100 == 0) {
+				if(nave.getEscudos() == 0 || nave.getEscudos() == 1) {
+					spawnPowerUp.spawnPowerUps("escudo");
+				}
+//					else {
+//					int numeroSorteado = MathUtils.random(1, 3);
+//					switch(numeroSortaeado) {
+//					case 1:
+//						
+//					}
+//				}
+				
 				time-=10000;
 			}
 		}
+		
+		spawnPowerUp.renderPowerUps(batch);
+		spawnPowerUp.removerPowerUps();
 		
 		meteoro.moverMeteoros();
 		meteoro.desenharMeteoro(batch);
 		alien.moverAlien();
 		alien.desenharAlien(batch);
-		powerUp.moverMeteoros();
-		powerUp.desenharMeteoro(batch);
+//		powerUp.moverMeteoros();
+//		powerUp.desenharMeteoro(batch);
 		nave.moverNave();
 		nave.atirar();
 		nave.renderBalas(batch);

@@ -1,4 +1,5 @@
 package utilitarios;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
@@ -9,14 +10,17 @@ import com.badlogic.gdx.utils.Array;
 import objetos.Alien;
 import objetos.Meteoro;
 import objetos.Nave;
+import powerUps.PowerUp;
 import tiros.Tiro;
 
 public class Colisao {
 
 	private Nave nave;
 	private Meteoro meteoro;
-	private Array<Tiro> arrTiros = new Array<>();
 	private Alien alien;
+	
+	private Array<Tiro> arrTiros = new Array<>();
+	
 	
 	public Colisao(Nave nave, Meteoro meteoro, Alien alien) {
 		super();
@@ -44,12 +48,12 @@ public class Colisao {
 		}
 		return false;
 	}
-	public Boolean colisaoNavePoweup(Rectangle r) {
-		if(colicao(r.x, r.y, r.height, r.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
-			return true;
-		}
-		return false;
-	}
+//	public Boolean colisaoNavePoweup(Rectangle r) {
+//		if(colicao(r.x, r.y, r.height, r.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
+//			return true;
+//		}
+//		return false;
+//	}
 	public Boolean colisaoTiro(Rectangle r) {
 		for(Tiro t : arrTiros) {
 			if(colicao(r.x, r.y, r.height, r.width, t.getTiroX(), t.getTiroY(), t.getImgTiro().getHeight() , t.getImgTiro().getWidth())) {
@@ -57,6 +61,13 @@ public class Colisao {
 				nave.setArrTiros(arrTiros);
 				return true;
 			}
+		}
+		return false;
+		
+	}
+	public Boolean colisaNavePowerUp(float powerUpX, float powerUpY, Texture img) {
+			if(colicao(powerUpX, powerUpY, img.getHeight(), img.getWidth(), nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
+				return true;
 		}
 		return false;
 		
