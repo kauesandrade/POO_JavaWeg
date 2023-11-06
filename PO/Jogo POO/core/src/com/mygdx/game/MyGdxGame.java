@@ -82,9 +82,12 @@ public class MyGdxGame extends ApplicationAdapter {
 				}
 //					else {
 //					int numeroSorteado = MathUtils.random(1, 3);
-//					switch(numeroSortaeado) {
-//					case 1:
-//						
+//					switch(numeroSorteado) {
+//					case 1: spawnPowerUp.spawnPowerUps("tiroBomba");
+//						break;
+//					case 2: spawnPowerUp.spawnPowerUps("escudo");
+//						break;
+//					case 3: spawnPowerUp.spawnPowerUps("escudo");
 //					}
 //				}
 				

@@ -133,6 +133,13 @@ public class Nave {
 			System.out.println("O jogo acabou");
 		}
 	}
+	public void ganharEscudo() {
+		if (this.escudos < 3) {
+			this.escudos++;
+		} else if (this.escudos == 3) {
+			System.out.println("Escudo máximo");
+		}
+	}
 
 	public Texture getImgEscudos() {
 		Texture t;

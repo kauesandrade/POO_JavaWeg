@@ -11,5 +11,5 @@ public class TiroBomba extends Tiro {
 		imgTiro = new Texture("tiroBomba.png");
 		velocidade = 5;
 	}
-
+	
 }

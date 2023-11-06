@@ -8,11 +8,11 @@ import utilitarios.Spawn;
 
 public class PowerUp  {
 	
-	protected Texture imgPowerUp = new Texture("escudo1.png"); // PRECISA REMOVER QUANDO FOR FAZER AS CLASES E BOTAR LA E 
+	protected Texture imgPowerUp; // PRECISA REMOVER QUANDO FOR FAZER AS CLASES E BOTAR LA E 
 //	fazer a nava receber escuda na clase escudo
 	protected float PowerUpY;
 	protected float PowerUpX;
-	protected float velocidade = 5; // PRECISA REMOVER QUANDO FOR FAZER AS CLASES E BOTAR LA
+	protected float velocidade = 5;
 	protected boolean remover = false;
 	private Colisao colisao;
 	
@@ -65,6 +65,11 @@ public class PowerUp  {
 	
 	public void render(SpriteBatch batch) {
 		batch.draw(imgPowerUp, PowerUpX, PowerUpY);
+	}
+
+
+	public void ativarPowerUp() {
+		colisao.getNave().ganharEscudo();
 	}
 
 	

@@ -21,7 +21,6 @@ public class Colisao {
 	
 	private Array<Tiro> arrTiros = new Array<>();
 	
-	
 	public Colisao(Nave nave, Meteoro meteoro, Alien alien) {
 		super();
 		this.nave = nave;
@@ -29,6 +28,16 @@ public class Colisao {
 		this.alien = alien;
 		this.arrTiros = nave.getArrTiros();
 	};
+	
+	public Nave getNave() {
+		return nave;
+	}
+
+
+
+	public void setNave(Nave nave) {
+		this.nave = nave;
+	}
 
 	public Colisao() {
 		super();
