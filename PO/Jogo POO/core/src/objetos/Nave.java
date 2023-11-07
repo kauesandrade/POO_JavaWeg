@@ -1,3 +1,7 @@
+/**
+ * Esta classe representa a nave controlada pelo jogador no jogo. Ela lida com o movimento da nave,
+ * disparo de tiros, controle de escudos e outros aspectos relacionados à nave.
+ */
 package objetos;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -16,7 +20,6 @@ public class Nave {
 
 	private Texture imgNave = new Texture("nave.png");
 	private Sprite nave = new Sprite(imgNave);
-
 	private int escudos = 3;
 	private float velocidade = 10;
 	private float postX = 100;
@@ -24,7 +27,7 @@ public class Nave {
 
 	private Array<Tiro> arrTiros = new Array<>();
 	private String tipoTiro = "Normal";
-	
+
 	public String getTipoTiro() {
 		return tipoTiro;
 	}
@@ -73,6 +76,10 @@ public class Nave {
 		this.arrTiros = arrTiros;
 	}
 
+	/**
+	 * Atualiza a posição da nave com base nas entradas do jogador (teclas
+	 * pressionadas).
+	 */
 	public void moverNave() {
 		if (postX < 1536 - nave.getWidth()) {
 			if (Gdx.input.isKeyPressed(Input.Keys.D)) {
@@ -97,6 +104,10 @@ public class Nave {
 
 	}
 
+	/**
+	 * Permite que a nave dispare tiros. O tipo de tiro depende do atributo
+	 * "tipoTiro".
+	 */
 	public void atirar() {
 
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
@@ -114,12 +125,20 @@ public class Nave {
 		}
 	}
 
+	/**
+	 * Renderiza os tiros da nave no jogo.
+	 *
+	 * @param batch O lote no qual renderizar os tiros.
+	 */
 	public void renderBalas(SpriteBatch batch) {
 		for (Tiro tiro : arrTiros) {
 			tiro.render(batch);
 		}
 	}
 
+	/**
+	 * Remove tiros que atingiram o limite de sua trajetória.
+	 */
 	public void removerBalas() {
 		Array<Tiro> removerTiros = new Array<>();
 		for (Tiro tiro : arrTiros) {
@@ -133,6 +152,9 @@ public class Nave {
 
 	}
 
+	/**
+	 * Diminui o número de escudos da nave quando ela é atingida.
+	 */
 	public void perderEscudo() {
 		if (this.escudos >= 0) {
 			this.escudos--;
@@ -140,6 +162,10 @@ public class Nave {
 			System.out.println("O jogo acabou");
 		}
 	}
+
+	/**
+	 * Aumenta o número de escudos da nave.
+	 */
 	public void ganharEscudo() {
 		if (this.escudos < 3) {
 			this.escudos++;
@@ -148,22 +174,24 @@ public class Nave {
 		}
 	}
 
+	/**
+	 * Retorna a textura que representa o número atual de escudos da nave.
+	 */
 	public Texture getImgEscudos() {
 		Texture t;
-		if(escudos == 1) {
+		if (escudos == 1) {
 			t = new Texture("escudos1.png");
 			return t;
-		}else if(escudos == 2) {
+		} else if (escudos == 2) {
 			t = new Texture("escudos2.png");
 			return t;
-		}else if(escudos == 3) {
+		} else if (escudos == 3) {
 			t = new Texture("escudos3.png");
 			return t;
-		}else {
+		} else {
 			t = new Texture("escudos0.png");
 			return t;
 		}
-		
 
 	}
 

@@ -1,3 +1,7 @@
+/**
+ * Esta classe representa a tela principal do jogo, onde a jogabilidade ocorre. Ela lida com a renderização
+ * dos objetos, colisões, pontuação e controle das ações do jogador.
+ */
 package screens;
 
 import com.badlogic.gdx.Gdx;
@@ -28,16 +32,19 @@ public class GameScreen extends ScreenAdapter {
 	Colisao colisao;
 	PowerUp powerUp;
 	Spawn spawnPowerUp;
-	
+
 	float ultimoNanoTime;
 	int pontos;
 	int time;
-	
-	
+
 	private FreeTypeFontGenerator gerador;
 	private FreeTypeFontGenerator.FreeTypeFontParameter parametro;
 	private BitmapFont bitMap;
-	
+
+	/**
+	 * Inicializa a tela do jogo, criando objetos e configurando elementos visuais,
+	 * como a fonte de pontuação.
+	 */
 	@Override
 	public void show() {
 		gerador = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
@@ -47,7 +54,7 @@ public class GameScreen extends ScreenAdapter {
 		parametro.borderColor = Color.BLACK;
 		parametro.color = Color.WHITE;
 		bitMap = gerador.generateFont(parametro);
-		
+
 		batch = new SpriteBatch();
 		img = new Texture("space.png");
 		nave = new Nave();
@@ -59,36 +66,45 @@ public class GameScreen extends ScreenAdapter {
 		time = 999999999;
 	}
 
-	 @Override
-	    public void render(float delta) {
+	/**
+	 * Método de renderização onde o jogo é atualizado e desenhado na tela.
+	 *
+	 * @param delta O tempo passado desde o último quadro.
+	 */
+	@Override
+	public void render(float delta) {
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
-		
+
 		batch.draw(img, 0, 0);
-		batch.draw(nave.getNave(), nave.getPostX() , nave.getPostY());
+		batch.draw(nave.getNave(), nave.getPostX(), nave.getPostY());
 		batch.draw(nave.getImgEscudos(), 350, Gdx.graphics.getHeight() - 75);
 		bitMap.draw(batch, "Pontos: " + pontos, 40, Gdx.graphics.getHeight() - 40);
-		if(TimeUtils.nanoTime() - ultimoNanoTime > time) {
+
+		// Lógica para atualização de pontos e geração de power-ups
+		if (TimeUtils.nanoTime() - ultimoNanoTime > time) {
 			pontos += 10;
 			ultimoNanoTime = TimeUtils.nanoTime();
-			if(pontos % 100 == 0) {
-				if(nave.getEscudos() == 0 || nave.getEscudos() == 1) {
+			if (pontos % 100 == 0) {
+				if (nave.getEscudos() == 0 || nave.getEscudos() == 1) {
 					spawnPowerUp.spawnPowerUps("escudo");
-				}
-					else {
+				} else {
 					int numeroSorteado = MathUtils.random(1, 2);
-					switch(numeroSorteado) {
-					case 1: spawnPowerUp.spawnPowerUps("tiroBomba");
+					switch (numeroSorteado) {
+					case 1:
+						spawnPowerUp.spawnPowerUps("tiroBomba");
 						break;
-					case 2: spawnPowerUp.spawnPowerUps("escudo");
+					case 2:
+						spawnPowerUp.spawnPowerUps("escudo");
 						break;
 					}
 				}
-				
-				time-=10000;
+
+				time -= 10000;
 			}
 		}
-		
+
+		// Renderização de objetos e atualizações
 		spawnPowerUp.renderPowerUps(batch);
 		spawnPowerUp.removerPowerUps();
 		meteoro.moverMeteoros();
@@ -99,21 +115,25 @@ public class GameScreen extends ScreenAdapter {
 		nave.atirar();
 		nave.renderBalas(batch);
 		nave.removerBalas();
-		
-		if(nave.getEscudos() == -1) {
+
+		// Verifica se o jogador perdeu o jogo e redireciona para a tela de Game Over
+		if (nave.getEscudos() == -1) {
 			MyGdxGame game = (MyGdxGame) Gdx.app.getApplicationListener();
-			game.setScreen(new GameOverScreen(""+pontos));
+			game.setScreen(new GameOverScreen("" + pontos));
 		}
-		
-		
+
 		batch.end();
-		
+
 	}
-	
+
+	/**
+	 * Método chamado quando a tela do jogo é ocultada. Realiza a limpeza de
+	 * recursos.
+	 */
 	@Override
 	public void hide() {
 		batch.dispose();
 		img.dispose();
 	}
-	
+
 }
