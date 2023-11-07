@@ -2,18 +2,16 @@ package powerUps;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import utilitarios.Colisao;
-import utilitarios.Spawn;
 
 public class PowerUp  {
 	
-	protected Texture imgPowerUp; // PRECISA REMOVER QUANDO FOR FAZER AS CLASES E BOTAR LA E 
-//	fazer a nava receber escuda na clase escudo
+	protected Texture imgPowerUp;
 	protected float PowerUpY;
 	protected float PowerUpX;
 	protected float velocidade = 5;
 	protected boolean remover = false;
+	protected boolean pegou = false;
 	protected Colisao colisao;
 	
 	public PowerUp(float x, float y, Colisao colisao) {
@@ -55,10 +53,21 @@ public class PowerUp  {
 		return remover;
 	}
 	
-	
+	public boolean isPegou() {
+		return pegou;
+	}
+
+	public void setPegou(boolean pegou) {
+		this.pegou = pegou;
+	}
+
+
 	public void update() {
 		PowerUpX -= velocidade;
-		if(PowerUpX < 0 || colisao.colisaNavePowerUp(PowerUpX, PowerUpY, imgPowerUp)) {
+		if(PowerUpX < 0 || colisao.colisaNavePowerUp(PowerUpX, PowerUpY, imgPowerUp)){
+			if(colisao.colisaNavePowerUp(PowerUpX, PowerUpY, imgPowerUp)){
+				pegou = true;
+			}
 			remover = true;
 		}
 	}

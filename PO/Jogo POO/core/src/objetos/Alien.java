@@ -15,12 +15,10 @@ public class Alien {
 		spawn = new Spawn(imgAlien, colisao);
 	}
 
-	public void atirar() {
-		
-	}
 	public void desenharAlien(SpriteBatch batch) {
 		spawn.desenhar(batch);
 	}
+	
 	public void spawnAlien() {
 		spawn.spawn();
 	}

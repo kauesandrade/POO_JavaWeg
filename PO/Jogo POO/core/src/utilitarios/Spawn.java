@@ -105,7 +105,9 @@ public class Spawn {
 		for (PowerUp p : arrPowerUps) {
 			p.update();
 			if (p.isRemover()) {
-				p.ativarPowerUp();
+				if(p.isPegou()) {
+					p.ativarPowerUp();
+				}
 				removerPowerUp.add(p);
 			}
 
