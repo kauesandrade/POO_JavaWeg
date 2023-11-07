@@ -1,18 +1,11 @@
 package objetos;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Predicate;
-import com.badlogic.gdx.utils.TimeUtils;
 
 import utilitarios.Colisao;
 import utilitarios.Spawn;
 
-import java.util.Iterator ;
 
 
 public class Meteoro {

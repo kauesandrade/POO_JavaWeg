@@ -1,40 +1,34 @@
 package utilitarios;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-
-import objetos.Alien;
-import objetos.Meteoro;
 import objetos.Nave;
 import tiros.Tiro;
 
 public class Colisao {
 
 	private Nave nave;
-	private Meteoro meteoro;
-	private Array<Tiro> arrTiros = new Array<>();
-	private Alien alien;
 	
-	public Colisao(Nave nave, Meteoro meteoro, Alien alien) {
+	private Array<Tiro> arrTiros = new Array<>();
+	
+	public Colisao(Nave nave) {
 		super();
 		this.nave = nave;
-		this.meteoro = meteoro;
-		this.alien = alien;
 		this.arrTiros = nave.getArrTiros();
 	};
+	
+	public Nave getNave() {
+		return nave;
+	}
+
+
+
+	public void setNave(Nave nave) {
+		this.nave = nave;
+	}
 
 	public Colisao() {
 		super();
-	}
-	
-	public boolean colisaoRectagle(Rectangle r1, Rectangle r2) {
-		if(colicao(r1.x, r1.y, r1.height, r1.width, r2.x, r2.y, r2.height, r2.width)) {
-			return true;
-		}
-		return false;
 	}
 	
 	public Boolean colisaoRectangleNave(Rectangle r) {
@@ -44,19 +38,23 @@ public class Colisao {
 		}
 		return false;
 	}
-	public Boolean colisaoNavePoweup(Rectangle r) {
-		if(colicao(r.x, r.y, r.height, r.width, nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
-			return true;
-		}
-		return false;
-	}
+	
 	public Boolean colisaoTiro(Rectangle r) {
 		for(Tiro t : arrTiros) {
 			if(colicao(r.x, r.y, r.height, r.width, t.getTiroX(), t.getTiroY(), t.getImgTiro().getHeight() , t.getImgTiro().getWidth())) {
-				t.setRemover(true);
+				if(t.getImgTiro().toString() != "tiroBomba.png") {
+					t.setRemover(true);
+				}
 				nave.setArrTiros(arrTiros);
 				return true;
 			}
+		}
+		return false;
+		
+	}
+	public Boolean colisaNavePowerUp(float powerUpX, float powerUpY, Texture img) {
+			if(colicao(powerUpX, powerUpY, img.getHeight(), img.getWidth(), nave.getPostX(), nave.getPostY(), nave.getImgNave().getHeight() , nave.getImgNave().getWidth())) {
+				return true;
 		}
 		return false;
 		
