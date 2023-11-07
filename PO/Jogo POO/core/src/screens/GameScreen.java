@@ -51,7 +51,7 @@ public class GameScreen extends ScreenAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("space.png");
 		nave = new Nave();
-		colisao = new Colisao(nave, meteoro, alien);
+		colisao = new Colisao(nave);
 		meteoro = new Meteoro(colisao);
 		alien = new Alien(colisao);
 		spawnPowerUp = new Spawn(colisao);
@@ -100,7 +100,7 @@ public class GameScreen extends ScreenAdapter {
 		nave.renderBalas(batch);
 		nave.removerBalas();
 		
-		if(nave.getEscudos() <= 0) {
+		if(nave.getEscudos() == -1) {
 			MyGdxGame game = (MyGdxGame) Gdx.app.getApplicationListener();
 			game.setScreen(new GameOverScreen(""+pontos));
 		}

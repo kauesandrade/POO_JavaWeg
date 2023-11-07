@@ -2,8 +2,6 @@ package utilitarios;
 
 import java.util.Iterator;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -14,9 +12,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 import powerUps.BombaTiro;
 import powerUps.Escudo;
 import powerUps.PowerUp;
-import tiros.Tiro;
-import tiros.TiroBomba;
-import tiros.TiroNormal;
 
 public class Spawn {
 
@@ -81,17 +76,6 @@ public class Spawn {
 		for (Iterator<Rectangle> iter = rectangles.iterator(); iter.hasNext();) {
 			Rectangle r = iter.next();
 
-//			if(!baixo) {
-//				r.y += velocidade;
-//			}else if(baixo) {
-//				r.y -= velocidade;
-//			}
-//			if(r.y < -140) {
-//				baixo = false;
-//			}else if(r.y > 600) {
-//				baixo = true;
-//			}
-
 			if (colisao.colisaoRectangleNave(r) || colisao.colisaoTiro(r)) {
 				iter.remove();
 			}
@@ -101,11 +85,10 @@ public class Spawn {
 	public void spawnPowerUps(String tipo) {
 		switch (tipo) {
 		case "escudo":
-			arrPowerUps.add(new Escudo(1536, MathUtils.random(0, 864), colisao));
-			System.out.println("ADD: "+arrPowerUps);
+			arrPowerUps.add(new Escudo(1536, MathUtils.random(0 + 100, 864 - 100), colisao));
 			break;
 		case "tiroBomba":
-			arrPowerUps.add(new BombaTiro(1536, MathUtils.random(0, 864), colisao));
+			arrPowerUps.add(new BombaTiro(1536, MathUtils.random(0 + 100, 864 - 100), colisao));
 			break;
 		}
 		

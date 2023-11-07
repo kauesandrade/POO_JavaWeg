@@ -3,8 +3,6 @@ package tiros;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import utilitarios.Colisao;
-
 public abstract class Tiro{
 	
 	protected Texture imgTiro;
@@ -12,12 +10,10 @@ public abstract class Tiro{
 	protected float tiroX;
 	protected float velocidade;
 	protected boolean remover = false;
-	private Colisao colisao;
 	
-	public Tiro(float x, float y, Colisao colisao) {
+	public Tiro(float x, float y) {
 		this.tiroX = x;
 		this.tiroY = y;
-		this.colisao = colisao;
 	}
 	
 	

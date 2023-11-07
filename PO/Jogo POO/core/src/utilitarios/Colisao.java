@@ -1,31 +1,19 @@
 package utilitarios;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-
-import objetos.Alien;
-import objetos.Meteoro;
 import objetos.Nave;
-import powerUps.PowerUp;
 import tiros.Tiro;
 
 public class Colisao {
 
 	private Nave nave;
-	private Meteoro meteoro;
-	private Alien alien;
 	
 	private Array<Tiro> arrTiros = new Array<>();
 	
-	public Colisao(Nave nave, Meteoro meteoro, Alien alien) {
+	public Colisao(Nave nave) {
 		super();
 		this.nave = nave;
-		this.meteoro = meteoro;
-		this.alien = alien;
 		this.arrTiros = nave.getArrTiros();
 	};
 	

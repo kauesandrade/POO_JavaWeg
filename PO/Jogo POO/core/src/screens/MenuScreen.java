@@ -11,22 +11,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.mygdx.game.MyGdxGame;
 
-public class GameOverScreen extends ScreenAdapter{
+public class MenuScreen extends ScreenAdapter{
 	private SpriteBatch batch;
 	private FreeTypeFontGenerator generator;
 	private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
 	private BitmapFont bitmap;
 	private Texture img;
-	private String pontos;
-	
-	public GameOverScreen(String pontos) {
-		this.pontos = pontos;
-	}
+	private Texture nave;
 	
 	 @Override
 	    public void show() {
 		 	batch = new SpriteBatch();
 			img = new Texture("space.png");
+			nave = new Texture("nave.png");
 			generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
 		    parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		    
@@ -44,9 +41,9 @@ public class GameOverScreen extends ScreenAdapter{
 	        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	        batch.begin();
 		    batch.draw(img, 0, 0);
-			bitmap.draw(batch, "Game Over", Gdx.graphics.getWidth()/2 - 150, Gdx.graphics.getHeight()/2 + 100);
-			bitmap.draw(batch, "Voce fez: " + pontos + " pontos", Gdx.graphics.getWidth()/2 - 250, Gdx.graphics.getHeight()/2);
-			bitmap.draw(batch, "Aperte F para jogar novamente", Gdx.graphics.getWidth()/2 - 350, Gdx.graphics.getHeight()/2-100);
+			bitmap.draw(batch, "STAR DEFENDERS", Gdx.graphics.getWidth()/2 - 150, Gdx.graphics.getHeight()/2 + 100);
+			batch.draw(nave, Gdx.graphics.getWidth()/2 + 190, Gdx.graphics.getHeight()/2 + 13);
+			bitmap.draw(batch, "Aperte F para jogar", Gdx.graphics.getWidth()/2 - 190, Gdx.graphics.getHeight()/2-100);
 			batch.end();
 	    }
 	    

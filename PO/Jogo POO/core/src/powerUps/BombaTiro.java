@@ -8,7 +8,7 @@ public class BombaTiro  extends PowerUp{
 	
 	public BombaTiro(float x, float y, Colisao colisao) {
 		super(x, y, colisao);
-		this.imgPowerUp = new Texture("tiroBomba.png");
+		this.imgPowerUp = new Texture("tiroBombaP.png");
 	}
 
 	@Override

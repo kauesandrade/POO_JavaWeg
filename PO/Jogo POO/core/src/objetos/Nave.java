@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Array;
 import tiros.Tiro;
 import tiros.TiroBomba;
 import tiros.TiroNormal;
-import utilitarios.Colisao;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Gdx;
@@ -33,8 +32,6 @@ public class Nave {
 	public void setTipoTiro(String tipoTiro) {
 		this.tipoTiro = tipoTiro;
 	}
-
-	private Colisao colisao;
 
 	public Texture getImgNave() {
 		return imgNave;
@@ -106,10 +103,10 @@ public class Nave {
 			if (arrTiros.size < 3) {
 				switch (tipoTiro) {
 				case "Normal":
-					arrTiros.add(new TiroNormal(postX + 130, postY + 70, colisao));
+					arrTiros.add(new TiroNormal(postX + 130, postY + 70));
 					break;
 				case "Bomba":
-					arrTiros.add(new TiroBomba(postX + 130, postY + 70, colisao));
+					arrTiros.add(new TiroBomba(postX + 130, postY + 70));
 					tipoTiro = "Normal";
 					break;
 				}
@@ -137,7 +134,7 @@ public class Nave {
 	}
 
 	public void perderEscudo() {
-		if (this.escudos > 0) {
+		if (this.escudos >= 0) {
 			this.escudos--;
 		} else if (this.escudos <= 0) {
 			System.out.println("O jogo acabou");
