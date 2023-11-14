@@ -64,6 +64,7 @@ public class GameScreen extends ScreenAdapter {
 		spawnPowerUp = new Spawn(colisao);
 
 		time = 999999999;
+		
 	}
 
 	/**
@@ -80,12 +81,14 @@ public class GameScreen extends ScreenAdapter {
 		batch.draw(nave.getNave(), nave.getPostX(), nave.getPostY());
 		batch.draw(nave.getImgEscudos(), 350, Gdx.graphics.getHeight() - 75);
 		bitMap.draw(batch, "Pontos: " + pontos, 40, Gdx.graphics.getHeight() - 40);
+		pontos = colisao.getPontos();
 
 		// Lógica para atualização de pontos e geração de power-ups
 		if (TimeUtils.nanoTime() - ultimoNanoTime > time) {
 			pontos += 10;
 			ultimoNanoTime = TimeUtils.nanoTime();
 			if (pontos % 100 == 0) {
+				meteoro.setVelocidade(meteoro.getVelocidade() + 2);
 				if (nave.getEscudos() == 0 || nave.getEscudos() == 1) {
 					spawnPowerUp.spawnPowerUps("escudo");
 				} else {

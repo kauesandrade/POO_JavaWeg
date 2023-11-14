@@ -13,7 +13,7 @@ import tiros.Tiro;
 public class Colisao {
 
 	private Nave nave;
-
+	private int pontos = 0;
 	private Array<Tiro> arrTiros = new Array<>();
 
 	/**
@@ -43,6 +43,14 @@ public class Colisao {
 
 	public void setNave(Nave nave) {
 		this.nave = nave;
+	}
+	
+	public int getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(int pontos) {
+		this.pontos = pontos;
 	}
 
 	/**
@@ -79,6 +87,7 @@ public class Colisao {
 				if (t.getImgTiro().toString() != "tiroBomba.png") {
 					t.setRemover(true);
 				}
+				pontos += 1;
 				nave.setArrTiros(arrTiros);
 				return true;
 			}
