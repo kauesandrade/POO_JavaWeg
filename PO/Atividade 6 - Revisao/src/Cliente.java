@@ -40,7 +40,7 @@ public class Cliente {
 	}
 
 	public ArrayList<Pedido> getHistoricoPedido() {
-		return getHistoricoPedido();
+		return historicoPedido;
 	}
 
 	public void setHistoricoPedido(ArrayList<Pedido> historicoPedido) {
